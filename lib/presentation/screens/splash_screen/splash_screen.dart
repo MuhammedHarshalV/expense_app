@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expense/controller/splash_controller/splash_controller.dart';
 import 'package:expense/controller/splash_controller/splash_state.dart';
 import 'package:expense/presentation/screens/bottom_nav_screen/screen/bottom_nav_screen.dart';
@@ -20,12 +22,14 @@ class SplashScreen extends ConsumerWidget {
           MaterialPageRoute(builder: (_) => const BottomNavScreen()),
           (_) => false,
         );
+        log('6');
       } else if (next.navigationScreen == SplashNavigationState.loginScreen) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const LoginScreen()),
           (_) => false,
         );
+        log('7');
       }
     });
 

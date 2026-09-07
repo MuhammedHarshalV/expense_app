@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:expense/apis/auth_api/login_api.dart';
 import 'package:expense/controller/login_controller/login_state.dart';
 import 'package:expense/core/errors/app_message.dart';
-import 'package:expense/models/login_response_model.dart';
+
 import 'package:expense/presentation/screens/bottom_nav_screen/screen/bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
@@ -38,12 +38,12 @@ class LoginController extends StateNotifier<LoginState> {
         },
       );
 
-      if (response['success'] == false) return;
+      if (response.data['success'] == false) return;
 
       if (!context.mounted) return;
 
-      if (response['success'] == true &&
-          response['message'] == 'Login successful') {
+      if (response.data['success'] == true &&
+          response.data['message'] == 'Login successful') {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => const BottomNavScreen()),

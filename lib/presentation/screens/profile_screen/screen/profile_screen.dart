@@ -1,8 +1,7 @@
-
 import 'package:expense/controller/profile_screen_controller/profile_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
-import 'package:expense/presentation/screens/profile_screen/widget/name_dialog.dart';
+import 'package:expense/presentation/screens/profile_screen/widget/popup_dialog.dart';
 import 'package:expense/presentation/screens/profile_screen/widget/profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,9 +11,8 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profile = ref.watch(profileProvider);
+    final profileState = ref.watch(profileProvider);
     final profileController = ref.read(profileProvider.notifier);
-  
 
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +26,7 @@ class ProfileScreen extends ConsumerWidget {
               hoverColor: Colors.transparent,
               onTap: () {
                 Navigator.pop(context);
-                ref.invalidate(profileProvider);
+                //ref.invalidate(profileProvider);
               },
               child: GlassContainer(
                 padding: const EdgeInsets.all(8),
@@ -72,187 +70,227 @@ class ProfileScreen extends ConsumerWidget {
         ),
       ),
 
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            ProfileHeader(),
-//
-            const SizedBox(height: 24),
-
-            // ─────────────────────────
-            // PERSONAL INFORMATION
-            // ─────────────────────────
-            _SectionCard(
-              title: 'Personal Information',
+      body: profileState.isLoading
+          ? Center(child: CircularProgressIndicator(color: AppColors.appBlue))
+          : SingleChildScrollView(
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
-                  _ProfileInfo(
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Name",
-                          onSave: (value) {
-                            profileController.updateProfile(name: value);
-                          },
-                          initialValue: profile.name,
-                        ),
-                      );
-                    },
-                    label: 'Full Name',
-                    value: profile.name,
-                    icon: Icons.person_outline,
-                  ),
+                  ProfileHeader(),
+                  //
+                  const SizedBox(height: 24),
 
-                  _ProfileInfo(
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Email",
-                          onSave: (value) {
-                            profileController.updateProfile(email: value);
-                          },
-                          initialValue: profile.email,
-                        ),
-                      );
-                    },
-                    label: 'Email',
-                    value: profile.email,
-                    icon: Icons.email_outlined,
-                  ),
-
-                  _ProfileInfo(
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Phone",
-                          onSave: (value) {
-                            profileController.updateProfile(phone: value);
-                          },
-                          initialValue: profile.phone,
-                        ),
-                      );
-                    },
-                    label: 'Phone',
-                    value: profile.phone,
-                    icon: Icons.phone_outlined,
-                  ),
-
-                  _ProfileInfo(
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Date of Birth",
-                          onSave: (value) {
-                            profileController.updateProfile(dateOfBirth: value);
-                          },
-                          initialValue: profile.dateOfBirth,
-                        ),
-                      );
-                    },
-                    label: 'Date of Birth',
-                    value: profile.dateOfBirth,
-                    icon: Icons.calendar_today_outlined,
-                  ),
-
-                  _ProfileInfo(
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Gender",
-                          onSave: (value) {
-                            profileController.updateProfile(gender: value);
-                          },
-                          initialValue: profile.gender,
-                        ),
-                      );
-                    },
-                    label: 'Gender',
-                    value: profile.gender,
-                    icon: Icons.person_outline,
-                  ),
-
-                  _ProfileInfo(
-                    label: 'Location',
-                    value: profile.location,
-                    icon: Icons.location_on_outlined,
-                    showDivider: false,
-                    onFunction: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "Location",
-                          onSave: (value) {
-                            profileController.updateProfile(location: value);
-                          },
-                          initialValue: profile.location,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            // ─────────────────────────
-            // ABOUT
-            // ─────────────────────────
-            _SectionCard(
-              title: 'About',
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
+                  // ─────────────────────────
+                  // PERSONAL INFORMATION
+                  // ─────────────────────────
+                  _SectionCard(
+                    title: 'Personal Information',
                     child: Column(
                       children: [
-                        Text(
-                          profile.bio,
-                          style: TextStyle(
-                            fontSize: 14,
-                            height: 1.5,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.onSurface.withValues(alpha: .7),
+                        _ProfileInfo(
+                          onFunction: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                hintText: 'Enter Name',
+                                title: "Name",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    name: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.userName ?? "",
+                              ),
+                            );
+                          },
+                          label: 'Full Name',
+                          value:
+                              profileState.profileDetails?.userName ??
+                              "No Name",
+                          icon: Icons.person_outline,
+                        ),
+
+                        _ProfileInfo(
+                          onFunction: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                title: "Email",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    email: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.userEmail ??
+                                    "",
+                              ),
+                            );
+                          },
+                          label: 'Email',
+                          value:
+                              profileState.profileDetails?.userEmail ??
+                              "No email",
+                          icon: Icons.email_outlined,
+                        ),
+
+                        _ProfileInfo(
+                          onFunction: null,
+                          label: 'Phone',
+                          value:
+                              profileState.profileDetails?.userPhoneNumber ??
+                              "No phone",
+                          icon: Icons.phone_outlined,
+                        ),
+
+                        _ProfileInfo(
+                          onFunction: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                title: "Date of Birth",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    dateOfBirth: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.dateOfBirth ??
+                                    "YY-MM-DD",
+                              ),
+                            );
+                          },
+                          label: 'Date of Birth',
+                          value:
+                              profileState.profileDetails?.dateOfBirth ??
+                              "Not mentioned",
+                          icon: Icons.calendar_today_outlined,
+                        ),
+
+                        _ProfileInfo(
+                          onFunction: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                title: "Gender",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    gender: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.userGender ??
+                                    "",
+                              ),
+                            );
+                          },
+                          label: 'Gender',
+                          value:
+                              profileState.profileDetails?.userGender ??
+                              "Not mentioned",
+                          icon: Icons.person_outline,
+                        ),
+
+                        _ProfileInfo(
+                          label: 'Location',
+                          value:
+                              profileState.profileDetails?.userLocation ??
+                              "Not mentioned",
+                          icon: Icons.location_on_outlined,
+                          showDivider: false,
+                          onFunction: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                title: "Location",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    location: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.userLocation ??
+                                    "",
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // ─────────────────────────
+                  // ABOUT
+                  // ─────────────────────────
+                  _SectionCard(
+                    title: 'About',
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text(
+                                profileState.profileDetails?.userAbout ??
+                                    'No about',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  height: 1.5,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface.withValues(alpha: .7),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => EditTextDialog(
+                                title: "About",
+                                onSave: (value) {
+                                  profileController.updateProfileApi(
+                                    about: value,
+                                    // ignore: use_build_context_synchronously
+                                    context: context,
+                                  );
+                                },
+                                initialValue:
+                                    profileState.profileDetails?.userAbout ??
+                                    '',
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.edit,
+                            size: 20,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => EditTextDialog(
-                          title: "About",
-                          onSave: (value) {
-                            profileController.updateProfile(bio: value);
-                          },
-                          initialValue: profile.bio,
-                        ),
-                      );
-                    },
-                    child: Icon(
-                      Icons.edit,
-                      size: 20,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
+
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
-
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -273,7 +311,9 @@ class _SectionCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .4),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: .4),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -305,7 +345,7 @@ class _ProfileInfo extends StatelessWidget {
   final String value;
   final IconData icon;
   final bool showDivider;
-  final VoidCallback onFunction;
+  final VoidCallback? onFunction;
 
   const _ProfileInfo({
     required this.label,
@@ -358,14 +398,15 @@ class _ProfileInfo extends StatelessWidget {
                   ],
                 ),
               ),
-              InkWell(
-                onTap: onFunction,
-                child: Icon(
-                  Icons.edit,
-                  size: 20,
-                  color: Theme.of(context).colorScheme.primary,
+              if (onFunction != null)
+                InkWell(
+                  onTap: onFunction,
+                  child: Icon(
+                    Icons.edit,
+                    size: 20,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-              ),
             ],
           ),
         ),
@@ -373,7 +414,9 @@ class _ProfileInfo extends StatelessWidget {
         if (showDivider)
           Divider(
             height: 1,
-            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .2),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: .2),
           ),
       ],
     );

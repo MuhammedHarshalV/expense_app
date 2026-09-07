@@ -1,18 +1,15 @@
-
-
-
-
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/profile_screen/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileIcon extends StatelessWidget {
-  const ProfileIcon({super.key,});
-
+class ProfileIcon extends ConsumerWidget {
+  const ProfileIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.only(right: 12),
       child: GestureDetector(

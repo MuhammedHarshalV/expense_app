@@ -1,132 +1,141 @@
 import 'dart:developer';
-import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:expense/apis/user_related_api/get_profile_api.dart';
+import 'package:expense/apis/user_related_api/update_user_api.dart';
 import 'package:expense/controller/profile_screen_controller/profile_state.dart';
+import 'package:expense/core/themes/colors.dart';
+import 'package:expense/models/get_profile_details_response_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:path/path.dart' as path;
 
 class ProfileController extends StateNotifier<ProfileState> {
   ProfileController() : super(const ProfileState()) {
-    loadProfileImage();
+    fetchProfile();
+  }
+  Future<void> fetchProfile() async {
+    try {
+      state = state.copyWith(isLoading: true);
+      final GetProfileDetailsResponseModel response =
+          await ProfileApi.getProfile();
+
+      if (response.success == true && response.data != null) {
+        state = state.copyWith(
+          profileDetails: response.data,
+          imageVersion: DateTime.now().millisecondsSinceEpoch,
+        );
+      }
+    } catch (e, stackTrace) {
+      log('Fetch profile error: $e', stackTrace: stackTrace);
+    } finally {
+      state = state.copyWith(isLoading: false);
+    }
   }
 
-  Future<void> updateProfile({
+  //update profile
+  void updateProfileApi({
+    BuildContext? context,
+    String? photoPath,
     String? name,
     String? email,
-    String? phone,
-    String? profileImage,
-    String? location,
-    String? bio,
     String? dateOfBirth,
     String? gender,
+    String? location,
+    String? about,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    // Update only values that were provided
-    if (name != null) {
-      await prefs.setString('profile_name', name);
-    }
-
-    if (email != null) {
-      await prefs.setString('profile_email', email);
-    }
-
-    if (phone != null) {
-      await prefs.setString('profile_phone', phone);
-    }
-
-    if (location != null) {
-      await prefs.setString('profile_location', location);
-    }
-
-    if (bio != null) {
-      await prefs.setString('profile_bio', bio);
-    }
-
-    if (dateOfBirth != null) {
-      await prefs.setString('profile_date_of_birth', dateOfBirth);
-    }
-
-    if (gender != null) {
-      await prefs.setString('profile_gender', gender);
-    }
-
-    state = state.copyWith(
-      name: name,
-      email: email,
-      phone: phone,
-      profileImage: profileImage,
-      location: location,
-      bio: bio,
-      dateOfBirth: dateOfBirth,
-      gender: gender,
-    );
-  }
-
-  void updateName(String value) {
-    state = state.copyWith(name: value);
-  }
-
-  Future<void> updateProfileImage(String imagePath) async {
     try {
-      final directory = await getApplicationDocumentsDirectory();
+      state = state.copyWith(isUpdate: true);
+      final Map<String, dynamic> data = {};
 
-      final extension = path.extension(imagePath);
+      if (name != null) {
+        data['user_name'] = name;
+      }
 
-      final savedPath = path.join(directory.path, 'profile_image$extension');
+      if (email != null) {
+        data['user_email'] = email;
+      }
 
-      final imageFile = File(imagePath);
+      if (dateOfBirth != null) {
+        data['date_of_birth'] = dateOfBirth;
+      }
 
-      // Copy image to permanent app storage
-      await imageFile.copy(savedPath);
+      if (gender != null) {
+        data['user_gender'] = gender;
+      }
 
-      // Update state
-      state = state.copyWith(profileImage: imagePath);
+      if (location != null) {
+        data['user_location'] = location;
+      }
 
-      // Save permanent path
-      final prefs = await SharedPreferences.getInstance();
+      if (about != null) {
+        data['user_about'] = about;
+      }
 
-      await prefs.setString('profile_image_path', savedPath);
+      // Optional profile photo
+      if (photoPath != null && photoPath.isNotEmpty) {
+        data['user_profile_photo'] = await MultipartFile.fromFile(
+          photoPath,
+          filename: photoPath.split('/').last,
+        );
+      }
 
-      log('Profile image saved: $savedPath');
-    } catch (e) {
-      log('Error saving profile image: $e');
+      final formData = FormData.fromMap(data);
+
+      final response = await UpdateUserApi.updateUserApi(
+        context: context,
+
+        body: formData,
+      );
+      if (response.success == true) {
+        state = state.copyWith(
+          profileDetails: response.data,
+          imageVersion: DateTime.now().millisecondsSinceEpoch,
+        );
+        if (context != null) {
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                'Profile updated successfully',
+                style: TextStyle(
+                  color: AppColors.appWhite,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              backgroundColor: AppColors.appGreen,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } else if (context != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              'Profile updated failed',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.appRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e, stackTrace) {
+      log('Update profile API error: $e', stackTrace: stackTrace);
+    } finally {
+      state = state.copyWith(isUpdate: false);
     }
-  }
-
-  Future<void> loadProfileImage() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final path = prefs.getString('profile_image_path');
-
-    if (path == null || path.isEmpty) {
-      return;
-    }
-
-    final file = File(path);
-
-    if (await file.exists()) {
-      state = state.copyWith(profileImage: path);
-
-      log('Profile image loaded: $path');
-    } else {
-      log('Profile image does not exist: $path');
-
-      await prefs.remove('profile_image_path');
-//
-      state = state.copyWith(profileImage: '');
-    }
-    state = state.copyWith(
-      name: prefs.getString('profile_name'),
-      email: prefs.getString('profile_email'),
-      phone: prefs.getString('profile_phone'),
-      location: prefs.getString('profile_location'),
-      bio: prefs.getString('profile_bio'),
-      dateOfBirth: prefs.getString('profile_date_of_birth'),
-      gender: prefs.getString('profile_gender'),
-    );
   }
 
   @override
@@ -136,6 +145,7 @@ class ProfileController extends StateNotifier<ProfileState> {
   }
 }
 
-final profileProvider = StateNotifierProvider<ProfileController, ProfileState>(
-  (ref) => ProfileController(),
-);
+final profileProvider =
+    StateNotifierProvider.autoDispose<ProfileController, ProfileState>(
+      (ref) => ProfileController(),
+    );

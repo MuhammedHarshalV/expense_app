@@ -25,9 +25,9 @@ class ImageHelper {
                   final image = await picker.pickImage(
                     source: ImageSource.camera,
                     preferredCameraDevice: CameraDevice.front,
-                    imageQuality: 85,
-                    maxWidth: 1000,
-                    maxHeight: 1000,
+                    // imageQuality: 85,
+                    // maxWidth: 1000,
+                    // maxHeight: 1000,
                   );
                   // ignore: use_build_context_synchronously
                   Navigator.pop(context, image);
@@ -44,10 +44,11 @@ class ImageHelper {
                 onTap: () async {
                   final image = await picker.pickImage(
                     source: ImageSource.gallery,
-                    imageQuality: 85,
-                    maxWidth: 1000,
-                    maxHeight: 1000,
+                    // imageQuality: 85,
+                    // maxWidth: 1000,
+                    // maxHeight: 1000,
                   );
+
                   // ignore: use_build_context_synchronously
                   Navigator.pop(context, image);
                 },

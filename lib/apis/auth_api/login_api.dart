@@ -21,11 +21,11 @@ class SignInChecking {
         requiresAuth: false,
       );
 
-      if (response == null) {
+      if (response.data == null) {
         return null;
       }
 
-      final model = LoginResponseModel.fromJson(response);
+      final model = LoginResponseModel.fromJson(response.data);
 
       await TokenStorage.saveTokens(
         accessToken: model.accessToken ?? '',

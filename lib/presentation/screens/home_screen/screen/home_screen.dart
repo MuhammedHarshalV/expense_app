@@ -1,5 +1,6 @@
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
+import 'package:expense/presentation/screens/home_screen/widget/clinic_details_card.dart';
 import 'package:expense/presentation/screens/home_screen/widget/expense_income_card.dart';
 
 import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
@@ -8,6 +9,8 @@ import 'package:expense/presentation/screens/monthly_all_transaction/screen/mont
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -83,36 +86,19 @@ class HomeScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
 
                   Text(
-                    'TIMELINE',
-                    style: TextStyle(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: .6),
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Today, 2 May 2026',
+                    'Today, ${DateFormat('d MMM yyyy').format(DateTime.now())}',
 
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface,
-                      fontSize: 26,
+                      fontSize: 26.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 10.h),
 
-                  // MonthDetailsCard(),
-                  const SizedBox(height: 20),
-
-                  //  AnimattedSensexCard(),
-                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -120,66 +106,38 @@ class HomeScreen extends ConsumerWidget {
                         'Recent Transactions',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      homeState.expenseList.isEmpty
-                          ? SizedBox.shrink()
-                          : InkWell(
-                              focusColor: Colors.transparent,
-                              splashColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        MonthlyAllTransactionScreen(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "View All",
-                                style: TextStyle(
-                                  color: AppColors.appGreen,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
                     ],
                   ),
                 ],
               ),
             ),
           ),
+
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             sliver: SliverList.separated(
-              itemBuilder: (context, index) => ExpenseIncomeCards(index: index),
-              // ignore: unnecessary_underscores
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemCount: homeState.expenseList.length >= 10
-                  ? 10
-                  : homeState.expenseList.length,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: SpendingTrendsCard(
-                // You can pass any number of values here, and it will draw the bars dynamically
-                data: homeState.monthGraph,
-                summaryText: homeController.getSpendingTrend(
-                  homeState.monthExpense.length >= 2
-                      ? homeState.monthExpense.sublist(
-                          homeState.monthExpense.length - 2,
-                        )
-                      : homeState.monthExpense,
-                ),
-              ),
+              itemCount: 10,
+              separatorBuilder: (context, index) {
+                return const SizedBox(height: 10);
+              },
+              itemBuilder: (context, index) {
+                return ClinicExpenseCard(
+                  name: 'Al Salama Clinic',
+                  place: 'Malappuram',
+                  imageUrl: 'http://172.16.16.10:1024/api/clinic/6/photo',
+                  totalAmount: '₹840',
+                  totalPending: '₹320',
+                  advanceAmount: '₹600',
+                  onEdit: () {},
+                  onDelete: () {},
+                  onAddExpense: () {},
+                  onViewDetails: () {},
+                );
+              },
             ),
           ),
 

@@ -6,7 +6,7 @@ class AppMessage {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Theme.of(context).colorScheme.onSurface,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -15,7 +15,7 @@ class AppMessage {
               "Alert",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).scaffoldBackgroundColor,
               ),
             ),
           ),
@@ -26,7 +26,7 @@ class AppMessage {
                 child: Text(
                   message,
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:expense/core/constants/api_constants.dart';
+import 'package:expense/core/services/global_listener/refresh_token_listener.dart';
 import 'package:expense/core/storage/token_storage.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -48,7 +49,10 @@ class AuthInterceptor extends Interceptor {
     if (statusCode != 401) {
       return handler.next(err);
     }
-
+    // Prevent retry loop
+    if (err.requestOptions.extra['retried'] == true) {
+      return handler.next(err);
+    }
     // Avoid refresh loop
     if (err.requestOptions.path == ApiConstants.refreshToken) {
       await TokenStorage.clear();
@@ -83,7 +87,7 @@ class AuthInterceptor extends Interceptor {
         data: {'refresh_token': refreshToken},
       );
 
-      final newAccessToken = response.data['access_token'];
+      final newAccessToken = response.data['data']['access_token'];
 
       if (newAccessToken == null) {
         await TokenStorage.clear();
@@ -98,17 +102,78 @@ class AuthInterceptor extends Interceptor {
       // Update original failed request
       final requestOptions = err.requestOptions;
 
+      requestOptions.extra['retried'] = true;
+
       requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+
+      //if formdata
+      if (requestOptions.data is FormData) {
+        requestOptions.data = (requestOptions.data as FormData).clone();
+
+        // Let Dio generate the new multipart boundary
+        requestOptions.headers.remove(Headers.contentLengthHeader);
+
+        requestOptions.headers.remove(Headers.contentTypeHeader);
+      }
 
       // Retry SAME API request
       final retryResponse = await dio.fetch(requestOptions);
 
       return handler.resolve(retryResponse);
-    } catch (e) {
-      log('Refresh token failed: $e');
+    } on DioException catch (refreshError) {
+      final refreshStatus = refreshError.response?.statusCode;
 
-      await TokenStorage.clear();
+      log(
+        'Refresh failed. '
+        'Status: $refreshStatus '
+        'Type: ${refreshError.type}',
+      );
 
+      // ==============================
+      // REFRESH TOKEN EXPIRED/INVALID
+      // ==============================
+      if (refreshStatus == 401) {
+        log('Refresh token expired/invalid');
+
+        await TokenStorage.clear();
+        AppNavigator.goToLogin();
+        // Login navigation should happen
+        // from your auth/session layer.
+        return handler.next(err);
+      }
+
+      // ==============================
+      // NETWORK ERROR
+      // ==============================
+      if (refreshError.type == DioExceptionType.connectionError ||
+          refreshError.type == DioExceptionType.connectionTimeout ||
+          refreshError.type == DioExceptionType.receiveTimeout ||
+          refreshError.type == DioExceptionType.sendTimeout) {
+        log(
+          'Network error during refresh. '
+          'Keeping tokens.',
+        );
+
+        // IMPORTANT:
+        // DON'T clear storage
+        return handler.next(err);
+      }
+
+      // ==============================
+      // SERVER ERROR 500 etc.
+      // ==============================
+      log(
+        'Server error during refresh. '
+        'Keeping tokens.',
+      );
+
+      // DON'T clear storage
+      return handler.next(err);
+    } catch (e, stackTrace) {
+      log('Unexpected refresh error: $e', stackTrace: stackTrace);
+
+      // Don't clear credentials for an
+      // unknown client-side error.
       return handler.next(err);
     }
   }

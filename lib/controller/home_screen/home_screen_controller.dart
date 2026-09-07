@@ -1,7 +1,6 @@
 import 'dart:developer';
 
-
-
+import 'package:expense/apis/user_related_api/get_profile_api.dart';
 import 'package:expense/controller/home_screen/home_screen_state.dart';
 import 'package:expense/core/services/dio_services/api_services.dart';
 import 'package:expense/core/services/net_work_services/connection_checking.dart';
@@ -193,5 +192,5 @@ class HomeController extends StateNotifier<HomeState> {
 }
 
 final homeProvider = StateNotifierProvider<HomeController, HomeState>(
-  (ref) => HomeController()..fetchExpenses(),
+  (ref) => HomeController(),
 );
