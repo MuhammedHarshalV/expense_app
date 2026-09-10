@@ -4,4 +4,9 @@ class ApiConstants {
   static String refreshToken = '/api/auth/refresh-token';
   static String profileApi = '/api/users/single';
   static String profileUpdation = '/api/users/profileUpdation';
+  //clinic related
+  static String getAllClinics = '/api/clinic/all-clinics';
+  static String searchClinic = '/api/clinic/search';
+  static String createClinic = "/api/clinic/create-clinic";
+  static String deleteClinic = '/api/clinic/clinicRemoval';
 }

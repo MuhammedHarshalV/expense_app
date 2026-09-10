@@ -3,7 +3,7 @@ import 'package:expense/controller/history_screen_controller/history_screen_cont
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
-import 'package:expense/presentation/screens/home_screen/widget/expense_income_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -144,30 +144,8 @@ class MonthlyAllTransactionScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        '₹ ${homeState.monthlyIncome}',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        monthlyController.compareMonthlyAmount(
-                          currentMonth: homeState.monthlyIncome,
-                          previousMonth: monthlyState.monthlyList.isNotEmpty
-                              ? monthlyState.monthlyList.last.income == 0
-                                    ? 0
-                                    : monthlyState.monthlyList.last.income
-                              : 0,
-                        ),
-                        style: TextStyle(
-                          color: AppColors.appGreen,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          height: 1,
-                        ),
-                      ),
+                   
+                      
                     ],
                   ),
                 ),
@@ -212,45 +190,22 @@ class MonthlyAllTransactionScreen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        '₹ ${homeState.monthlyExpense}',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        monthlyController.compareMonthlyAmount(
-                          currentMonth: homeState.monthlyExpense,
-                          previousMonth: monthlyState.monthlyList.isNotEmpty
-                              ? monthlyState.monthlyList.last.expense == 0
-                                    ? 0
-                                    : monthlyState.monthlyList.last.expense
-                              : 0,
-                        ),
-                        style: TextStyle(
-                          color: AppColors.appRed,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          height: 1,
-                        ),
-                      ),
+                   
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            sliver: SliverList.separated(
-              itemBuilder: (context, index) => ExpenseIncomeCards(index: index),
-              // ignore: unnecessary_underscores
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemCount: homeState.expenseList.length,
-            ),
-          ),
+          // SliverPadding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //   sliver: SliverList.separated(
+          //     itemBuilder: (context, index) => ExpenseIncomeCards(index: index),
+          //     // ignore: unnecessary_underscores
+          //     separatorBuilder: (_, __) => const SizedBox(height: 10),
+          //     itemCount: homeState.expenseList.length,
+          //   ),
+          // ),
         ],
       ),
     );

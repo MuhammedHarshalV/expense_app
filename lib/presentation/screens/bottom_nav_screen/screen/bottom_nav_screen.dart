@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-
 import 'package:expense/controller/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/bottom_nav_screen/widget/bottom_nav_items.dart';
@@ -43,9 +42,7 @@ class BottomNavScreen extends ConsumerWidget {
                 onTap: () async {
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const NewTransactionScreen(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const AddClinicScreen()),
                   );
 
                   // When returning from Create

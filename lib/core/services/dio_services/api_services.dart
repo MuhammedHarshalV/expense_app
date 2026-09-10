@@ -257,3 +257,101 @@ class PatchApiServices {
     }
   }
 }
+
+//delete api
+
+class DeleteApiServices {
+  static Future<ApiResult> callApi({
+    BuildContext? context,
+    required String url,
+    dynamic body,
+    Map<String, dynamic>? queryParams,
+
+    // Default = secured API
+    bool requiresAuth = true,
+  }) async {
+    try {
+      log("=========== API REQUEST ===========");
+      log("METHOD : DELETE");
+      log("URL    : ${ApiConstants.baseUrl}$url");
+
+      if (body is FormData) {
+        log("BODY TYPE : FormData");
+
+        for (final field in body.fields) {
+          log("${field.key} : ${field.value}");
+        }
+
+        for (final file in body.files) {
+          log("${file.key} : ${file.value.filename}");
+        }
+      } else {
+        log("BODY   : ${body ?? {}}");
+      }
+
+      log("QUERY  : ${queryParams ?? {}}");
+      log("===================================");
+
+      final response = await DioClient.dio.delete(
+        url,
+        data: body,
+        queryParameters: queryParams,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
+
+      log("=========== API RESPONSE ===========");
+      log("STATUS CODE : ${response.statusCode}");
+      log("DATA : ${response.data}");
+      log("===================================");
+
+      return ApiResult(data: response.data, statusCode: response.statusCode);
+    } on DioException catch (e) {
+      log("=========== DIO ERROR ===========");
+      log("MESSAGE : ${e.message}");
+      log("STATUS  : ${e.response?.statusCode}");
+      log("DATA    : ${e.response?.data}");
+      log("TYPE    : ${e.type}");
+      log("=================================");
+
+      // Timeout
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout ||
+          e.type == DioExceptionType.sendTimeout) {
+        if (context != null && context.mounted) {
+          AppMessage.show(context, 'Connection timed out');
+        }
+
+        return const ApiResult(isNetworkError: true);
+      }
+
+      // No internet / server unreachable
+      if (e.type == DioExceptionType.connectionError) {
+        if (context != null && context.mounted) {
+          AppMessage.show(context, 'No Internet Connection');
+        }
+
+        return const ApiResult(isNetworkError: true);
+      }
+
+      // Backend returned error
+      if (e.response != null) {
+        final data = e.response?.data;
+
+        if (context != null && context.mounted) {
+          AppMessage.show(
+            context,
+            data is Map ? data['message'] ?? 'Server Error' : 'Server Error',
+          );
+        }
+
+        return ApiResult(data: data, statusCode: e.response?.statusCode);
+      }
+
+      return const ApiResult();
+    } catch (e, stackTrace) {
+      log('DELETE API ERROR: $e', stackTrace: stackTrace);
+
+      return const ApiResult();
+    }
+  }
+}

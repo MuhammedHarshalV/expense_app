@@ -9,8 +9,7 @@ class ClinicExpenseCard extends ConsumerWidget {
   final String place;
   final String imageUrl;
   final String totalAmount;
-  final String totalPending;
-  final String advanceAmount;
+
   final VoidCallback onEdit;
   final VoidCallback onDelete;
   final VoidCallback onAddExpense;
@@ -21,9 +20,8 @@ class ClinicExpenseCard extends ConsumerWidget {
     required this.name,
     required this.place,
     required this.imageUrl,
-    this.totalAmount = '\$840.00',
-    this.totalPending = '\$320.00',
-    this.advanceAmount = '\$600.00',
+    this.totalAmount = '0',
+
     required this.onEdit,
     required this.onDelete,
     required this.onAddExpense,
