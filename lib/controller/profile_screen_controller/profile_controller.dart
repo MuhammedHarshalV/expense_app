@@ -34,6 +34,7 @@ class ProfileController extends StateNotifier<ProfileState> {
 
   //update profile
   void updateProfileApi({
+    bool? isPhoto,
     BuildContext? context,
     String? photoPath,
     String? name,
@@ -93,7 +94,7 @@ class ProfileController extends StateNotifier<ProfileState> {
         );
         if (context != null) {
           // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+          if (isPhoto == null) Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text(

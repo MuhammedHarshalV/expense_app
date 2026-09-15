@@ -9,4 +9,5 @@ class ApiConstants {
   static String searchClinic = '/api/clinic/search';
   static String createClinic = "/api/clinic/create-clinic";
   static String deleteClinic = '/api/clinic/clinicRemoval';
+  static String updateClinic = '/api/clinic/clinicUpdation';
 }

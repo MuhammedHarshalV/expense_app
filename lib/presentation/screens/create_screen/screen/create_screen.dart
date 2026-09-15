@@ -1,4 +1,5 @@
 import 'package:expense/controller/create_clinics_controller/create_clinic_controller.dart';
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
@@ -365,9 +366,13 @@ class AddClinicScreen extends ConsumerWidget {
                         width: double.infinity,
                         child: ElevatedButton.icon(
                           onPressed: () async {
-                            await clinicController.createClinicApi(
-                              context: context,
-                            );
+                            final bool result = await clinicController
+                                .createClinicApi(context: context);
+                            if (result) {
+                              ref
+                                  .read(homeProvider.notifier)
+                                  .getAllclinics(page: 1);
+                            }
                           },
                           icon: clinicState.isSubmit
                               ? null

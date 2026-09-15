@@ -5,10 +5,11 @@ class AppNavigator {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
-  static void goToLogin() {
+  static void goToLogin({bool? isLogout}) {
     navigatorKey.currentState?.pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (_) => const LoginScreen(isRefreshExpired: true),
+        builder: (_) =>
+            LoginScreen(isRefreshExpired: isLogout == null ? true : null),
       ),
       (route) => false,
     );

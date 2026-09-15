@@ -132,7 +132,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
   }
 
   //create clinic api
-  Future<void> createClinicApi({required BuildContext? context}) async {
+  Future<bool> createClinicApi({required BuildContext? context}) async {
     try {
       state = state.copyWith(isSubmit: true);
       final formData = await createClinicFormData(
@@ -149,7 +149,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
       log('Create clinic response: $response');
 
       if (response != null && response['success'] == true && context != null) {
-        if (!context.mounted) return;
+        if (!context.mounted) return true;
 
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
@@ -170,6 +170,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             duration: const Duration(seconds: 2),
           ),
         );
+        return true;
       } else if (context != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -188,15 +189,17 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             duration: const Duration(seconds: 2),
           ),
         );
+        return false;
       }
       // handle response
     } catch (e) {
       log(e.toString());
+      return false;
     } finally {
       state = state.copyWith(isSubmit: false);
     }
+    return false;
   }
-
 
   //form data creation
   Future<FormData> createClinicFormData({

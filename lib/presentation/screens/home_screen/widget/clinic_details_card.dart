@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,8 @@ class ClinicExpenseCard extends ConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(.85),
+
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .5),

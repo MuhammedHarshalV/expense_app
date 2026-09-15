@@ -1,5 +1,8 @@
+import 'package:expense/controller/edit_clinic_controller/edit_clinic_controller.dart';
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
+import 'package:expense/presentation/screens/add_expense_screen/screen/add_expense_screen.dart';
+import 'package:expense/presentation/screens/edit_clinic_screen/screen/edit_clinic_screen.dart';
 
 import 'package:expense/presentation/screens/home_screen/widget/clinic_details_card.dart';
 
@@ -179,7 +182,15 @@ class HomeScreen extends ConsumerWidget {
                                       : '${clinic.clinicPhoto}?v=${homeState.imageVersion}',
                                   totalAmount: '₹${clinic.clinicTotalExp}',
 
-                                  onEdit: () {},
+                                  onEdit: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditClinicScreen(clinic: clinic),
+                                      ),
+                                    );
+                                  },
                                   onDelete: () {
                                     showDialog(
                                       context: context,
@@ -365,7 +376,15 @@ class HomeScreen extends ConsumerWidget {
                                       ),
                                     );
                                   },
-                                  onAddExpense: () {},
+                                  onAddExpense: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddExpenseScreen(),
+                                      ),
+                                    );
+                                  },
                                   onViewDetails: () {},
                                 );
                               },

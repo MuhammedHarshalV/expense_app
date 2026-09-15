@@ -107,6 +107,7 @@ class ProfileHeader extends ConsumerWidget {
                     photoPath: image.path,
                     // ignore: use_build_context_synchronously
                     context: context,
+                    isPhoto: true,
                   );
                 },
                 child: Container(

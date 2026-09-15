@@ -69,6 +69,7 @@ class HomeController extends StateNotifier<HomeState> {
         context: context,
       );
       if (response == true) {
+        getAllclinics(page: 1);
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
