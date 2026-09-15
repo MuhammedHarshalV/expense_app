@@ -4,8 +4,8 @@ import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 
-import 'package:expense/presentation/screens/create_screen/widget/photo_container.dart';
-import 'package:expense/presentation/screens/create_screen/widget/search_container.dart';
+import 'package:expense/presentation/screens/create_clinic_screen/widget/photo_container.dart';
+import 'package:expense/presentation/screens/create_clinic_screen/widget/search_container.dart';
 import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

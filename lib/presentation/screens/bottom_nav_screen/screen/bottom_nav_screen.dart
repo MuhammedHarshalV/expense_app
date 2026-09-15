@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:expense/controller/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/bottom_nav_screen/widget/bottom_nav_items.dart';
-import 'package:expense/presentation/screens/create_screen/screen/create_screen.dart';
+import 'package:expense/presentation/screens/create_clinic_screen/screen/add_clinic_screen.dart';
 import 'package:expense/presentation/screens/history_screen/screen/history_screen.dart';
 import 'package:expense/presentation/screens/home_screen/screen/home_screen.dart';
 import 'package:flutter/material.dart';

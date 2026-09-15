@@ -1,5 +1,5 @@
 import 'package:expense/presentation/common_widgets/image_container.dart';
-import 'package:expense/presentation/screens/create_screen/widget/description_card.dart';
+import 'package:expense/presentation/screens/create_clinic_screen/widget/description_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
