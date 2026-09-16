@@ -1,3 +1,4 @@
+import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,8 @@ class AmountCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final expenseController = ref.read(createExpenseProvider.notifier);
+
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -50,7 +53,12 @@ class AmountCard extends ConsumerWidget {
               SizedBox(width: 10.w),
               Expanded(
                 child: TextField(
-                  controller: TextEditingController(),
+                  controller: expenseController.amountController,
+                  onChanged: (value) {
+                    expenseController.updateState(
+                      amount: double.tryParse(value),
+                    );
+                  },
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
@@ -78,10 +86,18 @@ class AmountCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildAmountChip('+₹100', context, () {}),
-              _buildAmountChip('+₹500', context, () {}),
-              _buildAmountChip('+₹1,000', context, () {}),
-              _buildAmountChip('+₹2,000', context, () {}),
+              _buildAmountChip('+₹100', context, () {
+                expenseController.addAmount(100);
+              }),
+              _buildAmountChip('+₹500', context, () {
+                expenseController.addAmount(500);
+              }),
+              _buildAmountChip('+₹1,000', context, () {
+                expenseController.addAmount(1000);
+              }),
+              _buildAmountChip('+₹2,000', context, () {
+                expenseController.addAmount(2000);
+              }),
             ],
           ),
         ],

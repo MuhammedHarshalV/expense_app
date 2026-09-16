@@ -279,7 +279,7 @@ class AddClinicScreen extends ConsumerWidget {
                         if (clinicState.selectedImage != null ||
                             clinicState.networkImageUrl != null)
                           Row(
-                            children: const [
+                            children: [
                               Icon(
                                 Icons.check_circle,
                                 size: 14,
@@ -481,108 +481,6 @@ class AddClinicScreen extends ConsumerWidget {
       ),
     );
   }
-
-  // static Widget _buildPhotoPreviewCard(BuildContext context) {
-  //   return ClipRRect(
-  //     borderRadius: BorderRadius.circular(16),
-  //     child: Stack(
-  //       children: [
-  //         Image.network(
-  //           'https://images.unsplash.com/photo-1586773860418-d37222d8fce3',
-  //           height: 180.h,
-  //           width: double.infinity,
-  //           fit: BoxFit.cover,
-  //           errorBuilder: (_, __, ___) => Container(
-  //             height: 180.h,
-  //             color: Theme.of(
-  //               context,
-  //             ).colorScheme.onSurface.withValues(alpha: .05),
-  //             child: Icon(
-  //               Icons.image,
-  //               size: 48.h,
-  //               color: Theme.of(
-  //                 context,
-  //               ).colorScheme.onSurface.withValues(alpha: .5),
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned.fill(
-  //           child: DecoratedBox(
-  //             decoration: BoxDecoration(
-  //               gradient: LinearGradient(
-  //                 begin: Alignment.topCenter,
-  //                 end: Alignment.bottomCenter,
-  //                 colors: [
-  //                   Colors.transparent,
-  //                   Colors.transparent,
-  //                   Colors.black.withOpacity(0.7),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           top: 10,
-  //           right: 10,
-  //           child: Container(
-  //             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-  //             decoration: BoxDecoration(
-  //               color: Colors.black.withOpacity(0.6),
-  //               borderRadius: BorderRadius.circular(6),
-  //             ),
-  //             child: Icon(Icons.delete, color: AppColors.appRed, size: 20.h),
-  //           ),
-  //         ),
-  //         Positioned(
-  //           bottom: 10,
-  //           left: 12,
-  //           child: Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Text(
-  //                 'High Res Architectural View',
-  //                 style: TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 12.5.sp,
-  //                   fontWeight: FontWeight.w700,
-  //                 ),
-  //               ),
-  //               Text(
-  //                 'Ready for admin verification',
-  //                 style: TextStyle(color: Colors.white70, fontSize: 11.sp),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //         Positioned(
-  //           bottom: 10,
-  //           right: 12,
-  //           child: Container(
-  //             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-  //             decoration: BoxDecoration(
-  //               color: Colors.white,
-  //               borderRadius: BorderRadius.circular(8),
-  //             ),
-  //             child: Row(
-  //               children: const [
-  //                 Icon(Icons.camera_alt_outlined, color: textDark, size: 14),
-  //                 SizedBox(width: 4),
-  //                 Text(
-  //                   'view',
-  //                   style: TextStyle(
-  //                     fontSize: 11.5,
-  //                     fontWeight: FontWeight.w700,
-  //                     color: textDark,
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   static Widget _buildOutlineActionButton({
     required IconData icon,
