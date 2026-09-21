@@ -22,6 +22,8 @@ class AddExpenseScreen extends ConsumerWidget {
   // Theme Colors matching the image
   static const Color primaryBlue = Color(0xFF0052CC);
 
+  //
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final expenseState = ref.watch(createExpenseProvider);

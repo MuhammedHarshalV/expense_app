@@ -1,17 +1,14 @@
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
+import 'package:expense/presentation/screens/edit_expense_screen/screen/edit_expense_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpenseItemCard extends ConsumerWidget {
   final Expense expense;
-
-  final String category;
+  final int cliinicId;
   final IconData categoryIcon;
 
-  final String amount;
-  final String time;
-  final String description;
   final String footerText;
   final IconData footerIcon;
   final Color footerIconColor;
@@ -20,15 +17,13 @@ class ExpenseItemCard extends ConsumerWidget {
     super.key,
 
     required this.expense,
-    required this.category,
+
     required this.categoryIcon,
 
-    required this.amount,
-    required this.time,
-    required this.description,
     required this.footerText,
     required this.footerIcon,
     required this.footerIconColor,
+    required this.cliinicId,
   });
 
   @override
@@ -104,7 +99,7 @@ class ExpenseItemCard extends ConsumerWidget {
                           const SizedBox(width: 4),
                           Flexible(
                             child: Text(
-                              category,
+                              expense.expenseType ?? '',
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -130,7 +125,7 @@ class ExpenseItemCard extends ConsumerWidget {
                   children: [
                     Flexible(
                       child: Text(
-                        amount,
+                        '₹${expense.expenseAmount ?? 0}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -144,7 +139,7 @@ class ExpenseItemCard extends ConsumerWidget {
                     const SizedBox(width: 8),
 
                     Text(
-                      time,
+                      expense.expenseDate ?? '',
                       style: TextStyle(fontSize: 10.sp, color: textMuted),
                     ),
                   ],
@@ -153,7 +148,7 @@ class ExpenseItemCard extends ConsumerWidget {
                 const SizedBox(height: 6),
 
                 Text(
-                  description,
+                  expense.description ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -185,17 +180,38 @@ class ExpenseItemCard extends ConsumerWidget {
 
                     Icon(
                       Icons.file_download_outlined,
-                      size: 16.sp,
+                      size: 20.sp,
                       color: textMuted,
                     ),
 
                     SizedBox(width: 12.w),
 
-                    Icon(Icons.edit_outlined, size: 16.sp, color: textMuted),
+                    InkWell(
+                      highlightColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditExpenseScreen(
+                              expense: expense,
+                              clinicId: cliinicId,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.edit_outlined,
+                        size: 20.sp,
+                        color: textMuted,
+                      ),
+                    ),
 
                     SizedBox(width: 12.w),
 
-                    Icon(Icons.delete_outline, size: 16.sp, color: textMuted),
+                    Icon(Icons.delete_outline, size: 20.sp, color: textMuted),
                   ],
                 ),
               ],

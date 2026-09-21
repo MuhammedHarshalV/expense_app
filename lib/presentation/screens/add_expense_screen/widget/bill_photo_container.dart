@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
-import 'package:expense/controller/create_clinics_controller/create_clinic_controller.dart';
+
 import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 
 class BillPhotoContainer extends ConsumerWidget {
   const BillPhotoContainer({super.key});

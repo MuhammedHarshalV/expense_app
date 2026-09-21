@@ -14,4 +14,5 @@ class ApiConstants {
   //expense related
   static String createExpense = '/api/expense/create-expense';
   static String getAllExpense = '/api/expense/all-expenses';
+  static String editExpense = '/api/expense/expenseUpdation';
 }

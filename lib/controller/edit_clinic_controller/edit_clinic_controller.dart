@@ -134,7 +134,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
     state = state.copyWith(clinicDetails: [], isLoading: false, error: null);
   }
 
-  //create clinic api
+  //edit clinic api
   Future<bool> updateClinicApi({
     required BuildContext? context,
     required int id,
@@ -233,6 +233,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
       'clinic_name': clinicName,
       'clinic_place': clinicPlace,
 
+      // ignore: use_null_aware_elements
       if (clinicPhoto != null) 'clinic_photo': clinicPhoto,
     });
 

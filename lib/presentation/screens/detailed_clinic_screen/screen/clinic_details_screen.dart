@@ -152,14 +152,11 @@ class ClinicDetailsScreen extends ConsumerWidget {
                       final expense = state.expenses[index];
 
                       return ExpenseItemCard(
+                        cliinicId: clinicId,
                         expense: state.expenses[index],
 
-                        category: expense.expenseType ?? '',
                         categoryIcon: _getExpenseIcon(expense.expenseType),
 
-                        amount: '₹${expense.expenseAmount ?? 0}',
-                        time: expense.expenseDate ?? '',
-                        description: expense.description ?? '',
                         footerText: expense.billPhoto != null
                             ? 'Bill Attached'
                             : 'No Bill',
