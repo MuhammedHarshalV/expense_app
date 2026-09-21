@@ -1,7 +1,8 @@
-import 'package:expense/controller/edit_clinic_controller/edit_clinic_controller.dart';
+
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/screens/add_expense_screen/screen/add_expense_screen.dart';
+import 'package:expense/presentation/screens/detailed_clinic_screen/screen/clinic_details_screen.dart';
 import 'package:expense/presentation/screens/edit_clinic_screen/screen/edit_clinic_screen.dart';
 
 import 'package:expense/presentation/screens/home_screen/widget/clinic_details_card.dart';
@@ -380,12 +381,23 @@ class HomeScreen extends ConsumerWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddExpenseScreen(),
+                                        builder: (context) => AddExpenseScreen(
+                                          clinicId: clinic.clinicId ?? 0,
+                                        ),
                                       ),
                                     );
                                   },
-                                  onViewDetails: () {},
+                                  onViewDetails: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ClinicDetailsScreen(
+                                              clinicId: clinic.clinicId ?? 0,
+                                            ),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             ),

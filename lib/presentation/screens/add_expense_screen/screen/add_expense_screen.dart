@@ -1,4 +1,5 @@
 import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/expense_date_section.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
@@ -15,7 +16,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class AddExpenseScreen extends ConsumerWidget {
-  const AddExpenseScreen({super.key});
+  final int clinicId;
+  const AddExpenseScreen({super.key, required this.clinicId});
 
   // Theme Colors matching the image
   static const Color primaryBlue = Color(0xFF0052CC);
@@ -24,6 +26,7 @@ class AddExpenseScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final expenseState = ref.watch(createExpenseProvider);
     final expenseController = ref.read(createExpenseProvider.notifier);
+    final homeController = ref.read(homeProvider.notifier);
 
     return Scaffold(
       extendBody: true,
@@ -217,7 +220,13 @@ class AddExpenseScreen extends ConsumerWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await expenseController.createExpenseApi(
+                            context: context,
+                            clinicId: clinicId,
+                          );
+                          homeController.getAllclinics(page: 1);
+                        },
                         icon: expenseState.isLoading
                             ? null
                             : Icon(
