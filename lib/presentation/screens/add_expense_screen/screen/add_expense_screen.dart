@@ -223,11 +223,14 @@ class AddExpenseScreen extends ConsumerWidget {
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         onPressed: () async {
-                          await expenseController.createExpenseApi(
-                            context: context,
-                            clinicId: clinicId,
-                          );
-                          homeController.getAllclinics(page: 1);
+                          final result = await expenseController
+                              .createExpenseApi(
+                                context: context,
+                                clinicId: clinicId,
+                              );
+                          if (result == true) {
+                            homeController.getAllclinics(page: 1);
+                          }
                         },
                         icon: expenseState.isLoading
                             ? null

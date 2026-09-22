@@ -1,3 +1,6 @@
+import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
+import 'package:expense/controller/edit_expense_controller/edit_expense_controller.dart';
+import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
 import 'package:expense/presentation/screens/edit_expense_screen/screen/edit_expense_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,7 @@ class ExpenseItemCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final expenseController = ref.read(editExpenseProvider.notifier);
     final colorScheme = Theme.of(context).colorScheme;
 
     final surfaceColor = colorScheme.surface;
@@ -211,7 +215,192 @@ class ExpenseItemCard extends ConsumerWidget {
 
                     SizedBox(width: 12.w),
 
-                    Icon(Icons.delete_outline, size: 20.sp, color: textMuted),
+                    InkWell(
+                      highlightColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            backgroundColor: Theme.of(
+                              context,
+                            ).scaffoldBackgroundColor,
+                            insetPadding: EdgeInsets.symmetric(
+                              horizontal: 24.w,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24.r),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10.h),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // Delete icon
+                                  Container(
+                                    height: 50.h,
+                                    width: 50.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.appRed.withValues(
+                                        alpha: .20,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.delete_outline_rounded,
+                                      color: AppColors.appRed,
+                                      size: 25.sp,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 10.h),
+
+                                  // Title
+                                  Text(
+                                    'Delete this Expense?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 23.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurface,
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 5.h),
+
+                                  // Description
+                                  Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        const TextSpan(
+                                          text:
+                                              'This will permanently delete this ',
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              expense.expenseType ?? 'expense',
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        const TextSpan(
+                                          text:
+                                              ' expense record. This action can\'t be undone.',
+                                        ),
+                                      ],
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      height: 1.5,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withValues(alpha: .60),
+                                    ),
+                                  ),
+
+                                  SizedBox(height: 10.h),
+
+                                  Row(
+                                    children: [
+                                      // Cancel
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              elevation: 0,
+                                              backgroundColor: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface
+                                                  .withValues(alpha: .06),
+                                              foregroundColor: Theme.of(
+                                                context,
+                                              ).colorScheme.onSurface,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.r),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      SizedBox(width: 12.w),
+
+                                      // Delete
+                                      Expanded(
+                                        child: SizedBox(
+                                          height: 50,
+                                          child: ElevatedButton(
+                                            onPressed: () async {
+                                              final result =
+                                                  await expenseController
+                                                      .deleteExpense(
+                                                        clinicId: cliinicId,
+                                                        context: context,
+                                                        expId:
+                                                            expense.expenseId ??
+                                                            0,
+                                                      );
+                                              if (result == true) {
+                                                ref
+                                                    .read(
+                                                      clinicDetailsProvider(
+                                                        cliinicId,
+                                                      ).notifier,
+                                                    )
+                                                    .getClinicDetails();
+                                              }
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              elevation: 0,
+                                              backgroundColor: AppColors.appRed,
+                                              foregroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.r),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.delete_outline,
+                        size: 20.sp,
+                        color: textMuted,
+                      ),
+                    ),
                   ],
                 ),
               ],

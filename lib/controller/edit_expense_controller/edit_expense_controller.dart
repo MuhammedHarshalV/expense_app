@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:expense/apis/expense_related_api/delete_expense_api.dart';
 import 'package:expense/apis/expense_related_api/edit__expense_api.dart';
 import 'package:expense/controller/edit_expense_controller/edit_expense_state.dart';
 import 'package:expense/core/services/image_helper/network_image_to_bytes.dart';
@@ -35,6 +36,69 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
       description: description,
       clearSelectedImage: true,
     );
+  }
+
+  //delete expense api
+
+  Future<bool> deleteExpense({
+    required int clinicId,
+    required BuildContext context,
+    required int expId,
+  }) async {
+    try {
+      final response = await DeleteExpenseApi.deleteExpenseApi(
+        clinicId: clinicId,
+        context: context,
+        expId: expId,
+      );
+      if (response == true) {
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              'Expense delete successfully',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.appGreen,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+        return true;
+      } else {
+        Navigator.pop(context);
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text(
+              'Expense delete failed',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            backgroundColor: AppColors.appRed,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 2),
+          ),
+        );
+        return false;
+      }
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
   }
 
   //edit expense api
