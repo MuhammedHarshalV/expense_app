@@ -1,6 +1,7 @@
 import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
+import 'package:expense/presentation/common_widgets/common_appbar.dart';
 import 'package:expense/presentation/common_widgets/expense_date_section.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/common_widgets/title_field.dart';
@@ -33,59 +34,7 @@ class AddExpenseScreen extends ConsumerWidget {
     return Scaffold(
       extendBody: true,
 
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 4,
-        shadowColor: Colors.black45,
-        backgroundColor: const Color(0xFF1A2980),
-
-        title: Row(
-          children: [
-            InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: GlassContainer(
-                padding: const EdgeInsets.all(8),
-                borderRadius: BorderRadius.circular(360),
-                border: Border.all(color: AppColors.appWhite),
-                child: Icon(
-                  Icons.arrow_back_ios_new_sharp,
-                  color: AppColors.appWhite,
-                  size: 24,
-                ),
-              ),
-            ),
-
-            const SizedBox(width: 12),
-
-            const Text(
-              'FinanceTrack',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-
-        actions: const [ProfileIcon()],
-
-        // Gradient background
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1A2980), Color(0xFF26D0CE)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-      ),
+      appBar: CommonAppBar(),
       body: SafeArea(
         child: Column(
           //
@@ -93,8 +42,8 @@ class AddExpenseScreen extends ConsumerWidget {
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
+                  horizontal: 10,
+                  vertical: 10,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

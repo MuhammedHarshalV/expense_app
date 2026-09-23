@@ -92,6 +92,7 @@ class _CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final colorScheme = Theme.of(context).colorScheme;
 
     return InkWell(
@@ -100,7 +101,11 @@ class _CategoryCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primary : colorScheme.surface,
+          color: isSelected
+              ? colorScheme.primary
+              : isDark
+              ? const Color(0xFF1E293B)
+              : Colors.white,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isSelected

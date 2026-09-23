@@ -1,4 +1,5 @@
 import 'package:expense/core/themes/colors.dart';
+import 'package:expense/presentation/common_widgets/common_appbar.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
 import 'package:flutter/material.dart';
@@ -28,65 +29,65 @@ class HistoryScreen extends ConsumerWidget {
         : const Color(0xFFE2E8F0);
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 4,
-        shadowColor: Colors.black45,
-        backgroundColor: const Color(0xFF1A2980),
-
-        title: Row(
-          children: [
-            InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: GlassContainer(
-                padding: const EdgeInsets.all(8),
-                borderRadius: BorderRadius.circular(360),
-                border: Border.all(color: AppColors.appWhite),
-                child: Icon(
-                  Icons.arrow_back_ios_new_sharp,
-                  color: AppColors.appWhite,
-                  size: 24,
-                ),
-              ),
-            ),
-
-            const SizedBox(width: 12),
-
-            const Text(
-              'FinanceTrack',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-
-        actions: const [ProfileIcon()],
-
-        // Gradient background
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1A2980), Color(0xFF26D0CE)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-      ),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       body: SafeArea(
+        top: false,
         child: CustomScrollView(
           slivers: [
+            SliverAppBar(
+              elevation: 4,
+              shadowColor: Colors.black45,
+              expandedHeight: 70.0, // Slightly taller for a premium feel
+              backgroundColor:
+                  Colors.transparent, // Required to show the gradient
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF1A2980), // Deep stylish blue
+                      Color(0xFF26D0CE), // Vibrant teal
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                ),
+              ),
+              title: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.account_balance_wallet,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Text(
+                    'FinanceTrack',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
+              ),
+              actions: [ProfileIcon()],
+            ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -129,7 +130,7 @@ class HistoryScreen extends ConsumerWidget {
             ),
 
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
                   FacilityBreakdownCard(

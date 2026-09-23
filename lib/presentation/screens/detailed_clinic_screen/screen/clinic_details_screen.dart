@@ -1,5 +1,6 @@
 import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/core/themes/colors.dart';
+import 'package:expense/presentation/common_widgets/common_appbar.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/detailed_clinic_screen/widget/expense_item_card.dart';
 import 'package:expense/presentation/screens/detailed_clinic_screen/widget/top_clinic_card.dart';
@@ -39,59 +40,7 @@ class ClinicDetailsScreen extends ConsumerWidget {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 4,
-        shadowColor: Colors.black45,
-        backgroundColor: const Color(0xFF1A2980),
-
-        title: Row(
-          children: [
-            InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: GlassContainer(
-                padding: const EdgeInsets.all(8),
-                borderRadius: BorderRadius.circular(360),
-                border: Border.all(color: AppColors.appWhite),
-                child: Icon(
-                  Icons.arrow_back_ios_new_sharp,
-                  color: AppColors.appWhite,
-                  size: 24,
-                ),
-              ),
-            ),
-
-            const SizedBox(width: 12),
-
-            const Text(
-              'FinanceTrack',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                letterSpacing: 0.5,
-              ),
-            ),
-          ],
-        ),
-
-        actions: const [ProfileIcon()],
-
-        // Gradient background
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF1A2980), Color(0xFF26D0CE)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
-      ),
+      appBar: CommonAppBar(),
       body: SafeArea(
         child: RefreshIndicator(
           color: AppColors.appBlue,
@@ -104,7 +53,7 @@ class ClinicDetailsScreen extends ConsumerWidget {
             slivers: [
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
