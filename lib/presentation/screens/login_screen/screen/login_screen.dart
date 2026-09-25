@@ -135,6 +135,76 @@ class LoginScreen extends ConsumerWidget {
                           ),
                         ),
                         SizedBox(height: 24.h),
+                        Text(
+                          'Base URL',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        SizedBox(height: 8.h),
+                        TextField(
+                          controller: loginController.baseUrlController,
+                          keyboardType: TextInputType.url,
+                          textInputAction: TextInputAction.done,
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          decoration: InputDecoration(
+                            prefixIcon: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(width: 14),
+                                Icon(
+                                  Icons.link,
+                                  size: 20.h,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  'URL',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                              ],
+                            ),
+                            hintText: 'Enter Base URL',
+                            hintStyle: TextStyle(
+                              color: Color(0xFF94A3B8),
+                              fontSize: 14.sp,
+                            ),
+                            filled: true,
+                            fillColor: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: .1),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: Color(0xFFCBD5E1),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.appBlue,
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.sp),
 
                         // Mobile Number Label & Input
                         Text(

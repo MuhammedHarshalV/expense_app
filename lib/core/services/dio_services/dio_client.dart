@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -8,7 +9,6 @@ import 'package:expense/core/services/dio_services/auth_interceptor.dart';
 class DioClient {
   static final Dio dio = Dio(
     BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
       connectTimeout: const Duration(seconds: 15),
       receiveTimeout: const Duration(seconds: 15),
       headers: {
@@ -17,6 +17,18 @@ class DioClient {
       },
     ),
   );
+  static void setBaseUrl(String url) {
+    String baseUrl = url.trim();
+
+    if (baseUrl.endsWith('/')) {
+      baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+    }
+
+    ApiConstants.baseUrl = baseUrl;
+    dio.options.baseUrl = baseUrl;
+
+    log('Dio Base URL set: ${dio.options.baseUrl}');
+  }
 
   static void initialize() {
     dio.httpClientAdapter = IOHttpClientAdapter(

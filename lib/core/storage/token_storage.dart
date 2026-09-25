@@ -6,12 +6,15 @@ class TokenStorage {
 
   static const String accessTokenKey = 'access_token';
   static const String refreshTokenKey = 'refresh_token';
+  static const String baseUrlKey = 'base_url';
 
   static Future<void> saveTokens({
     required String accessToken,
     required String refreshToken,
+    required String? baseUrl,
   }) async {
     await _storage.write(key: accessTokenKey, value: accessToken);
+    if (baseUrl != null) await _storage.write(key: baseUrlKey, value: baseUrl);
 
     await _storage.write(key: refreshTokenKey, value: refreshToken);
   }
@@ -28,10 +31,15 @@ class TokenStorage {
     return _storage.read(key: refreshTokenKey);
   }
 
+  static Future<String?> getBaseUrl() async {
+    return _storage.read(key: baseUrlKey);
+  }
+
   static Future<void> clear() async {
     await _storage.delete(key: accessTokenKey);
 
     await _storage.delete(key: refreshTokenKey);
+    await _storage.delete(key: baseUrlKey);
     final String? refreshTokem = await _storage.read(key: refreshTokenKey);
     if (refreshTokem == null) {
       AppNavigator.goToLogin(isLogout: true);

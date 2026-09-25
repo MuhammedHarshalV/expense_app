@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:expense/apis/auth_api/refresh_token_api.dart';
 import 'package:expense/controller/splash_controller/splash_state.dart';
+import 'package:expense/core/constants/api_constants.dart';
 import 'package:expense/core/storage/token_storage.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -77,6 +78,7 @@ class SplashNotifierController extends StateNotifier<SplashState> {
         await TokenStorage.saveTokens(
           accessToken: newAccessToken,
           refreshToken: newRefreshToken ?? refreshToken,
+          baseUrl: null,
         );
 
         // Navigate to home

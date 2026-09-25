@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:expense/apis/auth_api/login_api.dart';
 import 'package:expense/controller/login_controller/login_state.dart';
+import 'package:expense/core/constants/api_constants.dart';
 import 'package:expense/core/errors/app_message.dart';
+import 'package:expense/core/services/dio_services/dio_client.dart';
 
 import 'package:expense/presentation/screens/bottom_nav_screen/screen/bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ class LoginController extends StateNotifier<LoginState> {
   LoginController() : super(const LoginState());
 
   final TextEditingController phoneController = TextEditingController();
-
+  final TextEditingController baseUrlController = TextEditingController();
   final TextEditingController pinController = TextEditingController();
 
   //login api
@@ -26,12 +28,26 @@ class LoginController extends StateNotifier<LoginState> {
       AppMessage.show(context, 'Please enter your PIN');
       return;
     }
+    if (baseUrlController.text.trim().isEmpty) {
+      AppMessage.show(context, 'Please enter your Base URL');
+      return;
+    }
 
     try {
       state = state.copyWith(isSubmit: true);
+      final baseUrl = baseUrlController.text.trim();
+
+      if (baseUrl.isEmpty) {
+        AppMessage.show(context, 'Please enter Base URL');
+        return;
+      }
+
+      // Login needs to use entered URL
+      DioClient.setBaseUrl(baseUrl);
 
       final response = await SignInChecking.signInChecking(
         context: context,
+        url: baseUrl,
         body: {
           'user_phone_number': phoneController.text.trim(),
           'user_pin': pinController.text.trim(),
