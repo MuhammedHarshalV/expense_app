@@ -120,6 +120,24 @@ class ExpenseHistoryController extends StateNotifier<ExpenseHistoryState> {
     await getExpenseHistory(isSearch: true);
   }
 
+  //filter change
+
+  final List<String> expenseFilters = [
+    'latest',
+    'oldest',
+    'largest',
+    'smallest',
+  ];
+  Future<void> changeFilter(int index) async {
+    if (index < 0 || index >= expenseFilters.length) return;
+
+    if (state.filterIndex == index) return;
+
+    state = state.copyWith(filterIndex: index);
+
+    await getExpenseHistory(isSearch: true);
+  }
+
   // -------------------------------
   // CLEAR SEARCH
   // -------------------------------
@@ -142,11 +160,12 @@ class ExpenseHistoryController extends StateNotifier<ExpenseHistoryState> {
     final startDate = state.startDate;
 
     final endDate = state.endDate;
+    final filter = expenseFilters[state.filterIndex];
 
     log('Search: $search');
     log('Start Date: $startDate');
     log('End Date: $endDate');
-
+    log('Filter: $filter');
     // Prevent duplicate API calls
     if (state.isLoading || state.isSearchLoading || state.isPaginationLoading) {
       return;
@@ -186,6 +205,7 @@ class ExpenseHistoryController extends StateNotifier<ExpenseHistoryState> {
             search: search,
             startDate: startDate,
             endDate: endDate,
+            filter: filter,
             pageNumber: requestedPage,
             limit: 10,
           );
@@ -284,9 +304,6 @@ class ExpenseHistoryController extends StateNotifier<ExpenseHistoryState> {
 }
 
 final expenseHistoryProvider =
-    StateNotifierProvider.autoDispose<
-      ExpenseHistoryController,
-      ExpenseHistoryState
-    >((ref) {
+    StateNotifierProvider<ExpenseHistoryController, ExpenseHistoryState>((ref) {
       return ExpenseHistoryController();
     });

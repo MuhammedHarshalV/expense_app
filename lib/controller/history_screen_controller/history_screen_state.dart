@@ -14,6 +14,7 @@ class ExpenseHistoryState {
   final int limit;
   final int totalPages;
   final int totalCount;
+  final int filterIndex;
 
   final String startDate;
   final String endDate;
@@ -21,6 +22,7 @@ class ExpenseHistoryState {
   ExpenseHistoryState({
     this.expenseHistory = const [],
     this.isLoading = false,
+    this.filterIndex = 0,
     this.isSearchLoading = false,
     this.isPaginationLoading = false,
     this.pageNumber = 0,
@@ -46,6 +48,7 @@ class ExpenseHistoryState {
     bool? isPaginationLoading,
     int? pageNumber,
     int? limit,
+    int? filterIndex,
     String? searchText,
     int? totalPages,
     int? totalCount,
@@ -67,6 +70,7 @@ class ExpenseHistoryState {
       endDate: endDate ?? this.endDate,
       searchText: searchText ?? this.searchText,
       totalSpend: totalSpend ?? this.totalSpend,
+      filterIndex: filterIndex ?? this.filterIndex,
       approvedAmount: approvedAmount ?? this.approvedAmount,
     );
   }

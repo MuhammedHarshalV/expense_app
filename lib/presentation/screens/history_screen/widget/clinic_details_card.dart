@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:expense/controller/history_screen_controller/history_screen_controller.dart';
 import 'package:expense/models/expense_related/get_expense_history_response_model.dart';
+import 'package:expense/presentation/screens/expense_history_by_date/screen/expense_by_date_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +33,8 @@ class ClinicDetailsCard extends ConsumerWidget {
     final num pendingAmount = totalSpend - approvedAmount;
 
     final bool isSettled = totalSpend > 0 && pendingAmount <= 0;
+
+    final expenseState = ref.watch(expenseHistoryProvider);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -219,23 +225,41 @@ class ClinicDetailsCard extends ConsumerWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Text(
-                    'View ${clinic.totalTransactionCount ?? 0} Receipts',
-                    style: TextStyle(
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w600,
+              InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ExpenseByDateScreen(
+                        clinicId: clinic.clinicId ?? 0,
+                        startDate: expenseState.startDate,
+                        endDate: expenseState.endDate,
+                      ),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      'View ${clinic.totalTransactionCount ?? 0} Receipts',
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w600,
+                        color: primaryBlue,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.arrow_circle_right_outlined,
+                      size: 16.sp,
                       color: primaryBlue,
                     ),
-                  ),
-                  const SizedBox(width: 4),
-                  Icon(
-                    Icons.arrow_circle_right_outlined,
-                    size: 16.sp,
-                    color: primaryBlue,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

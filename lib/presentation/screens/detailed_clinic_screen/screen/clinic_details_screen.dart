@@ -1,10 +1,8 @@
 import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
-import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/screens/detailed_clinic_screen/widget/expense_item_card.dart';
 import 'package:expense/presentation/screens/detailed_clinic_screen/widget/top_clinic_card.dart';
-import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -16,11 +16,8 @@ class HistoryScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // Theme Colors
+    final List<String> filters = ['Latest', 'Oldest', 'Largest', 'Smallest'];
 
-    final primaryBlue = isDark
-        ? const Color(0xFF3B82F6)
-        : const Color(0xFF003399);
     final textPrimary = isDark
         ? const Color(0xFFF8FAFC)
         : const Color(0xFF0F172A);
@@ -43,182 +40,219 @@ class HistoryScreen extends ConsumerWidget {
           onRefresh: () async {
             await historyController.refresh();
           },
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                floating: true,
-                pinned: false,
-                snap: true,
-                elevation: 4,
-                shadowColor: Colors.black45,
-                expandedHeight: 70.0, // Slightly taller for a premium feel
-                backgroundColor:
-                    Colors.transparent, // Required to show the gradient
-                flexibleSpace: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF1A2980), // Deep stylish blue
-                        Color(0xFF26D0CE), // Vibrant teal
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (notification) {
+              // Only check while scrolling
+
+              if (notification.metrics.extentAfter < 200) {
+                final state = ref.read(expenseHistoryProvider);
+
+                // More pages available
+                // AND pagination API isn't already running
+                if (state.pageNumber < state.totalPages &&
+                    !state.isPaginationLoading) {
+                  historyController.getExpenseHistory(isPagination: true);
+                }
+              }
+
+              return false;
+            },
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  floating: true,
+                  pinned: false,
+                  snap: true,
+                  elevation: 4,
+                  shadowColor: Colors.black45,
+                  expandedHeight: 70.0, // Slightly taller for a premium feel
+                  backgroundColor:
+                      Colors.transparent, // Required to show the gradient
+                  flexibleSpace: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF1A2980), // Deep stylish blue
+                          Color(0xFF26D0CE), // Vibrant teal
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
                     ),
                   ),
-                ),
-                title: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.account_balance_wallet,
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    const Text(
-                      'FinanceTrack',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [ProfileIcon()],
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  title: Row(
                     children: [
-                      SearchClinicHistory(),
-                      const SizedBox(height: 16),
-
-                      DatePickerContainer(),
-                      const SizedBox(height: 16),
-
-                      // _buildFilterChips(primaryBlue),
-                      //   const SizedBox(height: 20),
-                      TotalExpenseSpendCard(),
-                      const SizedBox(height: 24),
-
-                      _buildSectionHeader(
-                        textPrimary,
-                        textMuted,
-                        historyState.totalCount.toString(),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.account_balance_wallet,
+                          color: Colors.white,
+                          size: 24,
+                        ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(width: 12),
+                      const Text(
+                        'FinanceTrack',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
                     ],
                   ),
+                  actions: [ProfileIcon()],
                 ),
-              ),
-
-              if (historyState.isLoading || historyState.isSearchLoading)
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 100,
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                )
-              else if (historyState.expenseHistory.isEmpty)
                 SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 100,
-                    child: Center(
-                      child: Text(
-                        'No data found in this time range',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: textMuted,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SearchClinicHistory(),
+                        const SizedBox(height: 16),
+
+                        DatePickerContainer(),
+                        const SizedBox(height: 16),
+
+                        // _buildFilterChips(primaryBlue),
+                        //   const SizedBox(height: 20),
+                        TotalExpenseSpendCard(),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          height: 40,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.symmetric(horizontal: 12),
+                            itemCount: filters.length,
+                            itemBuilder: (context, index) {
+                              final isSelected =
+                                  historyState.filterIndex == index;
+
+                              final isDark =
+                                  Theme.of(context).brightness ==
+                                  Brightness.dark;
+
+                              return GestureDetector(
+                                onTap: () {
+                                  historyController.changeFilter(index);
+                                },
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  margin: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 22.w,
+                                    vertical: 9.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? AppColors.appBlue
+                                        : isDark
+                                        ? Colors.grey.shade800
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(25.r),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? AppColors.appBlue
+                                          : isDark
+                                          ? Colors.grey.shade700
+                                          : Colors.grey.shade200,
+                                    ),
+                                    boxShadow: isDark
+                                        ? null
+                                        : [
+                                            BoxShadow(
+                                              color: Colors.black.withValues(
+                                                alpha: 0.06,
+                                              ),
+                                              blurRadius: 6,
+                                              offset: const Offset(0, 2),
+                                            ),
+                                          ],
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      filters[index],
+                                      style: TextStyle(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: isSelected
+                                            ? Colors.white
+                                            : isDark
+                                            ? Colors.white70
+                                            : Colors.black87,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        _buildSectionHeader(
+                          textPrimary,
+                          textMuted,
+                          historyState.totalCount.toString(),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+                  ),
+                ),
+
+                if (historyState.isLoading || historyState.isSearchLoading)
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 100,
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  )
+                else if (historyState.expenseHistory.isEmpty)
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'No data found in this time range',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: textMuted,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              else
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final item = historyState.expenseHistory[index];
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = historyState.expenseHistory[index];
 
-                      return ClinicDetailsCard(clinic: item);
-                    }, childCount: historyState.expenseHistory.length),
+                        return ClinicDetailsCard(clinic: item);
+                      }, childCount: historyState.expenseHistory.length),
+                    ),
                   ),
-                ),
-            ],
+                SliverToBoxAdapter(child: SizedBox(height: 70)),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
-  // Widget _buildFilterChips(Color primaryBlue) {
-  //   return SingleChildScrollView(
-  //     scrollDirection: Axis.horizontal,
-  //     child: Row(
-  //       children: [
-  //         _buildChip(
-  //           'All Facilities',
-  //           isActive: true,
-  //           primaryBlue: primaryBlue,
-  //         ),
-  //         const SizedBox(width: 8),
-  //         _buildChip(
-  //           'Approved Only',
-  //           isActive: false,
-  //           primaryBlue: primaryBlue,
-  //         ),
-  //         const SizedBox(width: 8),
-  //         _buildChip(
-  //           'Pending Review',
-  //           isActive: false,
-  //           primaryBlue: primaryBlue,
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildChip(
-  //   String label, {
-  //   required bool isActive,
-  //   required Color primaryBlue,
-  // }) {
-  //   return Container(
-  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-  //     decoration: BoxDecoration(
-  //       color: isActive ? primaryBlue : Colors.white,
-  //       borderRadius: BorderRadius.circular(20),
-  //       border: Border.all(
-  //         color: isActive ? primaryBlue : const Color(0xFFE2E8F0),
-  //       ),
-  //     ),
-  //     child: Text(
-  //       label,
-  //       style: TextStyle(
-  //         fontSize: 12,
-  //         fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-  //         color: isActive ? Colors.white : const Color(0xFF64748B),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildSectionHeader(Color textPrimary, Color textMuted, String count) {
     return Row(

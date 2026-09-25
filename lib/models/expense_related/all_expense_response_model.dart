@@ -83,6 +83,7 @@ class Expense {
   String? expenseType;
   String? description;
   String? expenseDate;
+  num? approvedAmount;
   String? billPhoto;
 
   Expense({
@@ -92,6 +93,7 @@ class Expense {
     this.expenseType,
     this.description,
     this.expenseDate,
+    this.approvedAmount,
     this.billPhoto,
   });
 
@@ -102,6 +104,7 @@ class Expense {
     expenseType: json["expense_type"],
     description: json["description"],
     expenseDate: json["expense_date"],
+    approvedAmount: json["approved_amount"],
     billPhoto: json["bill_photo"],
   );
 
@@ -112,6 +115,7 @@ class Expense {
     "expense_type": expenseType,
     "description": description,
     "expense_date": expenseDate,
+    "approved_amount": approvedAmount,
     "bill_photo": billPhoto,
   };
 }

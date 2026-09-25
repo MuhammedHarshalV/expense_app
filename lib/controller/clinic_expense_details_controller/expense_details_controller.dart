@@ -43,24 +43,31 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
   //filter expense
   void filterExpenses(String filter) {
     final List<Expense> filteredList = [...state.expenses];
+    DateTime parseDate(String? date) {
+      if (date == null || date.isEmpty) {
+        return DateTime(1970);
+      }
+
+      try {
+        return DateFormat('dd-MMM-yyyy').parse(date);
+      } catch (_) {
+        return DateTime(1970);
+      }
+    }
 
     switch (filter) {
       case 'Latest':
-        filteredList.sort((a, b) {
-          final dateA = _parseExpenseDate(a.expenseDate);
-          final dateB = _parseExpenseDate(b.expenseDate);
-
-          return dateB.compareTo(dateA);
-        });
+        filteredList.sort(
+          (a, b) =>
+              parseDate(b.expenseDate).compareTo(parseDate(a.expenseDate)),
+        );
         break;
 
       case 'Oldest':
-        filteredList.sort((a, b) {
-          final dateA = _parseExpenseDate(a.expenseDate);
-          final dateB = _parseExpenseDate(b.expenseDate);
-
-          return dateA.compareTo(dateB);
-        });
+        filteredList.sort(
+          (a, b) =>
+              parseDate(a.expenseDate).compareTo(parseDate(b.expenseDate)),
+        );
         break;
 
       case 'Highest Amount':
@@ -85,17 +92,17 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
     state = state.copyWith(expenses: filteredList, filter: filter);
   }
 
-  DateTime _parseExpenseDate(String? date) {
-    if (date == null || date.trim().isEmpty) {
-      return DateTime(1970);
-    }
+  // DateTime _parseExpenseDate(String? date) {
+  //   if (date == null || date.trim().isEmpty) {
+  //     return DateTime(1970);
+  //   }
 
-    try {
-      return DateFormat('dd-MMM-yyyy').parse(date);
-    } catch (_) {
-      return DateTime(1970);
-    }
-  }
+  //   try {
+  //     return DateFormat('dd-MMM-yyyy').parse(date);
+  //   } catch (_) {
+  //     return DateTime(1970);
+  //   }
+  // }
 
   void updateState({
     bool? isLoading,

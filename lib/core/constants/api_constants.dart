@@ -17,4 +17,5 @@ class ApiConstants {
   static String editExpense = '/api/expense/expenseUpdation';
   static String deleteExpense = "/api/expense/delete-expense";
   static String getExpenseHistory = "/api/expense/history";
+  static String getExpenseByDate = '/api/expense/by-date-range';
 }

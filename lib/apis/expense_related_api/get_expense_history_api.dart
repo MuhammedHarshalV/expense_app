@@ -4,6 +4,7 @@ import 'package:expense/core/services/dio_services/api_services.dart';
 import 'package:expense/models/expense_related/get_expense_history_response_model.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class GetExpenseHistoryApi {
   static Future<dynamic> getExpenseHistoryApi({
@@ -13,6 +14,7 @@ class GetExpenseHistoryApi {
     String? search,
     String? startDate,
     String? endDate,
+    String? filter,
   }) async {
     try {
       final response = await GetApiServices.callApi(
@@ -21,10 +23,11 @@ class GetExpenseHistoryApi {
         requiresAuth: true,
         queryParams: {
           "search": search,
-          "start_date": startDate,
-          "end_date": endDate,
+          "start_date": convertDate(startDate),
+          "end_date": convertDate(endDate),
           "page": pageNumber,
           "limit": limit,
+          "filter": filter ?? 'latest',
         },
       );
 
@@ -40,5 +43,13 @@ class GetExpenseHistoryApi {
 
       return null;
     }
+  }
+
+  static String? convertDate(String? date) {
+    if (date == null || date.isEmpty) return null;
+
+    final parsedDate = DateFormat('dd-MMM-yyyy').parse(date);
+
+    return DateFormat('yyyy-MM-dd').format(parsedDate);
   }
 }
