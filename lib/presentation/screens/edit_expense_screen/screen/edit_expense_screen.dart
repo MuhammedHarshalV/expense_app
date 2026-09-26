@@ -65,28 +65,32 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // FieldLabel(label: 'DATE OF EXPENSE', isRequired: true),
-                    // SizedBox(height: 6),
-                    // ExpenseDateSection(
-                    //   date: expenseState.expenseDate,
-                    //   onTap: () async {
-                    //     final pickedDate = await showDatePicker(
-                    //       context: context,
-                    //       initialDate: DateTime.now(),
-                    //       firstDate: DateTime(2020),
-                    //       lastDate: DateTime.now(),
-                    //     );
+                    FieldLabel(label: 'DATE OF EXPENSE', isRequired: true),
+                    SizedBox(height: 6),
+                    ExpenseDateSection(
+                      date: expenseState.expenseDate.isNotEmpty
+                          ? DateFormat(
+                              'dd-MMM-yyyy',
+                            ).format(DateTime.parse(expenseState.expenseDate!))
+                          : '',
+                      onTap: () {
+                        // final pickedDate = await showDatePicker(
+                        //   context: context,
+                        //   initialDate: DateTime.now(),
+                        //   firstDate: DateTime(2020),
+                        //   lastDate: DateTime.now(),
+                        // );
 
-                    //     if (pickedDate != null) {
-                    //       expenseController.updateState(
-                    //         expenseDate: DateFormat(
-                    //           'dd-MMM-yyyy',
-                    //         ).format(pickedDate),
-                    //       );
-                    //     }
-                    //   },
-                    // ),
-                    // const SizedBox(height: 24),
+                        // if (pickedDate != null) {
+                        //   expenseController.updateState(
+                        //     expenseDate: DateFormat(
+                        //       'dd-MMM-yyyy',
+                        //     ).format(pickedDate),
+                        //   );
+                        // }
+                      },
+                    ),
+                    const SizedBox(height: 24),
                     FieldLabel(label: 'EXPENSE CATEGORY', isRequired: true),
                     SizedBox(height: 6),
                     ExpenseCategoryGrid(

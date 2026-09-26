@@ -33,6 +33,10 @@ class LoginScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       color: AppColors.appBlue,
                       borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage("asset/image/ExpensePro.png"),
+                        fit: BoxFit.fill,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: AppColors.appBlue.withOpacity(0.3),
@@ -41,17 +45,17 @@ class LoginScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    child: Icon(
-                      Icons.receipt_long_rounded,
-                      color: AppColors.appWhite,
-                      size: 34.h,
-                    ),
+                    // child: Icon(
+                    //   Icons.receipt_long_rounded,
+                    //   color: AppColors.appWhite,
+                    //   size: 34.h,
+                    // ),
                   ),
 
                   SizedBox(height: 16.h),
 
                   Text(
-                    'ExpensePro',
+                    'Expense PRO',
                     style: TextStyle(
                       fontSize: 26.sp,
                       fontWeight: FontWeight.w700,
