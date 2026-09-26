@@ -18,9 +18,8 @@ class TopClinicCard extends ConsumerWidget {
 
     final surfaceColor = colorScheme.surface;
     final primaryColor = colorScheme.primary;
-    final textPrimary = colorScheme.onSurface;
     final textMuted = colorScheme.onSurface.withValues(alpha: 0.6);
-    final borderColor = colorScheme.outline.withValues(alpha: 0.25);
+    colorScheme.outline.withValues(alpha: 0.25);
 
     return Container(
       decoration: BoxDecoration(

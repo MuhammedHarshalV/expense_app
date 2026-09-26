@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class EditExpenseController extends StateNotifier<EditExpenseState> {
   EditExpenseController() : super(EditExpenseState());
@@ -27,11 +28,17 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
     amountController.text = amount == 0 ? '' : amount.toStringAsFixed(2);
 
     descriptionController.text = description;
+    String formattedDate = state.expenseDate;
 
+    if (expense.expenseDate != null && expense.expenseDate!.isNotEmpty) {
+      final parsedDate = DateTime.parse(expense.expenseDate!);
+
+      formattedDate = DateFormat('dd-MMM-yyyy').format(parsedDate);
+    }
     state = state.copyWith(
       amount: amount,
       expenseCategory: expense.expenseType ?? 'Food & Lunch',
-      expenseDate: expense.expenseDate ?? state.expenseDate,
+      expenseDate: formattedDate,
       networkImageUrl: expense.billPhoto ?? '',
       description: description,
       clearSelectedImage: true,

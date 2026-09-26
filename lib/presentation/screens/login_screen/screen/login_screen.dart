@@ -39,7 +39,7 @@ class LoginScreen extends ConsumerWidget {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.appBlue.withOpacity(0.3),
+                          color: AppColors.appBlue.withValues(alpha: 0.3),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -110,7 +110,7 @@ class LoginScreen extends ConsumerWidget {
                       border: Border.all(color: const Color(0xFFE2E8F0)),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
+                          color: Colors.black.withValues(alpha: 0.04),
                           blurRadius: 16,
                           offset: const Offset(0, 6),
                         ),
@@ -375,7 +375,7 @@ class LoginScreen extends ConsumerWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color: AppColors.appBlue.withOpacity(0.35),
+                              color: AppColors.appBlue.withValues(alpha: 0.35),
                               width: 1.2,
                             ),
                           ),

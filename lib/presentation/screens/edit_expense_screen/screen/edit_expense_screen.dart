@@ -4,19 +4,18 @@ import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
 import 'package:expense/presentation/common_widgets/expense_date_section.dart';
-import 'package:expense/presentation/common_widgets/glass_container.dart';
+
 import 'package:expense/presentation/common_widgets/title_field.dart';
 
 import 'package:expense/presentation/screens/add_expense_screen/widget/expense_category_card.dart';
 import 'package:expense/presentation/screens/edit_expense_screen/widget/edit_amount_card.dart';
 import 'package:expense/presentation/screens/edit_expense_screen/widget/edit_bill_photo_card.dart';
 import 'package:expense/presentation/screens/edit_expense_screen/widget/edit_description_card.dart';
-import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class EditExpenseScreen extends ConsumerStatefulWidget {
   final int clinicId;
@@ -69,9 +68,7 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                     SizedBox(height: 6),
                     ExpenseDateSection(
                       date: expenseState.expenseDate.isNotEmpty
-                          ? DateFormat(
-                              'dd-MMM-yyyy',
-                            ).format(DateTime.parse(expenseState.expenseDate!))
+                          ? expenseState.expenseDate
                           : '',
                       onTap: () {
                         // final pickedDate = await showDatePicker(

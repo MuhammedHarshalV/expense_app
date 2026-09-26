@@ -4,12 +4,10 @@ import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/clinic_related/get_all_clinic_details_response_model.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
-import 'package:expense/presentation/common_widgets/glass_container.dart';
 import 'package:expense/presentation/common_widgets/title_field.dart';
 
 import 'package:expense/presentation/screens/edit_clinic_screen/widget/update_photo_container.dart';
 import 'package:expense/presentation/screens/edit_clinic_screen/widget/update_search_container.dart';
-import 'package:expense/presentation/screens/home_screen/widget/profile_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -309,7 +307,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                     // Save Button with Dashed Ring
                     CustomPaint(
                       painter: _DashedBorderPainter(
-                        color: primaryBlue.withOpacity(0.5),
+                        color: primaryBlue.withValues(alpha: 0.5),
                         strokeWidth: 1.5,
                         dashLength: 4,
                         dashSpace: 3,
@@ -372,7 +370,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                     // Cancel & Return Button
                     CustomPaint(
                       painter: _DashedBorderPainter(
-                        color: primaryBlue.withOpacity(0.55),
+                        color: primaryBlue.withValues(alpha: 0.55),
                         strokeWidth: 1.5,
                         dashLength: 4,
                         dashSpace: 3,

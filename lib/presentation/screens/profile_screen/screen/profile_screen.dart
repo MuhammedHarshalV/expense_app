@@ -1,3 +1,5 @@
+import 'package:expense/controller/history_screen_controller/history_screen_controller.dart';
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/controller/profile_screen_controller/profile_controller.dart';
 import 'package:expense/core/storage/token_storage.dart';
 import 'package:expense/core/themes/colors.dart';
@@ -410,6 +412,10 @@ class ProfileScreen extends ConsumerWidget {
                                           child: ElevatedButton(
                                             onPressed: () async {
                                               await TokenStorage.clear();
+                                              ref.invalidate(homeProvider);
+                                              ref.invalidate(
+                                                expenseHistoryProvider,
+                                              );
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,

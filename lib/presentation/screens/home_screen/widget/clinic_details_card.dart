@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/core/themes/colors.dart';
@@ -233,7 +232,7 @@ class ClinicExpenseCard extends ConsumerWidget {
     required VoidCallback onTap,
   }) {
     return Material(
-      color: Colors.black.withOpacity(0.45),
+      color: Colors.black.withValues(alpha: 0.45),
       shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
