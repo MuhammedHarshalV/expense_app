@@ -13,7 +13,7 @@ class ExpenseHistoryController extends StateNotifier<ExpenseHistoryState> {
   ExpenseHistoryController() : super(ExpenseHistoryState()) {
     getExpenseHistory(isInitial: true);
   }
-
+  final searchController = TextEditingController();
   Timer? _debounce;
 
   // dd-MMM-yyyy

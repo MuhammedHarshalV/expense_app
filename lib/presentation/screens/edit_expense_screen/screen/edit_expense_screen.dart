@@ -65,11 +65,28 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FieldLabel(label: 'EXPENSE AMOUNT', isRequired: true),
-                    SizedBox(height: 6),
-                    EditAmountCard(),
-                    const SizedBox(height: 24),
+                    // FieldLabel(label: 'DATE OF EXPENSE', isRequired: true),
+                    // SizedBox(height: 6),
+                    // ExpenseDateSection(
+                    //   date: expenseState.expenseDate,
+                    //   onTap: () async {
+                    //     final pickedDate = await showDatePicker(
+                    //       context: context,
+                    //       initialDate: DateTime.now(),
+                    //       firstDate: DateTime(2020),
+                    //       lastDate: DateTime.now(),
+                    //     );
 
+                    //     if (pickedDate != null) {
+                    //       expenseController.updateState(
+                    //         expenseDate: DateFormat(
+                    //           'dd-MMM-yyyy',
+                    //         ).format(pickedDate),
+                    //       );
+                    //     }
+                    //   },
+                    // ),
+                    // const SizedBox(height: 24),
                     FieldLabel(label: 'EXPENSE CATEGORY', isRequired: true),
                     SizedBox(height: 6),
                     ExpenseCategoryGrid(
@@ -79,27 +96,9 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                       },
                     ),
                     const SizedBox(height: 24),
-                    FieldLabel(label: 'DATE OF EXPENSE', isRequired: true),
+                    FieldLabel(label: 'EXPENSE AMOUNT', isRequired: true),
                     SizedBox(height: 6),
-                    ExpenseDateSection(
-                      date: expenseState.expenseDate,
-                      onTap: () async {
-                        final pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime.now(),
-                        );
-
-                        if (pickedDate != null) {
-                          expenseController.updateState(
-                            expenseDate: DateFormat(
-                              'dd-MMM-yyyy',
-                            ).format(pickedDate),
-                          );
-                        }
-                      },
-                    ),
+                    EditAmountCard(),
                     const SizedBox(height: 24),
 
                     Row(

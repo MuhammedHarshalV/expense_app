@@ -48,20 +48,6 @@ class AddExpenseScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FieldLabel(label: 'EXPENSE AMOUNT', isRequired: true),
-                    SizedBox(height: 6),
-                    AmountCard(),
-                    const SizedBox(height: 24),
-
-                    FieldLabel(label: 'EXPENSE CATEGORY', isRequired: true),
-                    SizedBox(height: 6),
-                    ExpenseCategoryGrid(
-                      selectedCategory: expenseState.expenseCategory,
-                      onCategorySelected: (value) {
-                        expenseController.updateState(expenseCategory: value);
-                      },
-                    ),
-                    const SizedBox(height: 24),
                     FieldLabel(label: 'DATE OF EXPENSE', isRequired: true),
                     SizedBox(height: 6),
                     ExpenseDateSection(
@@ -83,6 +69,20 @@ class AddExpenseScreen extends ConsumerWidget {
                         }
                       },
                     ),
+                    const SizedBox(height: 24),
+
+                    FieldLabel(label: 'EXPENSE CATEGORY', isRequired: true),
+                    SizedBox(height: 6),
+                    ExpenseCategoryGrid(
+                      selectedCategory: expenseState.expenseCategory,
+                      onCategorySelected: (value) {
+                        expenseController.updateState(expenseCategory: value);
+                      },
+                    ),
+                    const SizedBox(height: 24),
+                    FieldLabel(label: 'EXPENSE AMOUNT', isRequired: true),
+                    SizedBox(height: 6),
+                    AmountCard(),
                     const SizedBox(height: 24),
 
                     Row(

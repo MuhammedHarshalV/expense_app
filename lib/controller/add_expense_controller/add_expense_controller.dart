@@ -8,6 +8,7 @@ import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:intl/intl.dart';
 
 class CreateExpenseController extends StateNotifier<CreateExpenseState> {
   CreateExpenseController() : super(CreateExpenseState());
@@ -147,13 +148,25 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
     final formData = FormData.fromMap({
       'expense_amount': expenseAmount,
       'expense_type': expenseType,
-      'expense_date': expenseDate,
+      'expense_date': convertExpenseDate(expenseDate),
       'description': description,
 
       if (billPhoto != null) 'bill_photo': billPhotoConverted,
     });
 
     return formData;
+  }
+
+  String? convertExpenseDate(String? expenseDate) {
+    if (expenseDate == null || expenseDate.isEmpty) {
+      return null;
+    }
+
+    final DateTime parsedDate = DateFormat(
+      'dd-MMM-yyyy',
+    ).parseStrict(expenseDate);
+
+    return DateFormat('yyyy-MM-dd').format(parsedDate);
   }
 
   @override

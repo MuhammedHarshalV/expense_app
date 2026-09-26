@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchClinicHistory extends ConsumerWidget {
   SearchClinicHistory({super.key});
-  final searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -32,7 +32,7 @@ class SearchClinicHistory extends ConsumerWidget {
         border: Border.all(color: borderColor),
       ),
       child: TextField(
-        controller: searchController,
+        controller: historyController.searchController,
         onChanged: (value) {
           historyController.onSearchChanged(value);
         },
