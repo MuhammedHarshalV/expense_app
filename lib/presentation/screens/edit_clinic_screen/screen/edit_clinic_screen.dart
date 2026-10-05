@@ -101,7 +101,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                     SizedBox(height: 18.h),
 
                     // Clinic Name Field
-                    FieldLabel(label: 'CLINIC NAME', isRequired: true),
+                    FieldLabel(label: 'CLINIC/HOSPITAL/LAB NAME', isRequired: true),
                     SizedBox(height: 6),
 
                     TextFormField(
@@ -114,7 +114,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                       ),
                       decoration: InputDecoration(
                         hint: Text(
-                          'clinic name ...',
+                          'CLINIC/HOSPITAL/LAB NAME...',
                           style: TextStyle(
                             color: Theme.of(
                               context,

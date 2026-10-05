@@ -90,45 +90,45 @@ class ProfileHeader extends ConsumerWidget {
               ),
             ),
             // Edit image button
-            Positioned(
-              right: -2,
-              bottom: 0,
-              child: InkWell(
-                onTap: () async {
-                  final XFile? image = await ImageHelper.pickImage(
-                    context: context,
-                  );
-                  if (image == null) return;
+            // Positioned(
+            //   right: -2,
+            //   bottom: 0,
+            //   child: InkWell(
+            //     onTap: () async {
+            //       final XFile? image = await ImageHelper.pickImage(
+            //         context: context,
+            //       );
+            //       if (image == null) return;
 
-                  //  Step 4 — Save to controller
+            //       //  Step 4 — Save to controller
 
-                  profilecontroller.updateProfileApi(
-                    photoPath: image.path,
-                    // ignore: use_build_context_synchronously
-                    context: context,
-                    isPhoto: true,
-                  );
-                },
-                child: Container(
-                  width: 32.h,
-                  height: 32.h,
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
+            //       profilecontroller.updateProfileApi(
+            //         photoPath: image.path,
+            //         // ignore: use_build_context_synchronously
+            //         context: context,
+            //         isPhoto: true,
+            //       );
+            //     },
+            //     child: Container(
+            //       width: 32.h,
+            //       height: 32.h,
+            //       decoration: BoxDecoration(
+            //         color: Colors.blueAccent,
 
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      width: 2.h,
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.camera_alt_outlined,
-                    size: 15.h,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                ),
-              ),
-            ),
+            //         shape: BoxShape.circle,
+            //         border: Border.all(
+            //           color: Theme.of(context).scaffoldBackgroundColor,
+            //           width: 2.h,
+            //         ),
+            //       ),
+            //       child: Icon(
+            //         Icons.camera_alt_outlined,
+            //         size: 15.h,
+            //         color: Theme.of(context).scaffoldBackgroundColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
 

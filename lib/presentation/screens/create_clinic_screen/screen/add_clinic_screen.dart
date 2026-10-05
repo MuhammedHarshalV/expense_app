@@ -85,7 +85,7 @@ class AddClinicScreen extends ConsumerWidget {
 
                     // Clinic Name Field
                     _buildFieldLabel(
-                      'CLINIC NAME',
+                      'CLINIC/HOSPITAL/LAB NAME',
                       isRequired: true,
                       context: context,
                     ),
@@ -101,7 +101,7 @@ class AddClinicScreen extends ConsumerWidget {
                       ),
                       decoration: InputDecoration(
                         hint: Text(
-                          'clinic name ...',
+                          'CLINIC/HOSPITAL/LAB NAME...',
                           style: TextStyle(
                             color: Theme.of(
                               context,

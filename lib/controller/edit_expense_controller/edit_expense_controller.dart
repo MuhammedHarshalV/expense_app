@@ -212,12 +212,24 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
       'expense_amount': amount,
       'description': description,
       "expense_type": category,
-      "expense_date": date,
+      "expense_date": convertExpenseDate(date),
       // ignore: use_null_aware_elements
       if (billPhoto != null) 'bill_photo': billPhoto,
     });
 
     return formData;
+  }
+
+  String? convertExpenseDate(String? expenseDate) {
+    if (expenseDate == null || expenseDate.isEmpty) {
+      return null;
+    }
+
+    final DateTime parsedDate = DateFormat(
+      'dd-MMM-yyyy',
+    ).parseStrict(expenseDate);
+
+    return DateFormat('yyyy-MM-dd').format(parsedDate);
   }
 
   /// Common state update

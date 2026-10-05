@@ -19,10 +19,10 @@ class LoginController extends StateNotifier<LoginState> {
 
   //login api
   Future<void> login({required BuildContext context}) async {
-    if (phoneController.text.trim().isEmpty) {
-      AppMessage.show(context, 'Please enter your mobile number');
-      return;
-    }
+    // if (phoneController.text.trim().isEmpty) {
+    //   AppMessage.show(context, 'Please enter your mobile number');
+    //   return;
+    // }
 
     if (pinController.text.trim().isEmpty) {
       AppMessage.show(context, 'Please enter your PIN');
@@ -49,7 +49,7 @@ class LoginController extends StateNotifier<LoginState> {
         context: context,
         url: baseUrl,
         body: {
-          'user_phone_number': phoneController.text.trim(),
+          // 'user_phone_number': phoneController.text.trim(),
           'user_pin': pinController.text.trim(),
         },
       );
@@ -61,6 +61,7 @@ class LoginController extends StateNotifier<LoginState> {
       if (response.data['success'] == true &&
           response.data['message'] == 'Login successful') {
         Navigator.pushAndRemoveUntil(
+          
           context,
           MaterialPageRoute(builder: (_) => const BottomNavScreen()),
           (_) => false,

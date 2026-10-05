@@ -211,73 +211,73 @@ class LoginScreen extends ConsumerWidget {
                         SizedBox(height: 20.sp),
 
                         // Mobile Number Label & Input
-                        Text(
-                          'Mobile Number',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                        SizedBox(height: 8.h),
-                        TextField(
-                          controller: loginController.phoneController,
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            prefixIcon: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SizedBox(width: 14),
-                                Icon(
-                                  Icons.phone_android_rounded,
-                                  size: 20.h,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  '+91',
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurface,
-                                  ),
-                                ),
-                                SizedBox(width: 12),
-                              ],
-                            ),
-                            hintText: 'Enter your number',
-                            hintStyle: TextStyle(
-                              color: Color(0xFF94A3B8),
-                              fontSize: 14.sp,
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(
-                              context,
-                            ).colorScheme.onSurface.withValues(alpha: .1),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 14,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: Color(0xFFCBD5E1),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                color: AppColors.appBlue,
-                                width: 1.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20.sp),
+                        // Text(
+                        //   'Mobile Number',
+                        //   style: TextStyle(
+                        //     fontSize: 12.sp,
+                        //     fontWeight: FontWeight.w700,
+                        //     color: Theme.of(context).colorScheme.onSurface,
+                        //   ),
+                        // ),
+                        // SizedBox(height: 8.h),
+                        // TextField(
+                        //   controller: loginController.phoneController,
+                        //   keyboardType: TextInputType.phone,
+                        //   decoration: InputDecoration(
+                        //     prefixIcon: Row(
+                        //       mainAxisSize: MainAxisSize.min,
+                        //       children: [
+                        //         SizedBox(width: 14),
+                        //         Icon(
+                        //           Icons.phone_android_rounded,
+                        //           size: 20.h,
+                        //           color: Theme.of(
+                        //             context,
+                        //           ).colorScheme.onSurface,
+                        //         ),
+                        //         SizedBox(width: 8),
+                        //         Text(
+                        //           '+91',
+                        //           style: TextStyle(
+                        //             fontSize: 14.sp,
+                        //             fontWeight: FontWeight.w600,
+                        //             color: Theme.of(
+                        //               context,
+                        //             ).colorScheme.onSurface,
+                        //           ),
+                        //         ),
+                        //         SizedBox(width: 12),
+                        //       ],
+                        //     ),
+                        //     hintText: 'Enter your number',
+                        //     hintStyle: TextStyle(
+                        //       color: Color(0xFF94A3B8),
+                        //       fontSize: 14.sp,
+                        //     ),
+                        //     filled: true,
+                        //     fillColor: Theme.of(
+                        //       context,
+                        //     ).colorScheme.onSurface.withValues(alpha: .1),
+                        //     contentPadding: const EdgeInsets.symmetric(
+                        //       horizontal: 16,
+                        //       vertical: 14,
+                        //     ),
+                        //     enabledBorder: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(12),
+                        //       borderSide: const BorderSide(
+                        //         color: Color(0xFFCBD5E1),
+                        //       ),
+                        //     ),
+                        //     focusedBorder: OutlineInputBorder(
+                        //       borderRadius: BorderRadius.circular(12),
+                        //       borderSide: const BorderSide(
+                        //         color: AppColors.appBlue,
+                        //         width: 1.5,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SizedBox(height: 20.sp),
 
                         // Security PIN Label & Forgot PIN
                         Row(

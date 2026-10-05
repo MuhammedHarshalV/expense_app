@@ -42,7 +42,7 @@ class SearchClinicHistory extends ConsumerWidget {
 
         style: TextStyle(color: textPrimary, fontSize: 13),
         decoration: InputDecoration(
-          hintText: 'Search clinic names...',
+          hintText: 'Search clinic/hospital/lab names...',
           hintStyle: TextStyle(color: textMuted, fontSize: 13),
           prefixIcon: Icon(Icons.search, size: 18, color: textMuted),
           border: InputBorder.none,

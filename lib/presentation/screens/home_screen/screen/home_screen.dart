@@ -1,4 +1,3 @@
-
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/screens/add_expense_screen/screen/add_expense_screen.dart';
@@ -150,7 +149,6 @@ class HomeScreen extends ConsumerWidget {
                         ),
                       ),
                     ),
-
                     homeState.clinicList.isEmpty
                         ? SliverFillRemaining(
                             hasScrollBody: false,

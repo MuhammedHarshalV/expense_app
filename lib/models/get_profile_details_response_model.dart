@@ -66,7 +66,7 @@ class ProfileDetails {
     userEmpKey: json["user_emp_key"],
     userName: json["user_name"],
     userPhoneNumber: json["user_phone_number"],
-    userProfilePhoto: json["user_profile_photo"],
+    userProfilePhoto: json["user_profile_photo"] ?? json["profile_photo_url"],
     userPin: json["user_pin"],
     isAdmin: json["is_admin"],
     userEmail: json["user_email"],
