@@ -86,7 +86,8 @@ class ClinicDetailsScreen extends ConsumerWidget {
                   hasScrollBody: false,
                   child: Center(
                     child: Text(
-                      'No expenses found',
+                      'No expenses found\nOR\nAll expenses have been approved.',
+                      textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 14.sp, color: textMuted),
                     ),
                   ),

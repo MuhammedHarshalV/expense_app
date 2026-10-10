@@ -164,7 +164,7 @@ class ProfileScreen extends ConsumerWidget {
                               showDialog(
                                 context: context,
                                 builder: (context) => EditTextDialog(
-                                  title: "Date of Birth",
+                                  title: "Date of Birth(YY-MM-DD)",
                                   onSave: (value) {
                                     profileController.updateProfileApi(
                                       dateOfBirth: value,

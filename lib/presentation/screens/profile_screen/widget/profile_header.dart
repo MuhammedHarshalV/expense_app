@@ -2,12 +2,10 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/controller/profile_screen_controller/profile_controller.dart';
-import 'package:expense/core/services/image_helper/image_helper.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileHeader extends ConsumerWidget {
   const ProfileHeader({super.key});
@@ -15,7 +13,7 @@ class ProfileHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileProvider);
-    final profilecontroller = ref.read(profileProvider.notifier);
+
     final originalImageUrl =
         profileState.profileDetails?.userProfilePhoto ?? '';
 
