@@ -160,6 +160,7 @@ class _CategoryCard extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
+                fontFamily: "Notche",
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
                 color: isSelected ? AppColors.appWhite : colorScheme.onSurface,
@@ -173,6 +174,7 @@ class _CategoryCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
+                fontFamily: "Notche",
                 fontSize: 10.sp,
                 color: isSelected
                     ? Colors.white70

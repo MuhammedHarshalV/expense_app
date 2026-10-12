@@ -1,4 +1,3 @@
-
 import 'package:expense/controller/expense_by_date_controller/expense_by_date_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
@@ -59,6 +58,7 @@ class ExpenseByDateScreen extends ConsumerWidget {
                     child: Text(
                       '$startDate - $endDate',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         color: textMuted,
@@ -75,7 +75,11 @@ class ExpenseByDateScreen extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       'No expenses found',
-                      style: TextStyle(fontSize: 14.sp, color: textMuted),
+                      style: TextStyle(
+                        fontFamily: "Notche",
+                        fontSize: 14.sp,
+                        color: textMuted,
+                      ),
                     ),
                   ),
                 )

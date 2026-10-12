@@ -136,6 +136,7 @@ class ProfileHeader extends ConsumerWidget {
           profileState.profileDetails?.userName ?? 'No Name',
           textAlign: TextAlign.center,
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 21.sp,
             fontWeight: FontWeight.w800,
             color: Theme.of(context).colorScheme.onSurface,
@@ -148,6 +149,7 @@ class ProfileHeader extends ConsumerWidget {
           profileState.profileDetails?.userAbout ?? "No Description",
           textAlign: TextAlign.center,
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 14,
             color: Theme.of(
               context,

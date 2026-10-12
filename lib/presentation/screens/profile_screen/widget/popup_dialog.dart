@@ -30,12 +30,18 @@ class EditTextDialog extends ConsumerWidget {
       title: Center(
         child: Text(
           title,
-          style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
+          style: TextStyle(
+            fontFamily: "Notche",
+            color: Theme.of(context).scaffoldBackgroundColor,
+          ),
         ),
       ),
       content: TextField(
         controller: controller,
-        style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
+        style: TextStyle(
+          fontFamily: "Notche",
+          color: Theme.of(context).scaffoldBackgroundColor,
+        ),
         autofocus: true,
         maxLines: null,
         decoration: InputDecoration(

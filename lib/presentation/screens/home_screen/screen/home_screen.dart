@@ -99,6 +99,7 @@ class HomeScreen extends ConsumerWidget {
                           const Text(
                             'FinanceTrack',
                             style: TextStyle(
+                              fontFamily: "Notche",
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
@@ -123,6 +124,7 @@ class HomeScreen extends ConsumerWidget {
                               'Today, ${DateFormat('d MMM yyyy').format(DateTime.now())}',
 
                               style: TextStyle(
+                                fontFamily: "Notche",
                                 color: Theme.of(context).colorScheme.onSurface,
                                 fontSize: 26.sp,
                                 fontWeight: FontWeight.w900,
@@ -136,6 +138,7 @@ class HomeScreen extends ConsumerWidget {
                                 Text(
                                   'Recent Transactions',
                                   style: TextStyle(
+                                    fontFamily: "Notche",
                                     color: Theme.of(
                                       context,
                                     ).colorScheme.onSurface,
@@ -156,6 +159,7 @@ class HomeScreen extends ConsumerWidget {
                               child: Text(
                                 'No clinics found.',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 14.sp,
                                   color: Theme.of(
                                     context,
@@ -233,6 +237,7 @@ class HomeScreen extends ConsumerWidget {
                                                 'Delete this clinic?',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
+                                                  fontFamily: "Notche",
                                                   fontSize: 23.sp,
                                                   fontWeight: FontWeight.w700,
                                                   color: Theme.of(
@@ -269,6 +274,7 @@ class HomeScreen extends ConsumerWidget {
                                                 ),
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
+                                                  fontFamily: "Notche",
                                                   fontSize: 14.sp,
                                                   height: 1.5,
                                                   color: Theme.of(context)
@@ -316,6 +322,8 @@ class HomeScreen extends ConsumerWidget {
                                                         child: Text(
                                                           'Cancel',
                                                           style: TextStyle(
+                                                            fontFamily:
+                                                                "Notche",
                                                             fontSize: 15.sp,
                                                             fontWeight:
                                                                 FontWeight.w700,
@@ -359,6 +367,8 @@ class HomeScreen extends ConsumerWidget {
                                                         child: Text(
                                                           'Delete',
                                                           style: TextStyle(
+                                                            fontFamily:
+                                                                "Notche",
                                                             fontSize: 15.sp,
                                                             fontWeight:
                                                                 FontWeight.w700,

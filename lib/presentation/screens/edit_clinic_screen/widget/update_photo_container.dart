@@ -129,6 +129,7 @@ class UpdatePhotoContainer extends ConsumerWidget {
                   Text(
                     clinicState.clinicName,
                     style: TextStyle(
+                      fontFamily: "Notche",
                       color: Colors.white,
                       fontSize: 12.5.sp,
                       fontWeight: FontWeight.w700,
@@ -137,7 +138,11 @@ class UpdatePhotoContainer extends ConsumerWidget {
                 if (clinicState.clinicPlace.isNotEmpty)
                   Text(
                     clinicState.clinicPlace,
-                    style: TextStyle(color: Colors.white70, fontSize: 11.sp),
+                    style: TextStyle(
+                      fontFamily: "Notche",
+                      color: Colors.white70,
+                      fontSize: 11.sp,
+                    ),
                   ),
               ],
             ),
@@ -190,6 +195,7 @@ class UpdatePhotoContainer extends ConsumerWidget {
                       Text(
                         'view',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
                           color: AppColors.appBlack,

@@ -66,6 +66,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                       Text(
                         'Total Spend',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w600,
                           color: textMuted,
@@ -75,6 +76,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                       Text(
                         '₹${historyState.totalSpend}',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w800,
                           color: textPrimary,
@@ -83,7 +85,11 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                       const SizedBox(height: 2),
                       Text(
                         '₹${historyState.totalCount} Clinics',
-                        style: TextStyle(fontSize: 10.sp, color: textMuted),
+                        style: TextStyle(
+                          fontFamily: "Notche",
+                          fontSize: 10.sp,
+                          color: textMuted,
+                        ),
                       ),
                     ],
                   ),
@@ -104,6 +110,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                             Text(
                               'Approved',
                               style: TextStyle(
+                                fontFamily: "Notche",
                                 fontSize: 11.sp,
                                 fontWeight: FontWeight.w600,
                                 color: textMuted,
@@ -120,6 +127,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                         Text(
                           '₹${historyState.approvedAmount}',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w800,
                             color: primaryBlue,
@@ -128,7 +136,11 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                         const SizedBox(height: 2),
                         Text(
                           '$approvedPercentage % reimbursed',
-                          style: TextStyle(fontSize: 10.sp, color: textMuted),
+                          style: TextStyle(
+                            fontFamily: "Notche",
+                            fontSize: 10.sp,
+                            color: textMuted,
+                          ),
                         ),
                       ],
                     ),
@@ -163,6 +175,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                     Text(
                       'Under Review / Pending',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFFC2410C),
@@ -173,6 +186,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                 Text(
                   '₹${historyState.totalSpend - historyState.approvedAmount}',
                   style: TextStyle(
+                    fontFamily: "Notche",
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFFC2410C),
@@ -195,6 +209,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                     Text(
                       'Settlement Clearance Rate',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w600,
                         color: textMuted,
@@ -203,6 +218,7 @@ class TotalExpenseSpendCard extends ConsumerWidget {
                     Text(
                       '$approvedPercentage %',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w700,
                         color: primaryBlue,

@@ -18,6 +18,7 @@ class ImageHelper {
                 title: Text(
                   'Camera',
                   style: TextStyle(
+                    fontFamily: "Notche",
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
@@ -38,6 +39,7 @@ class ImageHelper {
                 title: Text(
                   'Gallery',
                   style: TextStyle(
+                    fontFamily: "Notche",
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),

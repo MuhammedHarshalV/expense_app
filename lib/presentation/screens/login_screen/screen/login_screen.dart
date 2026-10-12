@@ -57,6 +57,7 @@ class LoginScreen extends ConsumerWidget {
                   Text(
                     'Expense PRO',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 26.sp,
                       fontWeight: FontWeight.w700,
                       color: const Color(0xFF003D99),
@@ -91,6 +92,7 @@ class LoginScreen extends ConsumerWidget {
                             child: Text(
                               'Your session has expired. Please sign in again.',
                               style: TextStyle(
+                                fontFamily: "Notche",
                                 color: Color(0xFF991B1B),
                                 fontSize: 13,
                                 fontWeight: FontWeight.w500,
@@ -123,6 +125,7 @@ class LoginScreen extends ConsumerWidget {
                         Text(
                           'Welcome Back',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w700,
                             color: Theme.of(context).colorScheme.onSurface,
@@ -132,6 +135,7 @@ class LoginScreen extends ConsumerWidget {
                         Text(
                           'Sign in to manage your clinic expenses',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 13,
                             color: Theme.of(
                               context,
@@ -142,6 +146,7 @@ class LoginScreen extends ConsumerWidget {
                         Text(
                           'Base URL',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             color: Theme.of(context).colorScheme.onSurface,
@@ -170,6 +175,7 @@ class LoginScreen extends ConsumerWidget {
                                 Text(
                                   'URL',
                                   style: TextStyle(
+                                    fontFamily: "Notche",
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(
@@ -213,7 +219,8 @@ class LoginScreen extends ConsumerWidget {
                         // Mobile Number Label & Input
                         // Text(
                         //   'Mobile Number',
-                        //   style: TextStyle(
+                        // style: TextStyle(
+
                         //     fontSize: 12.sp,
                         //     fontWeight: FontWeight.w700,
                         //     color: Theme.of(context).colorScheme.onSurface,
@@ -238,7 +245,8 @@ class LoginScreen extends ConsumerWidget {
                         //         SizedBox(width: 8),
                         //         Text(
                         //           '+91',
-                        //           style: TextStyle(
+                        //         style: TextStyle(
+
                         //             fontSize: 14.sp,
                         //             fontWeight: FontWeight.w600,
                         //             color: Theme.of(
@@ -286,6 +294,7 @@ class LoginScreen extends ConsumerWidget {
                             Text(
                               'Security PIN',
                               style: TextStyle(
+                                fontFamily: "Notche",
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w700,
                                 color: Theme.of(context).colorScheme.onSurface,
@@ -301,6 +310,7 @@ class LoginScreen extends ConsumerWidget {
                               child: Text(
                                 'Forgot PIN?',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.appBlue,
@@ -424,6 +434,7 @@ class LoginScreen extends ConsumerWidget {
               Text(
                 'Having trouble? ',
                 style: TextStyle(
+                  fontFamily: "Notche",
                   fontSize: 13,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
@@ -440,6 +451,7 @@ class LoginScreen extends ConsumerWidget {
                     Text(
                       'Contact Support',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: AppColors.appBlue,

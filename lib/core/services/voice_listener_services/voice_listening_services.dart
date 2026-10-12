@@ -146,7 +146,11 @@ class VoiceNavigationService {
 
                     const Text(
                       'Listening...',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      style: TextStyle(
+                        fontFamily: "Notche",
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
                     ),
 
                     const SizedBox(height: 15),

@@ -120,6 +120,7 @@ class TopClinicCard extends ConsumerWidget {
                       Text(
                         clinicDetailsState.clinicPlace,
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w600,
                           color: AppColors.appWhite,
@@ -139,6 +140,7 @@ class TopClinicCard extends ConsumerWidget {
                     Text(
                       clinicDetailsState.clinicName,
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
@@ -172,6 +174,7 @@ class TopClinicCard extends ConsumerWidget {
                         Text(
                           'TOTAL CLINIC SPEND',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w700,
                             color: textMuted,
@@ -182,6 +185,7 @@ class TopClinicCard extends ConsumerWidget {
                         Text(
                           '₹${clinicDetailsState.clinicTotalExp}',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 28.sp,
                             fontWeight: FontWeight.bold,
                             color: primaryColor,
@@ -228,6 +232,7 @@ class TopClinicCard extends ConsumerWidget {
                       label: Text(
                         'Add Expense',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,

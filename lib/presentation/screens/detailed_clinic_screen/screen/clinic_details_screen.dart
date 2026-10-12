@@ -88,7 +88,11 @@ class ClinicDetailsScreen extends ConsumerWidget {
                     child: Text(
                       'No expenses found\nOR\nAll expenses have been approved.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14.sp, color: textMuted),
+                      style: TextStyle(
+                        fontFamily: "Notche",
+                        fontSize: 14.sp,
+                        color: textMuted,
+                      ),
                     ),
                   ),
                 )
@@ -174,6 +178,7 @@ class ClinicDetailsScreen extends ConsumerWidget {
           child: Text(
             'Expenses',
             style: TextStyle(
+              fontFamily: "Notche",
               fontSize: 18.sp,
               fontWeight: FontWeight.w800,
               color: textPrimary,
@@ -222,6 +227,7 @@ class ClinicDetailsScreen extends ConsumerWidget {
                         Text(
                           value,
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).colorScheme.onSurface,

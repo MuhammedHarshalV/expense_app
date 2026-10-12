@@ -165,6 +165,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
             content: const Text(
               'Clinic updation successfully',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -184,6 +185,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
             content: const Text(
               'Clinic updation failed',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

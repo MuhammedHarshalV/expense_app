@@ -38,6 +38,7 @@ class ExpenseDateSection extends ConsumerWidget {
             Text(
               date,
               style: TextStyle(
+                fontFamily: "Notche",
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.onSurface,

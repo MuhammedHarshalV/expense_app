@@ -54,6 +54,7 @@ class BottomNavItems extends ConsumerWidget {
                 Text(
                   title,
                   style: TextStyle(
+                    fontFamily: "Notche",
                     color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w600,
                   ),

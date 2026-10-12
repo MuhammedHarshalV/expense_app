@@ -62,6 +62,7 @@ class AddClinicScreen extends ConsumerWidget {
                           child: Text(
                             'OR ENTER DETAILS MANUALLY',
                             style: TextStyle(
+                              fontFamily: "Notche",
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.6,
@@ -95,6 +96,7 @@ class AddClinicScreen extends ConsumerWidget {
                       controller: clinicController.nameController,
                       onChanged: clinicController.onNameChanged,
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 13.h,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -103,6 +105,7 @@ class AddClinicScreen extends ConsumerWidget {
                         hint: Text(
                           'CLINIC/HOSPITAL/LAB NAME...',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             color: Theme.of(
                               context,
                             ).colorScheme.onSurface.withValues(alpha: .5),
@@ -145,6 +148,7 @@ class AddClinicScreen extends ConsumerWidget {
                     Text(
                       'Official medical practice or hospital registered title.',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 11,
                         color: Theme.of(
                           context,
@@ -164,6 +168,7 @@ class AddClinicScreen extends ConsumerWidget {
                       controller: clinicController.placeController,
                       onChanged: clinicController.onPlaceChanged,
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 13.5.h,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -172,6 +177,7 @@ class AddClinicScreen extends ConsumerWidget {
                         hint: Text(
                           'Enter place...',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             color: Theme.of(
                               context,
                             ).colorScheme.onSurface.withValues(alpha: .35),
@@ -236,6 +242,7 @@ class AddClinicScreen extends ConsumerWidget {
                               Text(
                                 'Photo Selected',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFF10B981),
@@ -341,6 +348,7 @@ class AddClinicScreen extends ConsumerWidget {
                               : Text(
                                   'Save & Register Clinic',
                                   style: TextStyle(
+                                    fontFamily: "Notche",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.white,
@@ -381,6 +389,7 @@ class AddClinicScreen extends ConsumerWidget {
                           child: Text(
                             'Cancel & Return',
                             style: TextStyle(
+                              fontFamily: "Notche",
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(
@@ -413,6 +422,7 @@ class AddClinicScreen extends ConsumerWidget {
       text: TextSpan(
         text: label,
         style: TextStyle(
+          fontFamily: "Notche",
           fontSize: 11.sp,
           fontWeight: FontWeight.w700,
           color: Theme.of(context).colorScheme.onSurface,
@@ -422,7 +432,11 @@ class AddClinicScreen extends ConsumerWidget {
           if (isRequired)
             const TextSpan(
               text: ' *',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: "Notche",
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
             ),
         ],
       ),
@@ -441,6 +455,7 @@ class AddClinicScreen extends ConsumerWidget {
       label: Text(
         label,
         style: TextStyle(
+          fontFamily: "Notche",
           fontSize: 12.5.h,
           fontWeight: FontWeight.w600,
           color: Theme.of(context).colorScheme.onSurface,

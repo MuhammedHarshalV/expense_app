@@ -102,6 +102,7 @@ class HistoryScreen extends ConsumerWidget {
                       const Text(
                         'FinanceTrack',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 22,
@@ -183,6 +184,7 @@ class HistoryScreen extends ConsumerWidget {
                                     child: Text(
                                       filters[index],
                                       style: TextStyle(
+                                        fontFamily: "Notche",
                                         fontSize: 13.sp,
                                         fontWeight: FontWeight.w600,
                                         color: isSelected
@@ -226,6 +228,7 @@ class HistoryScreen extends ConsumerWidget {
                           'No data found in this time range',
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: textMuted,
@@ -262,6 +265,7 @@ class HistoryScreen extends ConsumerWidget {
         Text(
           'Matching Results',
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             color: textPrimary,
@@ -270,6 +274,7 @@ class HistoryScreen extends ConsumerWidget {
         Text(
           '$count Total Clinic\'s',
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 11.sp,
             fontWeight: FontWeight.w600,
             color: textMuted,

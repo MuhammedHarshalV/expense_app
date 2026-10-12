@@ -79,6 +79,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                           child: Text(
                             'OR ENTER DETAILS MANUALLY',
                             style: TextStyle(
+                              fontFamily: "Notche",
                               fontSize: 11,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.6,
@@ -101,13 +102,17 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                     SizedBox(height: 18.h),
 
                     // Clinic Name Field
-                    FieldLabel(label: 'CLINIC/HOSPITAL/LAB NAME', isRequired: true),
+                    FieldLabel(
+                      label: 'CLINIC/HOSPITAL/LAB NAME',
+                      isRequired: true,
+                    ),
                     SizedBox(height: 6),
 
                     TextFormField(
                       controller: clinicController.nameController,
                       onChanged: clinicController.onNameChanged,
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 13.h,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -116,6 +121,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                         hint: Text(
                           'CLINIC/HOSPITAL/LAB NAME...',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             color: Theme.of(
                               context,
                             ).colorScheme.onSurface.withValues(alpha: .5),
@@ -158,6 +164,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                     Text(
                       'Official medical practice or hospital registered title.',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 11,
                         color: Theme.of(
                           context,
@@ -173,6 +180,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                       controller: clinicController.placeController,
                       onChanged: clinicController.onPlaceChanged,
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 13.5.h,
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
@@ -181,6 +189,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                         hint: Text(
                           'Enter place...',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             color: Theme.of(
                               context,
                             ).colorScheme.onSurface.withValues(alpha: .35),
@@ -241,6 +250,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                               Text(
                                 'Photo Selected',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFF10B981),
@@ -349,6 +359,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                               : Text(
                                   'Update Clinic',
                                   style: TextStyle(
+                                    fontFamily: "Notche",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.white,
@@ -389,6 +400,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                           child: Text(
                             'Cancel & Return',
                             style: TextStyle(
+                              fontFamily: "Notche",
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(
@@ -424,6 +436,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
       label: Text(
         label,
         style: TextStyle(
+          fontFamily: "Notche",
           fontSize: 12.5.h,
           fontWeight: FontWeight.w600,
           color: Theme.of(context).colorScheme.onSurface,

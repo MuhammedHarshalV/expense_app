@@ -13,6 +13,7 @@ class FieldLabel extends StatelessWidget {
       text: TextSpan(
         text: label,
         style: TextStyle(
+          fontFamily: "Notche",
           fontSize: 11.sp,
           fontWeight: FontWeight.w700,
           color: Theme.of(context).colorScheme.onSurface,
@@ -22,7 +23,11 @@ class FieldLabel extends StatelessWidget {
           if (isRequired)
             const TextSpan(
               text: ' *',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontFamily: "Notche",
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
             ),
         ],
       ),

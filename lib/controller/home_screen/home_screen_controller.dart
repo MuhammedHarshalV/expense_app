@@ -78,6 +78,8 @@ class HomeController extends StateNotifier<HomeState> {
             content: const Text(
               'Clinic delete successfully',
               style: TextStyle(
+                fontFamily: "Notche",
+          
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

@@ -67,6 +67,8 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
             content: const Text(
               'Expense delete successfully',
               style: TextStyle(
+                fontFamily: "Notche",
+               
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -88,6 +90,8 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
             content: const Text(
               'Expense delete failed',
               style: TextStyle(
+                fontFamily: "Notche",
+             
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -142,6 +146,8 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
             content: const Text(
               'Expense updation successfully',
               style: TextStyle(
+                fontFamily: "Notche",
+              
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -161,6 +167,8 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
             content: const Text(
               'Expense updation failed',
               style: TextStyle(
+                fontFamily: "Notche",
+               
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

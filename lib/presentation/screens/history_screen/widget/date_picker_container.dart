@@ -64,6 +64,7 @@ class DatePickerContainer extends ConsumerWidget {
                   Text(
                     'PERIOD',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 9.sp,
                       fontWeight: FontWeight.w700,
                       color: textMuted,
@@ -73,6 +74,7 @@ class DatePickerContainer extends ConsumerWidget {
                   Text(
                     '${historyState.startDate} - ${historyState.endDate}',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                       color: textPrimary,

@@ -1,4 +1,3 @@
-
 import 'package:expense/controller/history_screen_controller/history_screen_controller.dart';
 import 'package:expense/models/expense_related/get_expense_history_response_model.dart';
 import 'package:expense/presentation/screens/expense_history_by_date/screen/expense_by_date_screen.dart';
@@ -84,6 +83,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                     Text(
                       clinic.clinicName ?? '',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         color: textPrimary,
@@ -92,7 +92,11 @@ class ClinicDetailsCard extends ConsumerWidget {
                     const SizedBox(height: 4),
                     Text(
                       '• ${clinic.totalTransactionCount ?? 0} Claims',
-                      style: TextStyle(fontSize: 11.sp, color: textMuted),
+                      style: TextStyle(
+                        fontFamily: "Notche",
+                        fontSize: 11.sp,
+                        color: textMuted,
+                      ),
                     ),
                   ],
                 ),
@@ -111,6 +115,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                       ? 'Complete'
                       : "Active",
                   style: TextStyle(
+                    fontFamily: "Notche",
                     fontSize: 9.sp,
                     fontWeight: FontWeight.w700,
                     color:
@@ -135,6 +140,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                   Text(
                     'Total Spend',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w600,
                       color: textMuted,
@@ -144,6 +150,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                   Text(
                     '₹${clinic.totalSpend ?? 0}',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w700,
                       color: textPrimary,
@@ -157,6 +164,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                   Text(
                     'Approved',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w600,
                       color: textMuted,
@@ -166,6 +174,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                   Text(
                     '₹${clinic.approvedAmount ?? 0}',
                     style: TextStyle(
+                      fontFamily: "Notche",
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w700,
                       color: primaryBlue,
@@ -212,6 +221,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                           ? '100% Settled'
                           : '₹$pendingAmount Under Review',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w700,
                         color: isSettled
@@ -246,6 +256,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                     Text(
                       'View ${clinic.totalTransactionCount ?? 0} Receipts',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 11.sp,
                         fontWeight: FontWeight.w600,
                         color: primaryBlue,

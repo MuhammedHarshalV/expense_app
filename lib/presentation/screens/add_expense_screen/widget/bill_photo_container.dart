@@ -135,6 +135,7 @@ class BillPhotoContainer extends ConsumerWidget {
                       Text(
                         'view',
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 11.5,
                           fontWeight: FontWeight.w700,
                           color: AppColors.appBlack,

@@ -121,6 +121,7 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                               Text(
                                 'Photo Selected',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 11.5,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xFF10B981),
@@ -224,6 +225,7 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                             : Text(
                                 'Save & Update Expense',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.appWhite,
@@ -262,6 +264,7 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
       label: Text(
         label,
         style: TextStyle(
+          fontFamily: "Notche",
           fontSize: 12.5.h,
           fontWeight: FontWeight.w600,
           color: Theme.of(context).colorScheme.onSurface,

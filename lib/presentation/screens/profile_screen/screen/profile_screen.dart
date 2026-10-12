@@ -47,6 +47,7 @@ class ProfileScreen extends ConsumerWidget {
             const Text(
               'FinanceTrack',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
@@ -94,7 +95,7 @@ class ProfileScreen extends ConsumerWidget {
                     // PERSONAL INFORMATION
                     // ─────────────────────────
                     _SectionCard(
-                      title: 'Personal Information',
+                      title: 'PERSONAL INFORMATION',
                       child: Column(
                         children: [
                           _ProfileInfo(
@@ -210,7 +211,16 @@ class ProfileScreen extends ConsumerWidget {
                             value:
                                 profileState.profileDetails?.userGender ??
                                 "Not mentioned",
-                            icon: Icons.person_outline,
+                            icon:
+                                profileState.profileDetails?.userGender
+                                        ?.toLowerCase() ==
+                                    ('male')
+                                ? Icons.male
+                                : profileState.profileDetails?.userGender
+                                          ?.toLowerCase() ==
+                                      'female'
+                                ? Icons.female
+                                : Icons.error_outline_outlined,
                           ),
 
                           _ProfileInfo(
@@ -251,7 +261,7 @@ class ProfileScreen extends ConsumerWidget {
                     // ABOUT
                     // ─────────────────────────
                     _SectionCard(
-                      title: 'About',
+                      title: 'ABOUT',
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,6 +273,7 @@ class ProfileScreen extends ConsumerWidget {
                                   profileState.profileDetails?.userAbout ??
                                       'No about',
                                   style: TextStyle(
+                                    fontFamily: "Notche",
                                     fontSize: 14,
                                     height: 1.5,
                                     color: Theme.of(context)
@@ -294,7 +305,7 @@ class ProfileScreen extends ConsumerWidget {
                               );
                             },
                             child: Icon(
-                              Icons.edit,
+                              Icons.edit_outlined,
                               size: 20,
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -333,6 +344,7 @@ class ProfileScreen extends ConsumerWidget {
                                     'Logout',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      fontFamily: "Notche",
                                       fontSize: 23.sp,
                                       fontWeight: FontWeight.w700,
                                       color: Theme.of(
@@ -357,6 +369,7 @@ class ProfileScreen extends ConsumerWidget {
                                     ),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
+                                      fontFamily: "Notche",
                                       fontSize: 14.sp,
                                       height: 1.5,
                                       color: Theme.of(context)
@@ -395,6 +408,7 @@ class ProfileScreen extends ConsumerWidget {
                                             child: Text(
                                               'No',
                                               style: TextStyle(
+                                                fontFamily: "Notche",
                                                 fontSize: 15.sp,
                                                 fontWeight: FontWeight.w700,
                                               ),
@@ -429,6 +443,7 @@ class ProfileScreen extends ConsumerWidget {
                                             child: Text(
                                               'Yes',
                                               style: TextStyle(
+                                                fontFamily: "Notche",
                                                 fontSize: 15.sp,
                                                 fontWeight: FontWeight.w700,
                                               ),
@@ -446,8 +461,18 @@ class ProfileScreen extends ConsumerWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.appRed, width: 2),
+                          border: Border(
+                            top: BorderSide(color: AppColors.appRed, width: .5),
+                          ),
+                          color: Theme.of(context).scaffoldBackgroundColor,
                           borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.appRed,
+                              blurRadius: 2.h,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -458,6 +483,7 @@ class ProfileScreen extends ConsumerWidget {
                               Text(
                                 'Logout',
                                 style: TextStyle(
+                                  fontFamily: "Notche",
                                   color: AppColors.appRed,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -486,33 +512,46 @@ class _SectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.h),
       decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: .4),
+            width: .5,
+          ),
+        ),
         color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
         boxShadow: [
           BoxShadow(
             color: Theme.of(
               context,
             ).colorScheme.onSurface.withValues(alpha: .4),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            blurRadius: 2.h,
+            offset: Offset(0, 3),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.onSurface,
+          Center(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontFamily: "Norezo",
+                fontSize: 17.sp,
+
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
             ),
           ),
 
-          const SizedBox(height: 14),
+          SizedBox(height: 14.h),
 
           child,
         ],
@@ -541,17 +580,26 @@ class _ProfileInfo extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 9),
+          padding: EdgeInsets.symmetric(vertical: 9.h),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                icon,
-                size: 20,
-                color: Theme.of(context).colorScheme.primary,
+              Container(
+                decoration: BoxDecoration(
+                  color: AppColors.appBottomNavColor.withValues(alpha: .5),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0.h),
+                  child: Icon(
+                    icon,
+                    size: 20.h,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
 
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
 
               Expanded(
                 child: Column(
@@ -560,7 +608,9 @@ class _ProfileInfo extends StatelessWidget {
                     Text(
                       label,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontFamily: "Notche",
+                        fontSize: 12.sp,
+
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.w500,
                       ),
@@ -571,7 +621,9 @@ class _ProfileInfo extends StatelessWidget {
                     Text(
                       value.isEmpty ? '-' : value,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontFamily: "Notche",
+                        fontSize: 14.sp,
+
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
@@ -583,8 +635,8 @@ class _ProfileInfo extends StatelessWidget {
                 InkWell(
                   onTap: onFunction,
                   child: Icon(
-                    Icons.edit,
-                    size: 20,
+                    Icons.edit_outlined,
+                    size: 20.h,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
@@ -594,7 +646,7 @@ class _ProfileInfo extends StatelessWidget {
 
         if (showDivider)
           Divider(
-            height: 1,
+            height: 1.h,
             color: Theme.of(
               context,
             ).colorScheme.onSurface.withValues(alpha: .2),

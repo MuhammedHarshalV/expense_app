@@ -158,6 +158,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             content: const Text(
               'Clinic creation successfully',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -177,6 +178,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             content: const Text(
               'Clinic creation failed',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

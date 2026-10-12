@@ -14,6 +14,7 @@ class AppMessage {
             child: Text(
               "Alert",
               style: TextStyle(
+                fontFamily: "Notche",
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).scaffoldBackgroundColor,
               ),
@@ -26,6 +27,7 @@ class AppMessage {
                 child: Text(
                   message,
                   style: TextStyle(
+                    fontFamily: "Notche",
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),

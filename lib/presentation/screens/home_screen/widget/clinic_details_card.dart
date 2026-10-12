@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -112,6 +111,7 @@ class ClinicExpenseCard extends ConsumerWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
+                          fontFamily: "Notche",
                           color: AppColors.appWhite,
                           fontSize: 19,
                           fontWeight: FontWeight.w700,
@@ -178,6 +178,7 @@ class ClinicExpenseCard extends ConsumerWidget {
                     label: Text(
                       'Add Expense',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: AppColors.appWhite,
@@ -212,6 +213,7 @@ class ClinicExpenseCard extends ConsumerWidget {
                     child: Text(
                       'View Details',
                       style: TextStyle(
+                        fontFamily: "Notche",
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                         color: primaryBlue,
@@ -259,6 +261,7 @@ class ClinicExpenseCard extends ConsumerWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 10.5.h,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.3,
@@ -273,6 +276,7 @@ class ClinicExpenseCard extends ConsumerWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 17.h,
             fontWeight: FontWeight.w800,
             color: Theme.of(context).colorScheme.onSurface,

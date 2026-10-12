@@ -32,6 +32,7 @@ class EditDescriptionCard extends ConsumerWidget {
           },
           maxLines: 5,
           style: TextStyle(
+            fontFamily: "Notche",
             color: Theme.of(context).colorScheme.onSurface,
             fontSize: 15.sp,
           ),

@@ -30,6 +30,7 @@ class EditAmountCard extends ConsumerWidget {
               Text(
                 'INR (₹)',
                 style: TextStyle(
+                  fontFamily: "Notche",
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
                   color: AppColors.appBlue,
@@ -43,6 +44,7 @@ class EditAmountCard extends ConsumerWidget {
               Text(
                 '₹',
                 style: TextStyle(
+                  fontFamily: "Notche",
                   fontSize: 40.sp,
                   fontWeight: FontWeight.w500,
                   color: Theme.of(
@@ -68,6 +70,7 @@ class EditAmountCard extends ConsumerWidget {
                     ),
                   ],
                   style: TextStyle(
+                    fontFamily: "Notche",
                     fontSize: 40.sp,
                     fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSurface,
@@ -125,6 +128,7 @@ class EditAmountCard extends ConsumerWidget {
         child: Text(
           text,
           style: TextStyle(
+            fontFamily: "Notche",
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: Theme.of(context).scaffoldBackgroundColor,

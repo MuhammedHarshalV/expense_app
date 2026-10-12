@@ -100,6 +100,8 @@ class ProfileController extends StateNotifier<ProfileState> {
               content: const Text(
                 'Profile updated successfully',
                 style: TextStyle(
+                  fontFamily: "Notche",
+                 
                   color: AppColors.appWhite,
                   fontWeight: FontWeight.w500,
                 ),
@@ -119,6 +121,7 @@ class ProfileController extends StateNotifier<ProfileState> {
             content: const Text(
               'Profile updated failed',
               style: TextStyle(
+                fontFamily: "Notche",
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

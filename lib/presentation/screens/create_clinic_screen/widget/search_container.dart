@@ -30,6 +30,7 @@ class SearchClinicCard extends ConsumerWidget {
           Text(
             'SEARCH EXISTING CLINICS',
             style: TextStyle(
+              fontFamily: "Notche",
               fontSize: 11.sp,
               fontWeight: FontWeight.w700,
               color: Theme.of(context).colorScheme.onSurface,
@@ -198,6 +199,7 @@ class SearchClinicCard extends ConsumerWidget {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
+                                      fontFamily: "Notche",
                                       fontSize: 13.sp,
                                       fontWeight: FontWeight.w600,
                                       color: Theme.of(
@@ -228,6 +230,7 @@ class SearchClinicCard extends ConsumerWidget {
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
+                                              fontFamily: "Notche",
                                               fontSize: 11.sp,
                                               color: Theme.of(context)
                                                   .colorScheme

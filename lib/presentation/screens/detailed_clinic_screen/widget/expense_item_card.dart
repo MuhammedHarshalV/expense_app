@@ -1,5 +1,3 @@
-
-
 import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/controller/edit_expense_controller/edit_expense_controller.dart';
 import 'package:expense/controller/expense_by_date_controller/expense_by_date_controller.dart';
@@ -112,6 +110,7 @@ class ExpenseItemCard extends ConsumerWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
+                                fontFamily: "Notche",
                                 fontSize: 11.sp,
                                 fontWeight: FontWeight.w600,
                                 color: textMuted,
@@ -136,6 +135,7 @@ class ExpenseItemCard extends ConsumerWidget {
                         child: Text(
                           'Complete',
                           style: TextStyle(
+                            fontFamily: "Notche",
                             fontSize: 9.sp,
                             fontWeight: FontWeight.w700,
                             color: AppColors.appWhite,
@@ -157,6 +157,7 @@ class ExpenseItemCard extends ConsumerWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
+                          fontFamily: "Notche",
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w800,
                           color: primaryBlue,
@@ -172,7 +173,11 @@ class ExpenseItemCard extends ConsumerWidget {
                               'yyyy-MMM-dd',
                             ).format(DateTime.parse(expense.expenseDate!))
                           : '',
-                      style: TextStyle(fontSize: 10.sp, color: textMuted),
+                      style: TextStyle(
+                        fontFamily: "Notche",
+                        fontSize: 10.sp,
+                        color: textMuted,
+                      ),
                     ),
                   ],
                 ),
@@ -184,6 +189,7 @@ class ExpenseItemCard extends ConsumerWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
+                    fontFamily: "Notche",
                     fontSize: 12.sp,
                     color: textPrimary,
                     height: 1.3,
@@ -204,7 +210,11 @@ class ExpenseItemCard extends ConsumerWidget {
                         footerText,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 10.sp, color: textMuted),
+                        style: TextStyle(
+                          fontFamily: "Notche",
+                          fontSize: 10.sp,
+                          color: textMuted,
+                        ),
                       ),
                     ),
 
@@ -295,6 +305,7 @@ class ExpenseItemCard extends ConsumerWidget {
                                       'Delete this Expense?',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
+                                        fontFamily: "Notche",
                                         fontSize: 23.sp,
                                         fontWeight: FontWeight.w700,
                                         color: Theme.of(
@@ -329,6 +340,7 @@ class ExpenseItemCard extends ConsumerWidget {
                                       ),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
+                                        fontFamily: "Notche",
                                         fontSize: 14.sp,
                                         height: 1.5,
                                         color: Theme.of(context)
@@ -370,6 +382,7 @@ class ExpenseItemCard extends ConsumerWidget {
                                               child: Text(
                                                 'Cancel',
                                                 style: TextStyle(
+                                                  fontFamily: "Notche",
                                                   fontSize: 15.sp,
                                                   fontWeight: FontWeight.w700,
                                                 ),
@@ -441,6 +454,7 @@ class ExpenseItemCard extends ConsumerWidget {
                                               child: Text(
                                                 'Delete',
                                                 style: TextStyle(
+                                                  fontFamily: "Notche",
                                                   fontSize: 15.sp,
                                                   fontWeight: FontWeight.w700,
                                                 ),

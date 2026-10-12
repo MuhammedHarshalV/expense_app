@@ -40,7 +40,11 @@ class SearchClinicHistory extends ConsumerWidget {
           FocusManager.instance.primaryFocus?.unfocus();
         },
 
-        style: TextStyle(color: textPrimary, fontSize: 13),
+        style: TextStyle(
+          fontFamily: "Notche",
+          color: textPrimary,
+          fontSize: 13,
+        ),
         decoration: InputDecoration(
           hintText: 'Search clinic/hospital/lab names...',
           hintStyle: TextStyle(color: textMuted, fontSize: 13),

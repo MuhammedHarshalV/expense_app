@@ -49,6 +49,8 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
             content: const Text(
               'Expense Added successfully',
               style: TextStyle(
+                fontFamily: "Notche",
+               
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -68,6 +70,8 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
             content: const Text(
               'Expense Added failed',
               style: TextStyle(
+                fontFamily: "Notche",
+               
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),

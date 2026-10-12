@@ -47,6 +47,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Text(
             'FinanceTrack',
             style: TextStyle(
+              fontFamily: "Notche",
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 22,
