@@ -12,6 +12,7 @@ class SignInChecking {
     required BuildContext context,
     required Map<String, dynamic> body,
     required String url,
+    required String device_id,
   }) async {
     try {
       final response = await PostApiServices.callApi(
@@ -37,6 +38,7 @@ class SignInChecking {
         accessToken: model.accessToken ?? '',
         refreshToken: model.refreshToken ?? '',
         baseUrl: url,
+        deviceId: device_id,
       );
 
       // Keep current runtime Dio synchronized too

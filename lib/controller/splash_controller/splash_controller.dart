@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:expense/apis/auth_api/refresh_token_api.dart';
 import 'package:expense/controller/splash_controller/splash_state.dart';
+import 'package:expense/core/constants/app_constants.dart';
 
 import 'package:expense/core/storage/token_storage.dart';
 
@@ -44,7 +45,10 @@ class SplashNotifierController extends StateNotifier<SplashState> {
       // Call refresh token API
       final response = await RefreshTokenApi.refreshTokenApi(
         context: null,
-        body: {'refresh_token': refreshToken},
+        body: {
+          'refresh_token': refreshToken,
+          "deviceId": AppConstants.deviceId,
+        },
       );
 
       if (response.isNetworkError == true) {
@@ -79,6 +83,7 @@ class SplashNotifierController extends StateNotifier<SplashState> {
           accessToken: newAccessToken,
           refreshToken: newRefreshToken ?? refreshToken,
           baseUrl: null,
+          deviceId: null,
         );
 
         // Navigate to home

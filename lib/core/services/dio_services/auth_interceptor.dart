@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:expense/core/constants/api_constants.dart';
+import 'package:expense/core/constants/app_constants.dart';
 import 'package:expense/core/services/global_listener/refresh_token_listener.dart';
 import 'package:expense/core/storage/token_storage.dart';
 
@@ -84,7 +85,10 @@ class AuthInterceptor extends Interceptor {
 
       final response = await refreshDio.post(
         ApiConstants.refreshToken,
-        data: {'refresh_token': refreshToken},
+        data: {
+          'refresh_token': refreshToken,
+          'deviceId': AppConstants.deviceId,
+        },
       );
 
       final newAccessToken = response.data['data']['access_token'];

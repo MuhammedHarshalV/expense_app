@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:expense/core/constants/app_constants.dart';
 import 'package:expense/core/services/dio_services/dio_client.dart';
 import 'package:expense/core/services/global_listener/refresh_token_listener.dart';
 import 'package:expense/core/storage/token_storage.dart';
@@ -16,7 +17,10 @@ Future<void> main() async {
   DioClient.initialize();
 
   final String? url = await TokenStorage.getBaseUrl();
-
+  String? deviceId = await TokenStorage.getDeviceId();
+  if (deviceId != null && deviceId.isNotEmpty) {
+    AppConstants.deviceId = deviceId;
+  }
   if (url != null && url.isNotEmpty) {
     DioClient.setBaseUrl(url);
 
