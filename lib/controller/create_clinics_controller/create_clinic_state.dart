@@ -9,12 +9,14 @@ class CreateClinicState {
   final String clinicPlace;
   final bool isPaginationLoading;
   final int page;
+  final int imageVersion;
   final int totalPages;
   final String? error;
   final XFile? selectedImage;
   final String? networkImageUrl;
 
   const CreateClinicState({
+    this.imageVersion = 0,
     this.clinicDetails = const [],
     this.isLoading = false,
     this.isPaginationLoading = false,
@@ -38,6 +40,7 @@ class CreateClinicState {
     String? clinicPlace,
     bool? isSubmit,
     String? error,
+    int? imageVersion,
     XFile? selectedImage,
     String? networkImageUrl,
     bool clearSelectedImage = false,
@@ -60,6 +63,7 @@ class CreateClinicState {
       networkImageUrl: clearNetworkImageUrl
           ? null
           : networkImageUrl ?? this.networkImageUrl,
+      imageVersion: imageVersion ?? this.imageVersion,
     );
   }
 }

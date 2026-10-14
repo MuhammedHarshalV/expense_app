@@ -2,7 +2,7 @@ import 'package:expense/models/expense_related/all_expense_response_model.dart';
 
 class ClinicDetailsState {
   final bool isLoading;
-
+  final int imageVersion;
   final int clinicId;
   final String clinicName;
   final num clinicTotalExp;
@@ -16,6 +16,7 @@ class ClinicDetailsState {
     this.filter = 'Latest',
     this.isLoading = false,
     this.clinicId = 0,
+    this.imageVersion = 0,
     this.clinicName = '',
     this.clinicTotalExp = 0.0,
     this.clinicPlace = '',
@@ -29,6 +30,7 @@ class ClinicDetailsState {
     int? clinicId,
     String? clinicName,
     num? clinicTotalExp,
+    int? imageVersion,
     String? clinicPlace,
     String? clinicPhoto,
     List<Expense>? expenses,
@@ -42,6 +44,7 @@ class ClinicDetailsState {
       clinicPlace: clinicPlace ?? this.clinicPlace,
       clinicPhoto: clinicPhoto ?? this.clinicPhoto,
       expenses: expenses ?? this.expenses,
+      imageVersion: imageVersion ?? this.imageVersion,
     );
   }
 }

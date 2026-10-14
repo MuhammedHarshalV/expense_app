@@ -84,7 +84,10 @@ class AddExpenseScreen extends ConsumerWidget {
                     SizedBox(height: 6),
                     AmountCard(),
                     const SizedBox(height: 24),
-
+                    FieldLabel(label: 'DESCRIPTION', isRequired: false),
+                    const SizedBox(height: 6),
+                    DescriptionCard(),
+                    const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -162,11 +165,6 @@ class AddExpenseScreen extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
-
-                    FieldLabel(label: 'DESCRIPTION', isRequired: false),
-                    const SizedBox(height: 6),
-                    DescriptionCard(),
                     const SizedBox(height: 24),
 
                     SizedBox(

@@ -73,6 +73,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
             clinicDetails: newClinics,
             page: page,
             totalPages: response.pagination?.totalPages ?? 0,
+            imageVersion: DateTime.now().millisecondsSinceEpoch,
           );
         } else {
           // Next pages -> append
@@ -80,6 +81,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
             clinicDetails: [...state.clinicDetails, ...newClinics],
             page: page,
             totalPages: response.pagination?.totalPages ?? state.totalPages,
+            imageVersion: DateTime.now().millisecondsSinceEpoch,
           );
         }
       } else {
@@ -289,6 +291,7 @@ class EditClinicController extends StateNotifier<EditClinicState> {
       clinicName: clinic.clinicName ?? '',
       clinicPlace: clinic.clinicPlace ?? '',
       networkImageUrl: clinic.clinicPhoto,
+      imageVersion: DateTime.now().millisecondsSinceEpoch,
       clearSelectedImage: true,
     );
   }

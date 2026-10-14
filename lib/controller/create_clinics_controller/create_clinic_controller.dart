@@ -70,6 +70,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             clinicDetails: newClinics,
             page: page,
             totalPages: response.pagination?.totalPages ?? 0,
+            imageVersion: DateTime.now().millisecondsSinceEpoch,
           );
         } else {
           // Next pages -> append
@@ -77,6 +78,7 @@ class CreateClinicController extends StateNotifier<CreateClinicState> {
             clinicDetails: [...state.clinicDetails, ...newClinics],
             page: page,
             totalPages: response.pagination?.totalPages ?? state.totalPages,
+            imageVersion: DateTime.now().millisecondsSinceEpoch,
           );
         }
       } else {

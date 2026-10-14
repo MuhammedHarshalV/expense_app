@@ -89,7 +89,7 @@ class ProfileScreen extends ConsumerWidget {
                   children: [
                     ProfileHeader(),
                     //
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 14),
 
                     // ─────────────────────────
                     // PERSONAL INFORMATION

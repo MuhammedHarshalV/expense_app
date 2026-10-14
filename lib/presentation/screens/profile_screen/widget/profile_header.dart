@@ -20,143 +20,158 @@ class ProfileHeader extends ConsumerWidget {
     final imageUrl = originalImageUrl.isNotEmpty
         ? '$originalImageUrl?v=${profileState.imageVersion}'
         : '';
-    return Column(
-      children: [
-        Stack(
-          clipBehavior: Clip.none,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("asset/image/border_design.png"),
+          fit: BoxFit.fill,
+        ),
+        color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .05),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
           children: [
-            InkWell(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              onTap: () {
-                final imageUrl = profileState.profileDetails?.userProfilePhoto;
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  onTap: () {
+                    final imageUrl =
+                        profileState.profileDetails?.userProfilePhoto;
 
-                if (imageUrl != null && imageUrl.isNotEmpty) {
-                  showZoomableImage(context: context, imageUrl: imageUrl);
-                }
-              },
-              child: Container(
-                width: 105,
-                height: 105,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey.shade200,
-                  border: Border.all(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: .3),
-                    width: 4,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: .10),
-                      blurRadius: 10,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    width: 105.h,
-                    height: 105.h,
-                    fit: BoxFit.cover,
-
-                    placeholder: (context, url) {
-                      return const Center(
-                        child: SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: CircularProgressIndicator(
-                            color: AppColors.appBlue,
-                          ),
+                    if (imageUrl != null && imageUrl.isNotEmpty) {
+                      showZoomableImage(context: context, imageUrl: imageUrl);
+                    }
+                  },
+                  child: Container(
+                    width: 105,
+                    height: 105,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.shade200,
+                      border: Border.all(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: .3),
+                        width: 4,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withValues(alpha: .10),
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
                         ),
-                      );
-                    },
+                      ],
+                    ),
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        width: 105.h,
+                        height: 105.h,
+                        fit: BoxFit.cover,
 
-                    errorWidget: (context, url, error) {
-                      log('Network image error: $error');
+                        placeholder: (context, url) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: CircularProgressIndicator(
+                                color: AppColors.appBlue,
+                              ),
+                            ),
+                          );
+                        },
 
-                      return const Icon(Icons.person, size: 50);
-                    },
+                        errorWidget: (context, url, error) {
+                          log('Network image error: $error');
+
+                          return const Icon(Icons.person, size: 50);
+                        },
+                      ),
+                    ),
                   ),
                 ),
+                // Edit image button
+                // Positioned(
+                //   right: -2,
+                //   bottom: 0,
+                //   child: InkWell(
+                //     onTap: () async {
+                //       final XFile? image = await ImageHelper.pickImage(
+                //         context: context,
+                //       );
+                //       if (image == null) return;
+
+                //       //  Step 4 — Save to controller
+
+                //       profilecontroller.updateProfileApi(
+                //         photoPath: image.path,
+                //         // ignore: use_build_context_synchronously
+                //         context: context,
+                //         isPhoto: true,
+                //       );
+                //     },
+                //     child: Container(
+                //       width: 32.h,
+                //       height: 32.h,
+                //       decoration: BoxDecoration(
+                //         color: Colors.blueAccent,
+
+                //         shape: BoxShape.circle,
+                //         border: Border.all(
+                //           color: Theme.of(context).scaffoldBackgroundColor,
+                //           width: 2.h,
+                //         ),
+                //       ),
+                //       child: Icon(
+                //         Icons.camera_alt_outlined,
+                //         size: 15.h,
+                //         color: Theme.of(context).scaffoldBackgroundColor,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+
+            const SizedBox(height: 14),
+
+            Text(
+              profileState.profileDetails?.userName ?? 'No Name',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "Notche",
+                fontSize: 21.sp,
+                fontWeight: FontWeight.w800,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
-            // Edit image button
-            // Positioned(
-            //   right: -2,
-            //   bottom: 0,
-            //   child: InkWell(
-            //     onTap: () async {
-            //       final XFile? image = await ImageHelper.pickImage(
-            //         context: context,
-            //       );
-            //       if (image == null) return;
 
-            //       //  Step 4 — Save to controller
+            const SizedBox(height: 4),
 
-            //       profilecontroller.updateProfileApi(
-            //         photoPath: image.path,
-            //         // ignore: use_build_context_synchronously
-            //         context: context,
-            //         isPhoto: true,
-            //       );
-            //     },
-            //     child: Container(
-            //       width: 32.h,
-            //       height: 32.h,
-            //       decoration: BoxDecoration(
-            //         color: Colors.blueAccent,
-
-            //         shape: BoxShape.circle,
-            //         border: Border.all(
-            //           color: Theme.of(context).scaffoldBackgroundColor,
-            //           width: 2.h,
-            //         ),
-            //       ),
-            //       child: Icon(
-            //         Icons.camera_alt_outlined,
-            //         size: 15.h,
-            //         color: Theme.of(context).scaffoldBackgroundColor,
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            Text(
+              profileState.profileDetails?.userAbout ?? "No Description",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "Notche",
+                fontSize: 14,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: .5),
+              ),
+            ),
           ],
         ),
-
-        const SizedBox(height: 14),
-
-        Text(
-          profileState.profileDetails?.userName ?? 'No Name',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: "Notche",
-            fontSize: 21.sp,
-            fontWeight: FontWeight.w800,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-        ),
-
-        const SizedBox(height: 4),
-
-        Text(
-          profileState.profileDetails?.userAbout ?? "No Description",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: "Notche",
-            fontSize: 14,
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: .5),
-          ),
-        ),
-      ],
+      ),
     );
   }
 

@@ -31,6 +31,7 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
           clinicPlace: data?.clinicPlace ?? '',
           clinicPhoto: data?.clinicPhoto ?? '',
           expenses: data?.expenses ?? [],
+          imageVersion: DateTime.now().millisecondsSinceEpoch,
         );
       }
     } catch (e) {
@@ -120,6 +121,7 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
       clinicTotalExp: clinicTotalExp,
       clinicPlace: clinicPlace,
       clinicPhoto: clinicPhoto,
+      imageVersion: DateTime.now().millisecondsSinceEpoch,
       expenses: expenses,
     );
   }

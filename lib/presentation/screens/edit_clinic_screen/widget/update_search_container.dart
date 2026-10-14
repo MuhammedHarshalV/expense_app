@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/controller/edit_clinic_controller/edit_clinic_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -167,17 +168,10 @@ class UpdateSearchContainer extends ConsumerWidget {
                             Container(
                               height: 38.h,
                               width: 38.h,
+                              clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
                                 color: AppColors.appBlue.withValues(alpha: .08),
-                                borderRadius: BorderRadius.circular(8),
-                                image: (clinic.clinicPhoto ?? '').isEmpty
-                                    ? null
-                                    : DecorationImage(
-                                        image: NetworkImage(
-                                          clinic.clinicPhoto ?? '',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
                               ),
                               child: (clinic.clinicPhoto ?? '').isEmpty
                                   ? Icon(
@@ -185,7 +179,26 @@ class UpdateSearchContainer extends ConsumerWidget {
                                       color: AppColors.appBlue,
                                       size: 20.sp,
                                     )
-                                  : null,
+                                  : CachedNetworkImage(
+                                      imageUrl:  '${clinic.clinicPhoto}?v=${clinicState.imageVersion}',
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) => Center(
+                                        child: SizedBox(
+                                          height: 15.h,
+                                          width: 15.h,
+                                          child:
+                                              const CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                              ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(
+                                            Icons.local_hospital_outlined,
+                                            color: AppColors.appBlue,
+                                            size: 20.sp,
+                                          ),
+                                    ),
                             ),
 
                             SizedBox(width: 10.w),

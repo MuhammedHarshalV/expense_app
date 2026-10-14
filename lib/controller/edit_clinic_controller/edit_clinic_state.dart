@@ -6,6 +6,7 @@ class EditClinicState {
   final bool isLoading;
   final bool isSubmit;
   final String clinicName;
+  final int imageVersion;
   final String clinicPlace;
   final bool isPaginationLoading;
   final int page;
@@ -16,6 +17,7 @@ class EditClinicState {
 
   const EditClinicState({
     this.clinicDetails = const [],
+    this.imageVersion = 0,
     this.isLoading = false,
     this.isPaginationLoading = false,
     this.isSubmit = false,
@@ -41,6 +43,7 @@ class EditClinicState {
     XFile? selectedImage,
     String? networkImageUrl,
     bool clearSelectedImage = false,
+    int? imageVersion,
     bool clearNetworkImageUrl = false,
   }) {
     return EditClinicState(
@@ -60,6 +63,7 @@ class EditClinicState {
       networkImageUrl: clearNetworkImageUrl
           ? null
           : networkImageUrl ?? this.networkImageUrl,
+      imageVersion: imageVersion ?? this.imageVersion,
     );
   }
 }

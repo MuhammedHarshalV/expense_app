@@ -101,7 +101,10 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                     SizedBox(height: 6),
                     EditAmountCard(),
                     const SizedBox(height: 24),
-
+                    FieldLabel(label: 'DESCRIPTION', isRequired: false),
+                    const SizedBox(height: 6),
+                    EditDescriptionCard(),
+                    const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -178,11 +181,6 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 24),
-
-                    FieldLabel(label: 'DESCRIPTION', isRequired: false),
-                    const SizedBox(height: 6),
-                    EditDescriptionCard(),
                     const SizedBox(height: 24),
 
                     SizedBox(

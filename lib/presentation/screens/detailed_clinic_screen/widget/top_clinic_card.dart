@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/screens/add_expense_screen/screen/add_expense_screen.dart';
@@ -55,12 +56,23 @@ class TopClinicCard extends ConsumerWidget {
                           ).colorScheme.onSurface.withValues(alpha: .5),
                         ),
                       )
-                    : Image.network(
-                        clinicDetailsState.clinicPhoto,
+                    : CachedNetworkImage(
+                        imageUrl:
+                            '${clinicDetailsState.clinicPhoto}?v=${clinicDetailsState.imageVersion}',
                         height: 180.h,
                         width: double.infinity,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
+                        placeholder: (context, url) => Container(
+                          height: 180.h,
+                          width: double.infinity,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withValues(alpha: .05),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
                           height: 180.h,
                           width: double.infinity,
                           color: Theme.of(
