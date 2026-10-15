@@ -425,11 +425,18 @@ class ProfileScreen extends ConsumerWidget {
                                           height: 50,
                                           child: ElevatedButton(
                                             onPressed: () async {
-                                              await TokenStorage.clear();
-                                              ref.invalidate(homeProvider);
-                                              ref.invalidate(
-                                                expenseHistoryProvider,
-                                              );
+                                              final bool response =
+                                                  await profileController
+                                                      .logoutApi(
+                                                        context: context,
+                                                      );
+                                              if (response == true) {
+                                                await TokenStorage.clear();
+                                                ref.invalidate(homeProvider);
+                                                ref.invalidate(
+                                                  expenseHistoryProvider,
+                                                );
+                                              }
                                             },
                                             style: ElevatedButton.styleFrom(
                                               elevation: 0,

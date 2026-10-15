@@ -5,8 +5,10 @@ class ProfileState {
   final int imageVersion;
   final bool isUpdate;
   final bool isLoading;
+  final bool isLogOut;
 
   const ProfileState({
+    this.isLogOut = false,
     this.imageVersion = 0,
     this.isLoading = false,
     this.isUpdate = false,
@@ -14,12 +16,14 @@ class ProfileState {
   });
 
   ProfileState copyWith({
+    bool? isLogOut,
     bool? isLoading,
     bool? isUpdate,
     int? imageVersion,
     ProfileDetails? profileDetails,
   }) {
     return ProfileState(
+      isLogOut: isLogOut ?? this.isLogOut,
       isLoading: isLoading ?? this.isLoading,
       imageVersion: imageVersion ?? this.imageVersion,
       profileDetails: profileDetails ?? this.profileDetails,

@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:expense/apis/auth_api/logout_api.dart';
 import 'package:expense/apis/user_related_api/get_profile_api.dart';
 import 'package:expense/apis/user_related_api/update_user_api.dart';
 import 'package:expense/controller/profile_screen_controller/profile_state.dart';
+import 'package:expense/core/services/device_details/device_details_picking.dart';
+import 'package:expense/core/storage/token_storage.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/get_profile_details_response_model.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +104,7 @@ class ProfileController extends StateNotifier<ProfileState> {
                 'Profile updated successfully',
                 style: TextStyle(
                   fontFamily: "Notche",
-                 
+
                   color: AppColors.appWhite,
                   fontWeight: FontWeight.w500,
                 ),
@@ -140,6 +143,27 @@ class ProfileController extends StateNotifier<ProfileState> {
     } finally {
       state = state.copyWith(isUpdate: false);
     }
+  }
+
+  Future<bool> logoutApi({required BuildContext context, required}) async {
+    try {
+      state = state.copyWith(isLogOut: true);
+      final String? access_token = await TokenStorage.getAccessToken();
+      final String deviceId = await DeviceIdPicking.getDeviceId();
+      final dynamic response = await LogoutApi.logoutApi(
+        context: context,
+        body: {"access_token": access_token, "deviceId": deviceId},
+      );
+      if (response == true) {
+        return true;
+      }
+    } catch (e) {
+      log(e.toString());
+      return false;
+    } finally {
+      state = state.copyWith(isLogOut: false);
+    }
+    return false;
   }
 
   @override
