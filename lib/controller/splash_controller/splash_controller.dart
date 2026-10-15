@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:expense/apis/auth_api/refresh_token_api.dart';
 import 'package:expense/controller/splash_controller/splash_state.dart';
-import 'package:expense/core/constants/app_constants.dart';
+import 'package:expense/core/services/device_details/device_details_picking.dart';
 
 import 'package:expense/core/storage/token_storage.dart';
 
@@ -41,14 +41,11 @@ class SplashNotifierController extends StateNotifier<SplashState> {
         _goToLogin();
         return;
       }
-
+      final String deviceId = await DeviceIdPicking.getDeviceId();
       // Call refresh token API
       final response = await RefreshTokenApi.refreshTokenApi(
         context: null,
-        body: {
-          'refresh_token': refreshToken,
-          "deviceId": AppConstants.deviceId,
-        },
+        body: {'refresh_token': refreshToken, "deviceId": deviceId},
       );
 
       if (response.isNetworkError == true) {
@@ -58,7 +55,7 @@ class SplashNotifierController extends StateNotifier<SplashState> {
 
         return;
       }
-      if (response.statusCode == 401) {
+      if (response.statusCode == 401 || response.statusCode == 400) {
         await TokenStorage.clear();
 
         _goToLogin();
@@ -83,7 +80,6 @@ class SplashNotifierController extends StateNotifier<SplashState> {
           accessToken: newAccessToken,
           refreshToken: newRefreshToken ?? refreshToken,
           baseUrl: null,
-          deviceId: null,
         );
 
         // Navigate to home

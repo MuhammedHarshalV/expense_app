@@ -38,7 +38,6 @@ class SignInChecking {
         accessToken: model.accessToken ?? '',
         refreshToken: model.refreshToken ?? '',
         baseUrl: url,
-        deviceId: device_id,
       );
 
       // Keep current runtime Dio synchronized too
