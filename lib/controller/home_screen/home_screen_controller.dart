@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:expense/apis/auth_api/device_request.dart';
+
 import 'package:expense/apis/clinic_related_api/delete_clinic_api.dart';
 import 'package:expense/apis/clinic_related_api/get_all_clinics_api.dart';
 import 'package:expense/controller/home_screen/home_screen_state.dart';
+import 'package:expense/core/errors/app_message.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/clinic_related/get_all_clinic_details_response_model.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +14,13 @@ import 'package:flutter_riverpod/legacy.dart';
 
 class HomeController extends StateNotifier<HomeState> {
   HomeController() : super(const HomeState());
+  //allow devices
 
   //get all clinics
-  Future<void> getAllclinics({required int page}) async {
+  Future<void> getAllclinics({
+    required int page,
+    required BuildContext? context,
+  }) async {
     try {
       // First page
       if (page == 1) {
@@ -55,6 +62,12 @@ class HomeController extends StateNotifier<HomeState> {
       log(e.toString());
     } finally {
       state = state.copyWith(isLoading: false, isPaginationLoading: false);
+      final dynamic request = await DeviceRequest.deviceRequest(
+        context: context,
+      );
+      if (request == true && context != null) {
+        AppMessage.show(context, "neww device request");
+      }
     }
   }
 
@@ -69,7 +82,7 @@ class HomeController extends StateNotifier<HomeState> {
         context: context,
       );
       if (response == true) {
-        getAllclinics(page: 1);
+        getAllclinics(page: 1, context: context);
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
@@ -79,7 +92,7 @@ class HomeController extends StateNotifier<HomeState> {
               'Clinic delete successfully',
               style: TextStyle(
                 fontFamily: "Notche",
-          
+
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -100,5 +113,5 @@ class HomeController extends StateNotifier<HomeState> {
 }
 
 final homeProvider = StateNotifierProvider<HomeController, HomeState>(
-  (ref) => HomeController()..getAllclinics(page: 1),
+  (ref) => HomeController()..getAllclinics(page: 1, context: null),
 );

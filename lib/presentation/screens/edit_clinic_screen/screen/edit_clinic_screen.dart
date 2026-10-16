@@ -336,7 +336,7 @@ class _EditClinicScreenState extends ConsumerState<EditClinicScreen> {
                             if (result) {
                               ref
                                   .read(homeProvider.notifier)
-                                  .getAllclinics(page: 1);
+                                  .getAllclinics(page: 1, context: context);
                             }
                           },
                           icon: clinicState.isSubmit

@@ -30,7 +30,7 @@ class HomeScreen extends ConsumerWidget {
               color: AppColors.appBlue,
 
               onRefresh: () async {
-                await homeController.getAllclinics(page: 1);
+                await homeController.getAllclinics(page: 1, context: context);
               },
               child: NotificationListener<ScrollNotification>(
                 onNotification: (notification) {
@@ -43,7 +43,10 @@ class HomeScreen extends ConsumerWidget {
                     // AND pagination API isn't already running
                     if (state.page < state.totalPages &&
                         !state.isPaginationLoading) {
-                      homeController.getAllclinics(page: state.page + 1);
+                      homeController.getAllclinics(
+                        page: state.page + 1,
+                        context: context,
+                      );
                     }
                   }
 

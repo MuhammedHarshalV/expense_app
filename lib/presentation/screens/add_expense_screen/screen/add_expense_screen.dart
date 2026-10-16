@@ -177,7 +177,10 @@ class AddExpenseScreen extends ConsumerWidget {
                                 clinicId: clinicId,
                               );
                           if (result == true) {
-                            homeController.getAllclinics(page: 1);
+                            homeController.getAllclinics(
+                              page: 1,
+                              context: context,
+                            );
                           }
                         },
                         icon: expenseState.isLoading
