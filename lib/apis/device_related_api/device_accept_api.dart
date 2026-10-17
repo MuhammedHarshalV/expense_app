@@ -5,21 +5,24 @@ import 'package:expense/core/services/dio_services/api_services.dart';
 
 import 'package:flutter/material.dart';
 
-class LogoutApi {
-  static Future<dynamic> logoutApi({
-    required BuildContext context,
-    required Map<String, dynamic> body,
+class DeviceAcceptApi {
+  static Future<dynamic> deviceAcceptApi({
+    required BuildContext? context,
   }) async {
     try {
       final response = await PostApiServices.callApi(
         context: context,
-        body: body,
-        url: ApiConstants.logOutApi,
+
+        url: ApiConstants.deviceRequestAccept,
       );
 
-      if (response["success"] == true) {
+      final data = response.data;
+
+      if (data["success"] == true) {
         return true;
       }
+
+      return false;
     } catch (e) {
       log(e.toString());
       return null;

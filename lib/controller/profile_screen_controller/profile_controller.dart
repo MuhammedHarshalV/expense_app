@@ -1,12 +1,11 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:expense/apis/auth_api/logout_api.dart';
+import 'package:expense/apis/device_related_api/device_logout_api.dart';
 import 'package:expense/apis/user_related_api/get_profile_api.dart';
 import 'package:expense/apis/user_related_api/update_user_api.dart';
 import 'package:expense/controller/profile_screen_controller/profile_state.dart';
 import 'package:expense/core/services/device_details/device_details_picking.dart';
-import 'package:expense/core/storage/token_storage.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/get_profile_details_response_model.dart';
 import 'package:flutter/material.dart';
@@ -148,11 +147,11 @@ class ProfileController extends StateNotifier<ProfileState> {
   Future<bool> logoutApi({required BuildContext context, required}) async {
     try {
       state = state.copyWith(isLogOut: true);
-      final String? access_token = await TokenStorage.getAccessToken();
+
       final String deviceId = await DeviceIdPicking.getDeviceId();
       final dynamic response = await LogoutApi.logoutApi(
         context: context,
-        body: {"access_token": access_token, "deviceId": deviceId},
+        body: {"deviceId": deviceId},
       );
       if (response == true) {
         return true;

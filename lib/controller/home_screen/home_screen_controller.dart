@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:expense/apis/auth_api/device_request.dart';
+import 'package:expense/apis/device_related_api/device_request.dart';
 
 import 'package:expense/apis/clinic_related_api/delete_clinic_api.dart';
 import 'package:expense/apis/clinic_related_api/get_all_clinics_api.dart';
@@ -66,7 +66,7 @@ class HomeController extends StateNotifier<HomeState> {
         context: context,
       );
       if (request == true && context != null) {
-        AppMessage.show(context, "neww device request");
+        AppMessage.show(context, "new device request");
       }
     }
   }

@@ -4,6 +4,7 @@ import 'package:expense/controller/profile_screen_controller/profile_controller.
 import 'package:expense/core/storage/token_storage.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/glass_container.dart';
+import 'package:expense/presentation/screens/device_details_screen/screen/device_details_screen.dart';
 import 'package:expense/presentation/screens/profile_screen/widget/popup_dialog.dart';
 import 'package:expense/presentation/screens/profile_screen/widget/profile_header.dart';
 import 'package:flutter/material.dart';
@@ -311,6 +312,62 @@ class ProfileScreen extends ConsumerWidget {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DeviceDetailsScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: .4),
+                              width: .5,
+                            ),
+                          ),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: .4),
+                              blurRadius: 2.h,
+                              offset: Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Login Device\'s',
+                                style: TextStyle(
+                                  fontFamily: "Notche",
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
