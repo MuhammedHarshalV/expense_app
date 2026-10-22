@@ -2,7 +2,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class EditExpenseState {
-  final double amount;
+  final num amount;
   final String expenseCategory;
   final String expenseDate;
   final XFile? selectedImage;
@@ -22,7 +22,7 @@ class EditExpenseState {
            expenseDate ?? DateFormat('dd-MMM-yyyy').format(DateTime.now());
 
   EditExpenseState copyWith({
-    double? amount,
+    num? amount,
     String? expenseCategory,
     String? expenseDate,
 

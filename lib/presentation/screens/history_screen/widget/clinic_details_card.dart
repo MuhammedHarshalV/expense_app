@@ -91,7 +91,7 @@ class ClinicDetailsCard extends ConsumerWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '• ${clinic.totalTransactionCount ?? 0} Claims',
+                      '• ${clinic.totalTransactionCount ?? 0} Claims / ${clinic.approved_count ?? 0} Approved',
                       style: TextStyle(
                         fontFamily: "Notche",
                         fontSize: 11.sp,
@@ -105,13 +105,15 @@ class ClinicDetailsCard extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
                   color:
-                      ((clinic.approvedAmount ?? 0) == (clinic.totalSpend ?? 0))
-                      ? const Color.fromARGB(255, 8, 208, 15)
+                      ((clinic.totalTransactionCount ?? 0) ==
+                          (clinic.approved_count ?? 0))
+                      ? const Color.fromARGB(255, 222, 247, 223)
                       : const Color(0xFF06B6D4).withValues(alpha: .15),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  ((clinic.approvedAmount ?? 0) == (clinic.totalSpend ?? 0))
+                  ((clinic.totalTransactionCount ?? 0) ==
+                          (clinic.approved_count ?? 0))
                       ? 'Complete'
                       : "Active",
                   style: TextStyle(
@@ -119,9 +121,9 @@ class ClinicDetailsCard extends ConsumerWidget {
                     fontSize: 9.sp,
                     fontWeight: FontWeight.w700,
                     color:
-                        ((clinic.approvedAmount ?? 0) ==
-                            (clinic.totalSpend ?? 0))
-                        ? const Color.fromARGB(255, 8, 208, 15)
+                        ((clinic.totalTransactionCount ?? 0) ==
+                            (clinic.approved_count ?? 0))
+                        ? const Color.fromARGB(255, 0, 146, 5)
                         : const Color(0xFF06B6D4),
                   ),
                 ),

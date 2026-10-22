@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class CreateExpenseState {
-  final double amount;
+  final num amount;
   final String expenseCategory;
   final String expenseDate;
   final String billImage;
@@ -19,7 +19,7 @@ class CreateExpenseState {
            expenseDate ?? DateFormat('dd-MMM-yyyy').format(DateTime.now());
 
   CreateExpenseState copyWith({
-    double? amount,
+    num? amount,
     String? expenseCategory,
     String? expenseDate,
     String? billImage,

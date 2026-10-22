@@ -74,6 +74,7 @@ class ExpenseHistory {
   int? totalTransactionCount;
   num? totalSpend;
   num? approvedAmount;
+  int? approved_count;
   DateTime? lastTransactionDate;
 
   ExpenseHistory({
@@ -83,6 +84,7 @@ class ExpenseHistory {
     this.totalTransactionCount,
     this.totalSpend,
     this.approvedAmount,
+    this.approved_count,
     this.lastTransactionDate,
   });
 
@@ -93,6 +95,7 @@ class ExpenseHistory {
     totalTransactionCount: json["total_transaction_count"],
     totalSpend: json["total_spend"],
     approvedAmount: json["approved_amount"],
+    approved_count: json["approved_count"],
     lastTransactionDate: json["last_transaction_date"] == null
         ? null
         : DateTime.parse(json["last_transaction_date"]),
@@ -105,6 +108,7 @@ class ExpenseHistory {
     "total_transaction_count": totalTransactionCount,
     "total_spend": totalSpend,
     "approved_amount": approvedAmount,
+    "approved_count": approved_count,
     "last_transaction_date": lastTransactionDate?.toIso8601String(),
   };
 }

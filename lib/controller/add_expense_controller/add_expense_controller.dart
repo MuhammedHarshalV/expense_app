@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:expense/apis/expense_related_api/create_expense_api.dart';
 import 'package:expense/controller/add_expense_controller/add_expense_state.dart';
+import 'package:expense/core/errors/app_message.dart';
 import 'package:expense/core/themes/colors.dart';
 
 import 'package:flutter/material.dart';
@@ -23,6 +24,12 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
     required,
   }) async {
     try {
+      if (state.amount <= 0) {
+        if (context != null) {
+          AppMessage.show(context, "Please enter a valid expense amount.");
+        }
+        return false;
+      }
       state = state.copyWith(isLoading: true);
       final formData = await createClinicFormData(
         expenseAmount: state.amount,
@@ -50,7 +57,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
               'Expense Added successfully',
               style: TextStyle(
                 fontFamily: "Notche",
-               
+
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -71,7 +78,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
               'Expense Added failed',
               style: TextStyle(
                 fontFamily: "Notche",
-               
+
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -97,7 +104,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
   }
 
   void updateState({
-    double? amount,
+    num? amount,
     String? expenseCategory,
     String? expenseDate,
     String? billImage,
@@ -114,8 +121,8 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
     );
   }
 
-  void addAmount(double amount) {
-    final currentAmount = double.tryParse(amountController.text.trim()) ?? 0.0;
+  void addAmount(num amount) {
+    final currentAmount = num.tryParse(amountController.text.trim()) ?? 0.0;
 
     final newAmount = currentAmount + amount;
 

@@ -85,7 +85,7 @@ class ExpenseByDateScreen extends ConsumerWidget {
                 )
               else
                 SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate((context, index) {
                       final expense = expenseState.expenseList[index];

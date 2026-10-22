@@ -58,7 +58,7 @@ class EditAmountCard extends ConsumerWidget {
                   controller: expenseController.amountController,
                   onChanged: (value) {
                     expenseController.updateState(
-                      amount: double.tryParse(value),
+                      amount: num.tryParse(value) ?? 0,
                     );
                   },
                   keyboardType: const TextInputType.numberWithOptions(

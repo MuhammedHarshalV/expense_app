@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:expense/apis/expense_related_api/delete_expense_api.dart';
 import 'package:expense/apis/expense_related_api/edit__expense_api.dart';
 import 'package:expense/controller/edit_expense_controller/edit_expense_state.dart';
+import 'package:expense/core/errors/app_message.dart';
 import 'package:expense/core/services/image_helper/network_image_to_bytes.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
@@ -22,7 +23,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
 
   /// Load existing expense details
   void initializeExpense(Expense expense) {
-    final amount = expense.expenseAmount?.toDouble() ?? 0.0;
+    final amount = expense.expenseAmount ?? 0.0;
     final description = expense.description ?? '';
 
     amountController.text = amount == 0 ? '' : amount.toStringAsFixed(2);
@@ -68,7 +69,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
               'Expense delete successfully',
               style: TextStyle(
                 fontFamily: "Notche",
-               
+
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -91,7 +92,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
               'Expense delete failed',
               style: TextStyle(
                 fontFamily: "Notche",
-             
+
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -119,6 +120,12 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
     required int expId,
   }) async {
     try {
+      if (state.amount <= 0) {
+        if (context != null) {
+          AppMessage.show(context, "Please enter a valid expense amount.");
+        }
+        return false;
+      }
       state = state.copyWith(isLoading: true);
       final formData = await createExpenseFormData(
         date: state.expenseDate,
@@ -147,7 +154,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
               'Expense updation successfully',
               style: TextStyle(
                 fontFamily: "Notche",
-              
+
                 color: AppColors.appWhite,
                 fontWeight: FontWeight.w500,
               ),
@@ -168,7 +175,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
               'Expense updation failed',
               style: TextStyle(
                 fontFamily: "Notche",
-               
+
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
               ),
@@ -242,7 +249,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
 
   /// Common state update
   void updateState({
-    double? amount,
+    num? amount,
     String? expenseCategory,
     String? expenseDate,
 
@@ -261,27 +268,18 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
 
   /// Amount from TextField
   void updateAmount(String value) {
-    final amount = double.tryParse(value) ?? 0.0;
+    final amount = num.tryParse(value) ?? 0.0;
 
     state = state.copyWith(amount: amount);
   }
 
   /// Increase amount
-  void addAmount([double value = 100]) {
+  void addAmount([num value = 100]) {
     final newAmount = state.amount + value;
 
     amountController.text = newAmount.toStringAsFixed(2);
 
     state = state.copyWith(amount: newAmount);
-  }
-
-  /// Decrease amount
-  void minusAmount([double value = 100]) {
-    final newAmount = (state.amount - value).clamp(0, double.infinity);
-
-    amountController.text = newAmount.toStringAsFixed(2);
-
-    state = state.copyWith(amount: newAmount.toDouble());
   }
 
   /// Change expense category
