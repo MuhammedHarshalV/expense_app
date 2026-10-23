@@ -33,198 +33,209 @@ class ClinicExpenseCard extends ConsumerWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     const primaryBlue = Color.fromARGB(255, 3, 141, 254);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E293B) : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.onSurface.withValues(alpha: .5),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
+    return GestureDetector(
+      onTap: onViewDetails,
+      child: Container(
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1E293B) : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
             color: Theme.of(
               context,
             ).colorScheme.onSurface.withValues(alpha: .5),
-            blurRadius: 1,
-            offset: const Offset(0, 4),
+            width: 1,
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Top Image Header with Actions & Labels
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-            child: Stack(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  height: 150.h,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => Container(
-                    height: 150,
-                    color: const Color(0xFFE2E8F0),
-                    child: const Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Container(
-                    height: 150,
-                    color: const Color(0xFFCBD5E1),
-                    child: const Icon(
-                      Icons.broken_image_outlined,
-                      size: 50,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-
-                // Edit & Delete Action Buttons
-                Positioned(
-                  top: 12,
-                  right: 12,
-                  child: Row(
-                    children: [
-                      _buildHeaderIconButton(icon: Icons.edit, onTap: onEdit),
-                      const SizedBox(width: 8),
-                      _buildHeaderIconButton(
-                        icon: Icons.delete_outline_rounded,
-                        onTap: onDelete,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: .5),
+              blurRadius: 1,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Top Image Header with Actions & Labels
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
+              child: Stack(
+                children: [
+                  CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    height: 150.h,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      height: 150,
+                      color: const Color(0xFFE2E8F0),
+                      child: const Center(
+                        child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                    ],
+                    ),
+                    errorWidget: (context, url, error) => Container(
+                      height: 150,
+                      color: const Color(0xFFCBD5E1),
+                      child: const Icon(
+                        Icons.broken_image_outlined,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
-                ),
 
-                // Name & Place Info
-                Positioned(
-                  left: 16,
-                  right: 16,
-                  bottom: 12,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontFamily: "Notche",
-                          color: AppColors.appWhite,
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.3,
+                  // Edit & Delete Action Buttons
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Row(
+                      children: [
+                        _buildHeaderIconButton(icon: Icons.edit, onTap: onEdit),
+                        const SizedBox(width: 8),
+                        _buildHeaderIconButton(
+                          icon: Icons.delete_outline_rounded,
+                          onTap: onDelete,
                         ),
-                      ),
-                      const SizedBox(height: 4),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.white70,
-                            size: 16,
+                      ],
+                    ),
+                  ),
+
+                  // Name & Place Info
+                  Positioned(
+                    left: 16,
+                    right: 16,
+                    bottom: 12,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontFamily: "Notche",
+                            color: AppColors.appWhite,
+                            fontSize: 19,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.3,
                           ),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: Text(
-                              place,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
+                        ),
+                        const SizedBox(height: 4),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_outlined,
+                              color: Colors.white70,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                place,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          // Financial Summary Metrics
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _buildMetricItem(
-                    label: 'TOTAL AMOUNT SPEND',
-                    value: totalAmount,
-                    context: context,
+            // Financial Summary Metrics
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _buildMetricItem(
+                      label: 'TOTAL AMOUNT SPEND',
+                      value: totalAmount,
+                      context: context,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          // Bottom Buttons
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
-            child: Row(
-              children: [
-                // Add Expense Button
-                Expanded(
-                  flex: 6,
-                  child: ElevatedButton.icon(
-                    onPressed: onAddExpense,
-                    icon: Icon(Icons.add, size: 18, color: AppColors.appWhite),
-                    label: Text(
-                      'Add Expense',
-                      style: TextStyle(
-                        fontFamily: "Notche",
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
+            // Bottom Buttons
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
+              child: Row(
+                children: [
+                  // Add Expense Button
+                  Expanded(
+                    flex: 6,
+                    child: ElevatedButton.icon(
+                      onPressed: onAddExpense,
+                      icon: Icon(
+                        Icons.add,
+                        size: 18,
                         color: AppColors.appWhite,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryBlue,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                      label: Text(
+                        'Add Expense',
+                        style: TextStyle(
+                          fontFamily: "Notche",
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.appWhite,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryBlue,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 12),
+                  const SizedBox(width: 12),
 
-                // View Details Button with Dashed/Dotted Outline
-                Expanded(
-                  flex: 5,
-                  child: TextButton(
-                    onPressed: onViewDetails,
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  // View Details Button with Dashed/Dotted Outline
+                  Expanded(
+                    flex: 5,
+                    child: TextButton(
+                      onPressed: onViewDetails,
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: .1),
                       ),
-                      backgroundColor: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withValues(alpha: .1),
-                    ),
-                    child: Text(
-                      'View Details',
-                      style: TextStyle(
-                        fontFamily: "Notche",
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: primaryBlue,
+                      child: Text(
+                        'View Details',
+                        style: TextStyle(
+                          fontFamily: "Notche",
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: primaryBlue,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
