@@ -186,23 +186,25 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final result = await expenseController
-                              .updateClinicApi(
-                                context: context,
-                                expId: widget.expense.expenseId ?? 0,
-                                clinicId: widget.clinicId,
-                              );
-                          if (result == true) {
-                            ref
-                                .read(
-                                  clinicDetailsProvider(
-                                    widget.clinicId,
-                                  ).notifier,
-                                )
-                                .getClinicDetails();
-                          }
-                        },
+                        onPressed: expenseState.isLoading
+                            ? null
+                            : () async {
+                                final result = await expenseController
+                                    .updateClinicApi(
+                                      context: context,
+                                      expId: widget.expense.expenseId ?? 0,
+                                      clinicId: widget.clinicId,
+                                    );
+                                if (result == true) {
+                                  ref
+                                      .read(
+                                        clinicDetailsProvider(
+                                          widget.clinicId,
+                                        ).notifier,
+                                      )
+                                      .getClinicDetails();
+                                }
+                              },
                         icon: expenseState.isLoading
                             ? null
                             : Icon(

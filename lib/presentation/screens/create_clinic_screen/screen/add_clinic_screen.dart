@@ -319,15 +319,20 @@ class AddClinicScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(3),
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: () async {
-                            final bool result = await clinicController
-                                .createClinicApi(context: context);
-                            if (result) {
-                              ref
-                                  .read(homeProvider.notifier)
-                                  .getAllclinics(page: 1, context: context);
-                            }
-                          },
+                          onPressed: clinicState.isSubmit
+                              ? null
+                              : () async {
+                                  final bool result = await clinicController
+                                      .createClinicApi(context: context);
+                                  if (result) {
+                                    ref
+                                        .read(homeProvider.notifier)
+                                        .getAllclinics(
+                                          page: 1,
+                                          context: context,
+                                        );
+                                  }
+                                },
                           icon: clinicState.isSubmit
                               ? null
                               : Icon(

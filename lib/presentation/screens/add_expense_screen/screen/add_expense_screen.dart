@@ -1,4 +1,5 @@
 import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
+import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
@@ -170,19 +171,28 @@ class AddExpenseScreen extends ConsumerWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: () async {
-                          final result = await expenseController
-                              .createExpenseApi(
-                                context: context,
-                                clinicId: clinicId,
-                              );
-                          if (result == true) {
-                            homeController.getAllclinics(
-                              page: 1,
-                              context: context,
-                            );
-                          }
-                        },
+                        onPressed: expenseState.isLoading
+                            ? null
+                            : () async {
+                                final result = await expenseController
+                                    .createExpenseApi(
+                                      context: context,
+                                      clinicId: clinicId,
+                                    );
+                                if (result == true) {
+                                  homeController.getAllclinics(
+                                    page: 1,
+                                    context: context,
+                                  );
+                                  ref
+                                      .read(
+                                        clinicDetailsProvider(
+                                          clinicId,
+                                        ).notifier,
+                                      )
+                                      .getClinicDetails();
+                                }
+                              },
                         icon: expenseState.isLoading
                             ? null
                             : Icon(

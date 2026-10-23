@@ -2,6 +2,7 @@ import 'package:expense/controller/clinic_expense_details_controller/expense_det
 import 'package:expense/controller/edit_expense_controller/edit_expense_controller.dart';
 import 'package:expense/controller/expense_by_date_controller/expense_by_date_controller.dart';
 import 'package:expense/controller/history_screen_controller/history_screen_controller.dart';
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
 import 'package:expense/presentation/screens/edit_expense_screen/screen/edit_expense_screen.dart';
@@ -437,6 +438,15 @@ class ExpenseItemCard extends ConsumerWidget {
                                                         ).notifier,
                                                       )
                                                       .refresh();
+
+                                                  ref
+                                                      .read(
+                                                        homeProvider.notifier,
+                                                      )
+                                                      .getAllclinics(
+                                                        page: 1,
+                                                        context: context,
+                                                      );
                                                 }
                                               },
                                               style: ElevatedButton.styleFrom(
