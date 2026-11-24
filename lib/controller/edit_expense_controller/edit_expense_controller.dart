@@ -20,11 +20,13 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
 
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController personCountController = TextEditingController();
 
   /// Load existing expense details
   void initializeExpense(Expense expense) {
     final amount = expense.expenseAmount ?? 0.0;
     final description = expense.description ?? '';
+    final personCount = expense.person_count ?? 1;
 
     amountController.text = amount == 0 ? '' : amount.toStringAsFixed(2);
 
@@ -43,6 +45,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
       networkImageUrl: expense.billPhoto ?? '',
       description: description,
       clearSelectedImage: true,
+      personCount: personCount,
     );
   }
 
@@ -134,6 +137,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
         category: state.expenseCategory,
         selectedImage: state.selectedImage,
         networkImageUrl: state.networkImageUrl,
+        personCount: state.personCount,
       );
 
       final response = await UpdateExpenseApi.updateExpenseApi(
@@ -147,7 +151,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
         if (!context.mounted) return true;
 
         // ignore: use_build_context_synchronously
-        Navigator.pop(context);
+       // Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
@@ -205,6 +209,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
     required num amount,
     required String category,
     required String date,
+    required int personCount,
     XFile? selectedImage,
     String? networkImageUrl,
     String? description,
@@ -228,6 +233,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
       'description': description,
       "expense_type": category,
       "expense_date": convertExpenseDate(date),
+      "person_count": personCount,
       // ignore: use_null_aware_elements
       if (billPhoto != null) 'bill_photo': billPhoto,
     });
@@ -252,7 +258,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
     num? amount,
     String? expenseCategory,
     String? expenseDate,
-
+    int? personCount,
     String? description,
     bool? isLoading,
   }) {
@@ -260,7 +266,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
       amount: amount,
       expenseCategory: expenseCategory,
       expenseDate: expenseDate,
-
+      personCount: personCount,
       description: description,
       isLoading: isLoading,
     );
@@ -328,6 +334,7 @@ class EditExpenseController extends StateNotifier<EditExpenseState> {
     log('===== edit expense screen disposed =====');
     amountController.dispose();
     descriptionController.dispose();
+    personCountController.dispose();
     super.dispose();
   }
 }

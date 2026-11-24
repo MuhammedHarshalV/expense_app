@@ -1,5 +1,5 @@
-import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/controller/edit_expense_controller/edit_expense_controller.dart';
+import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/models/expense_related/all_expense_response_model.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
@@ -101,6 +101,54 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                     SizedBox(height: 6),
                     EditAmountCard(),
                     const SizedBox(height: 24),
+                    FieldLabel(label: 'NUMBER OF PERSONS', isRequired: false),
+                    const SizedBox(height: 6),
+
+                    Row(
+                      children: [
+                        // Left TextField
+                        Expanded(
+                          child: TextField(
+                            controller: expenseController.personCountController,
+                            onChanged: (value) {
+                              expenseController.updateState(
+                                personCount: int.tryParse(value),
+                              );
+                            },
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: expenseState.personCount.toString(),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 12,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
                     FieldLabel(label: 'DESCRIPTION', isRequired: false),
                     const SizedBox(height: 6),
                     EditDescriptionCard(),
@@ -196,13 +244,10 @@ class _EditExpenseScreenState extends ConsumerState<EditExpenseScreen> {
                                       clinicId: widget.clinicId,
                                     );
                                 if (result == true) {
+                                  Navigator.pop(context, true);
                                   ref
-                                      .read(
-                                        clinicDetailsProvider(
-                                          widget.clinicId,
-                                        ).notifier,
-                                      )
-                                      .getClinicDetails();
+                                      .read(homeProvider.notifier)
+                                      .getAllclinics(page: 1, context: null);
                                 }
                               },
                         icon: expenseState.isLoading

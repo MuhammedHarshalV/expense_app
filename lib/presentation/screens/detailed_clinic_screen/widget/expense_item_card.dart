@@ -13,16 +13,18 @@ import 'package:intl/intl.dart';
 
 class ExpenseItemCard extends ConsumerWidget {
   final Expense expense;
-  final int cliinicId;
+  final int clinicId;
   final IconData categoryIcon;
-
+  final String? startDate;
+  final String? endDate;
   final String footerText;
   final IconData footerIcon;
   final Color footerIconColor;
 
   const ExpenseItemCard({
     super.key,
-
+    this.startDate = '',
+    this.endDate = '',
     required this.expense,
 
     required this.categoryIcon,
@@ -30,7 +32,7 @@ class ExpenseItemCard extends ConsumerWidget {
     required this.footerText,
     required this.footerIcon,
     required this.footerIconColor,
-    required this.cliinicId,
+    required this.clinicId,
   });
 
   @override
@@ -247,16 +249,36 @@ class ExpenseItemCard extends ConsumerWidget {
                         focusColor: Colors.transparent,
                         splashColor: Colors.transparent,
                         hoverColor: Colors.transparent,
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async {
+                          final created = await Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => EditExpenseScreen(
                                 expense: expense,
-                                clinicId: cliinicId,
+                                clinicId: clinicId,
                               ),
                             ),
                           );
+                          if (!context.mounted) return;
+
+                          if (created == true) {
+                            ref
+                                .read(clinicDetailsProvider(clinicId).notifier)
+                                .getClinicDetails();
+
+                            if ((startDate ?? '').isNotEmpty &&
+                                (endDate ?? '').isNotEmpty) {
+                              final params = ExpenseByDateParams(
+                                clinicId: clinicId,
+                                startDate: startDate!,
+                                endDate: endDate!,
+                              );
+
+                              ref
+                                  .read(expenseByDateProvider(params).notifier)
+                                  .refresh();
+                            }
+                          }
                         },
                         child: Icon(
                           Icons.edit_outlined,
@@ -415,7 +437,7 @@ class ExpenseItemCard extends ConsumerWidget {
                                                 final result =
                                                     await expenseController
                                                         .deleteExpense(
-                                                          clinicId: cliinicId,
+                                                          clinicId: clinicId,
                                                           context: context,
                                                           expId:
                                                               expense
@@ -426,12 +448,12 @@ class ExpenseItemCard extends ConsumerWidget {
                                                   ref
                                                       .read(
                                                         clinicDetailsProvider(
-                                                          cliinicId,
+                                                          clinicId,
                                                         ).notifier,
                                                       )
                                                       .getClinicDetails();
                                                   final params = ExpenseByDateParams(
-                                                    clinicId: cliinicId,
+                                                    clinicId: clinicId,
                                                     startDate: ref
                                                         .watch(
                                                           expenseHistoryProvider,

@@ -60,6 +60,7 @@ class HomeController extends StateNotifier<HomeState> {
       }
     } catch (e) {
       log(e.toString());
+    } finally {
       if (mounted) {
         state = state.copyWith(isLoading: false, isPaginationLoading: false);
       }

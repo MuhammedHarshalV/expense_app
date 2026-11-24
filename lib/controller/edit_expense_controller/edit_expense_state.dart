@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 class EditExpenseState {
   final num amount;
+  final int personCount;
   final String expenseCategory;
   final String expenseDate;
   final XFile? selectedImage;
@@ -11,6 +12,7 @@ class EditExpenseState {
   final bool isLoading;
 
   EditExpenseState({
+    this.personCount = 1,
     this.amount = 0.0,
     this.expenseCategory = 'Food & Lunch',
     String? expenseDate,
@@ -22,6 +24,7 @@ class EditExpenseState {
            expenseDate ?? DateFormat('dd-MMM-yyyy').format(DateTime.now());
 
   EditExpenseState copyWith({
+    int? personCount,
     num? amount,
     String? expenseCategory,
     String? expenseDate,
@@ -46,6 +49,7 @@ class EditExpenseState {
           : networkImageUrl ?? this.networkImageUrl,
       description: description ?? this.description,
       isLoading: isLoading ?? this.isLoading,
+      personCount: personCount ?? this.personCount,
     );
   }
 }

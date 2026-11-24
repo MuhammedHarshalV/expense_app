@@ -91,9 +91,10 @@ class ExpenseByDateScreen extends ConsumerWidget {
                       final expense = expenseState.expenseList[index];
 
                       return ExpenseItemCard(
-                        cliinicId: clinicId,
+                        clinicId: clinicId,
                         expense: expense,
-
+                        startDate: startDate,
+                        endDate: endDate,
                         categoryIcon: _getExpenseIcon(expense.expenseType),
 
                         footerText: expense.billPhoto != null

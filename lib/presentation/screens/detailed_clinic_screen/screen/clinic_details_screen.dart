@@ -104,7 +104,7 @@ class ClinicDetailsScreen extends ConsumerWidget {
                       final expense = state.expenses[index];
 
                       return ExpenseItemCard(
-                        cliinicId: clinicId,
+                        clinicId: clinicId,
                         expense: state.expenses[index],
 
                         categoryIcon: _getExpenseIcon(expense.expenseType),

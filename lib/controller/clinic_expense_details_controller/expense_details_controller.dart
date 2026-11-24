@@ -16,12 +16,13 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
   }
 
   Future<void> getClinicDetails() async {
+    if (!mounted) return;
     state = state.copyWith(isLoading: true);
 
     try {
       final AllClinicExpenseResponseModel response =
           await GetAllExpenseApi.getAllExpenseApi(clinicId: clinicId);
-
+      if (!mounted) return;
       if (response.success == true && response.data != null) {
         final data = response.data;
         state = state.copyWith(
@@ -37,7 +38,7 @@ class ClinicDetailsController extends StateNotifier<ClinicDetailsState> {
     } catch (e) {
       log('Get clinic details error: $e');
     } finally {
-      state = state.copyWith(isLoading: false);
+      if (mounted) state = state.copyWith(isLoading: false);
     }
   }
 
