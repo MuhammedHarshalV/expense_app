@@ -227,14 +227,27 @@ class TopClinicCard extends ConsumerWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) =>
+                        //         AddExpenseScreen(clinicId: clinicId),
+                        //   ),
+                        // );
+                        final created = await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
+                            builder: (_) =>
                                 AddExpenseScreen(clinicId: clinicId),
                           ),
                         );
+
+                        if (created == true) {
+                          ref
+                              .read(clinicDetailsProvider(clinicId).notifier)
+                              .getClinicDetails();
+                        }
                       },
                       icon: const Icon(
                         Icons.add_circle_outline,

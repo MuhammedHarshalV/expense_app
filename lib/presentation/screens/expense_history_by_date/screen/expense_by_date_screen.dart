@@ -118,7 +118,7 @@ class ExpenseByDateScreen extends ConsumerWidget {
 
   IconData _getExpenseIcon(String? type) {
     switch (type) {
-      case 'Fuel / Travel':
+      case 'Fuel':
         return Icons.local_gas_station_outlined;
 
       case 'Food & Lunch':
@@ -130,7 +130,7 @@ class ExpenseByDateScreen extends ConsumerWidget {
       case 'Hotel / Stay':
         return Icons.hotel_outlined;
 
-      case 'Stationery':
+      case 'Travel':
         return Icons.edit_note_outlined;
 
       case 'Other Expense':

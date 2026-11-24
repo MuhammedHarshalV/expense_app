@@ -16,6 +16,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
 
   final TextEditingController amountController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController personCountController = TextEditingController();
 
   // add expense api
   Future<bool> createExpenseApi({
@@ -37,6 +38,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
         expenseDate: state.expenseDate,
         billPhoto: state.billImage.isEmpty ? null : state.billImage,
         description: state.description,
+        personCount: state.personCount,
       );
 
       final response = await CreateExpenseApi.createExpenseApi(
@@ -50,7 +52,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
         if (!context.mounted) return true;
 
         // ignore: use_build_context_synchronously
-        Navigator.pop(context);
+        // Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
@@ -110,6 +112,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
     String? billImage,
     String? description,
     bool? isLoading,
+    int? personCount,
   }) {
     state = state.copyWith(
       amount: amount,
@@ -118,6 +121,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
       billImage: billImage,
       description: description,
       isLoading: isLoading,
+      personCount: personCount,
     );
   }
 
@@ -145,6 +149,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
     String? billPhoto,
     String? description,
     String? expenseDate,
+    int? personCount,
   }) async {
     MultipartFile? billPhotoConverted;
 
@@ -161,6 +166,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
       'expense_type': expenseType,
       'expense_date': convertExpenseDate(expenseDate),
       'description': description,
+      'person_count': personCount,
 
       if (billPhoto != null) 'bill_photo': billPhotoConverted,
     });
@@ -184,6 +190,7 @@ class CreateExpenseController extends StateNotifier<CreateExpenseState> {
   void dispose() {
     amountController.dispose();
     descriptionController.dispose();
+    personCountController.dispose();
     log('===== create expense screen disposed =====');
     super.dispose();
   }

@@ -60,11 +60,13 @@ class HomeController extends StateNotifier<HomeState> {
       }
     } catch (e) {
       log(e.toString());
-    } finally {
-      state = state.copyWith(isLoading: false, isPaginationLoading: false);
+      if (mounted) {
+        state = state.copyWith(isLoading: false, isPaginationLoading: false);
+      }
       final dynamic request = await DeviceRequest.deviceRequest(
         context: context,
       );
+      if (!mounted) return;
       if (request == true && context != null) {
         AppMessage.show(context, "new device request");
       }

@@ -23,7 +23,7 @@ class ExpenseCategoryGrid extends ConsumerWidget {
       ),
       CategoryItem(
         icon: Icons.local_gas_station_outlined,
-        title: 'Fuel / Travel',
+        title: 'Fuel',
         subtitle: 'Petrol, cabs & transit',
       ),
       CategoryItem(
@@ -38,7 +38,7 @@ class ExpenseCategoryGrid extends ConsumerWidget {
       ),
       CategoryItem(
         icon: Icons.print_outlined,
-        title: 'Stationery',
+        title: 'Travel',
         subtitle: 'Brochures & forms',
       ),
       CategoryItem(

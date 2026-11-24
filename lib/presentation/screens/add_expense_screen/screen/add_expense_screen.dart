@@ -1,5 +1,4 @@
 import 'package:expense/controller/add_expense_controller/add_expense_controller.dart';
-import 'package:expense/controller/clinic_expense_details_controller/expense_details_controller.dart';
 import 'package:expense/controller/home_screen/home_screen_controller.dart';
 import 'package:expense/core/themes/colors.dart';
 import 'package:expense/presentation/common_widgets/common_appbar.dart';
@@ -84,6 +83,55 @@ class AddExpenseScreen extends ConsumerWidget {
                     FieldLabel(label: 'EXPENSE AMOUNT', isRequired: true),
                     SizedBox(height: 6),
                     AmountCard(),
+                    const SizedBox(height: 24),
+                    FieldLabel(label: 'NUMBER OF PERSONS', isRequired: false),
+                    const SizedBox(height: 6),
+
+                    Row(
+                      children: [
+                        // Left TextField
+                        Expanded(
+                          child: TextField(
+                            controller: expenseController.personCountController,
+                            onChanged: (value) {
+                              expenseController.updateState(
+                                personCount: int.tryParse(value),
+                              );
+                            },
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: expenseState.personCount.toString(),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 12,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Theme.of(context).colorScheme.onSurface
+                                      .withValues(alpha: .15),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
                     const SizedBox(height: 24),
                     FieldLabel(label: 'DESCRIPTION', isRequired: false),
                     const SizedBox(height: 6),
@@ -184,13 +232,7 @@ class AddExpenseScreen extends ConsumerWidget {
                                     page: 1,
                                     context: context,
                                   );
-                                  ref
-                                      .read(
-                                        clinicDetailsProvider(
-                                          clinicId,
-                                        ).notifier,
-                                      )
-                                      .getClinicDetails();
+                                  Navigator.pop(context, true);
                                 }
                               },
                         icon: expenseState.isLoading

@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 
 class CreateExpenseState {
   final num amount;
+  final int personCount;
   final String expenseCategory;
   final String expenseDate;
   final String billImage;
@@ -9,6 +10,7 @@ class CreateExpenseState {
   final bool isLoading;
 
   CreateExpenseState({
+    this.personCount = 1,
     this.amount = 0.0,
     this.expenseCategory = 'Food & Lunch',
     String? expenseDate,
@@ -19,6 +21,7 @@ class CreateExpenseState {
            expenseDate ?? DateFormat('dd-MMM-yyyy').format(DateTime.now());
 
   CreateExpenseState copyWith({
+    int? personCount,
     num? amount,
     String? expenseCategory,
     String? expenseDate,
@@ -27,6 +30,7 @@ class CreateExpenseState {
     bool? isLoading,
   }) {
     return CreateExpenseState(
+      personCount: personCount ?? this.personCount,
       amount: amount ?? this.amount,
       expenseCategory: expenseCategory ?? this.expenseCategory,
       expenseDate: expenseDate ?? this.expenseDate,
