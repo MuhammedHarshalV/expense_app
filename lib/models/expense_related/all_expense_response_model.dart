@@ -85,6 +85,7 @@ class Expense {
   String? expenseDate;
   num? approvedAmount;
   String? billPhoto;
+  int? person_count;
 
   Expense({
     this.expenseId,
@@ -95,6 +96,7 @@ class Expense {
     this.expenseDate,
     this.approvedAmount,
     this.billPhoto,
+    this.person_count,
   });
 
   factory Expense.fromJson(Map<String, dynamic> json) => Expense(
@@ -106,6 +108,7 @@ class Expense {
     expenseDate: json["expense_date"],
     approvedAmount: json["approved_amount"],
     billPhoto: json["bill_photo"],
+    person_count: json["person_count"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -117,5 +120,6 @@ class Expense {
     "expense_date": expenseDate,
     "approved_amount": approvedAmount,
     "bill_photo": billPhoto,
+    "person_count": person_count,
   };
 }

@@ -56,39 +56,51 @@ class ExpenseItemCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Receipt image
-          Container(
-            width: 70.h,
-            height: 90.h,
-            decoration: BoxDecoration(
-              color: colorScheme.onSurface.withValues(alpha: 0.06),
-              borderRadius: BorderRadius.circular(8),
-              image:
-                  expense.billPhoto != null &&
-                      (expense.billPhoto ?? ''.trim()).isNotEmpty
-                  ? DecorationImage(
-                      image: NetworkImage(expense.billPhoto ?? ''),
-                      fit: BoxFit.cover,
-                    )
-                  : null,
-            ),
-            child: Center(
-              child:
-                  expense.billPhoto != null &&
-                      (expense.billPhoto ?? ''.trim()).isNotEmpty
-                  ? null
-                  : Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.4),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.image_not_supported_outlined,
-                        color: Colors.white,
-                        size: 18.sp,
-                      ),
-                    ),
-            ),
+          Column(
+            children: [
+              Container(
+                width: 70.h,
+                height: 90.h,
+                decoration: BoxDecoration(
+                  color: colorScheme.onSurface.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(8),
+                  image:
+                      expense.billPhoto != null &&
+                          (expense.billPhoto ?? ''.trim()).isNotEmpty
+                      ? DecorationImage(
+                          image: NetworkImage(expense.billPhoto ?? ''),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
+                ),
+                child: Center(
+                  child:
+                      expense.billPhoto != null &&
+                          (expense.billPhoto ?? ''.trim()).isNotEmpty
+                      ? null
+                      : Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.4),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: Colors.white,
+                            size: 18.sp,
+                          ),
+                        ),
+                ),
+              ),
+              Text(
+                "No. of \nPersons :${expense.person_count}",
+                style: TextStyle(
+                  fontFamily: "Notche",
+                  fontSize: 10.sp,
+                  color: textMuted,
+                ),
+              ),
+            ],
           ),
 
           const SizedBox(width: 12),
